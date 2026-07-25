@@ -61,6 +61,22 @@ sub.add(hull);
 const core = new THREE.Mesh(new THREE.IcosahedronGeometry(0.5, 1), new THREE.MeshStandardMaterial({ color: 0x0af0c8, emissive: 0x0af0c8, emissiveIntensity: 0.6, metalness: .7, roughness: .3 }));
 sub.add(core);
 
+// 適合產業標籤：貼在潛航器上一起隨鏡頭捲動旋轉，是場景本身的一部分
+function makeLabel(text){
+  const c = document.createElement('canvas'); c.width=256; c.height=64;
+  const cx = c.getContext('2d');
+  cx.font='600 26px -apple-system, sans-serif'; cx.fillStyle='#8fe9de';
+  cx.textAlign='center'; cx.textBaseline='middle';
+  cx.shadowColor='#2dd4bf'; cx.shadowBlur=14;
+  cx.fillText(text,128,32);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map:new THREE.CanvasTexture(c), transparent:true, depthWrite:false }));
+  s.scale.set(1.8,0.45,1);
+  return s;
+}
+const indLabel = makeLabel('適合：重工業／科研／探索類');
+indLabel.position.set(0, 1.3, 0);
+sub.add(indLabel);
+
 // 氣泡粒子
 const bubbleCount = 200;
 const pos = new Float32Array(bubbleCount*3);

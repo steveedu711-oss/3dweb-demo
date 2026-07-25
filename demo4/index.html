@@ -21,6 +21,7 @@
     font-weight:700;font-size:16px;cursor:pointer;border:none}
   .magnetic-btn.primary{background:linear-gradient(135deg,#5ec9ff,#3a7bff);color:#04070f;box-shadow:0 14px 34px rgba(94,201,255,.4)}
   .magnetic-btn.ghost{background:rgba(255,255,255,.06);color:#eef2ff;border:1px solid rgba(255,255,255,.2)}
+  .magnetic-btn.tag{padding:12px 22px;font-size:12px;background:transparent;border:1px dashed rgba(94,201,255,.5);color:#5ec9ff;font-weight:600}
   .hint{position:relative;z-index:1;margin-top:60px;font-size:12px;color:#6b7396;letter-spacing:.08em;text-transform:uppercase}
 </style>
 </head>
@@ -33,6 +34,8 @@
   <div class="mag-wrap">
     <button class="magnetic-btn primary">預約試飛 →</button>
     <button class="magnetic-btn ghost">觀看降落實況</button>
+    <!-- 適合產業標示做成同一顆磁性元件，被滑鼠吸附的行為跟主按鈕完全一樣，是效果的一部分而非外掛文字 -->
+    <button class="magnetic-btn tag">適合：城市空中交通產業</button>
   </div>
   <div class="hint">↑ Move your cursor near the buttons</div>
 </main>

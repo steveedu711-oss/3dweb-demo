@@ -32,11 +32,15 @@
     <path id="p4" d="M220 200 L220 60 L300 20 L380 60 L380 200 L220 200" />
     <path id="p5" class="accent" d="M250 200 L250 150 L285 150 L285 200" />
     <path id="p6" d="M310 200 L310 140 L350 140 L350 200" />
+    <!-- 適合產業做成畫線動畫的一部分：底下畫一條強調線，同時讓文字跟著線條畫完淡入 -->
+    <path id="p7" class="accent" d="M40 214 L380 214" stroke-width="2" />
+    <text id="indText" x="210" y="212" text-anchor="middle" fill="#b5461f" font-size="13" font-family="-apple-system,sans-serif" font-weight="600" opacity="0">適合：設計工作室／建築事務所／手作品牌</text>
   </svg>
 </main>
 
 <script>
-document.querySelectorAll('svg path').forEach((path, i) => {
+const paths = document.querySelectorAll('svg path');
+paths.forEach((path, i) => {
   const len = path.getTotalLength();
   path.style.strokeDasharray = len;
   path.style.strokeDashoffset = len;
@@ -45,6 +49,10 @@ document.querySelectorAll('svg path').forEach((path, i) => {
     { duration: 900, delay: i * 220, fill: 'forwards', easing: 'ease-in-out' }
   );
 });
+document.getElementById('indText').animate(
+  [{ opacity: 0 }, { opacity: 1 }],
+  { duration: 500, delay: paths.length * 220, fill: 'forwards' }
+);
 </script>
 </body>
 </html>

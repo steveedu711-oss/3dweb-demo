@@ -40,6 +40,10 @@
   <div class="stat"><b data-target="4128" data-suffix="">0</b><span>Active Projects</span></div>
   <div class="stat"><b data-target="892" data-suffix="k">0</b><span>Tons CO₂ Offset</span></div>
   <div class="stat"><b data-target="99" data-suffix="%">0</b><span>Funds to Field</span></div>
+  <!-- 適合產業做成同一種統計卡樣式，但用文字取代數字，跟其他卡片一起淡入 -->
+  <div class="stat gsap-ind" style="opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s">
+    <b style="font-size:16px;line-height:1.5">金融儀表板<br>募資頁<br>數據導向 SaaS</b><span>Suited For</span>
+  </div>
 </div>
 
 <div class="odometer-wrap">
@@ -96,6 +100,16 @@ const odoIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 odoIO.observe(odo);
+
+const indIO = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (!en.isIntersecting) return;
+    indIO.unobserve(en.target);
+    en.target.style.opacity = 1;
+    en.target.style.transform = 'translateY(0)';
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.gsap-ind').forEach(el => indIO.observe(el));
 </script>
 </body>
 </html>

@@ -82,6 +82,30 @@ const core = new THREE.Mesh(
 );
 scene.add(core);
 
+// 適合產業標籤：直接畫進 3D 場景，繞著核心物件公轉，不是畫面外的 HTML 貼紙
+function makeLabelSprite(text){
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 64;
+  const ctx = c.getContext('2d');
+  ctx.font = '600 30px -apple-system, sans-serif';
+  ctx.fillStyle = 'rgba(124,245,255,0.9)';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(124,245,255,0.8)'; ctx.shadowBlur = 14;
+  ctx.fillText(text, 128, 32);
+  const tex = new THREE.CanvasTexture(c);
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+  sprite.scale.set(1.6, 0.4, 1);
+  return sprite;
+}
+const industryLabels = ['科技產業', 'AI 平台', '量子運算', '加密貨幣'].map((t, i) => {
+  const s = makeLabelSprite(t);
+  s.userData.angle = (i / 4) * Math.PI * 2;
+  s.userData.radius = 2.4;
+  s.userData.speed = 0.15 + i*0.02;
+  scene.add(s);
+  return s;
+});
+
 const mouse = { x:0, y:0 };
 addEventListener('mousemove', e => { mouse.x=(e.clientX/innerWidth-0.5)*2; mouse.y=(e.clientY/innerHeight-0.5)*2; });
 
@@ -92,6 +116,10 @@ function tick(){
   mat.uniforms.uTime.value = t;
   core.rotation.y = t*0.25 + mouse.x*0.4;
   core.rotation.x = mouse.y*0.3;
+  industryLabels.forEach(s => {
+    const a = s.userData.angle + t*s.userData.speed;
+    s.position.set(Math.cos(a)*s.userData.radius, Math.sin(a*0.6)*0.6, Math.sin(a)*s.userData.radius);
+  });
   renderer.render(scene, camera);
 }
 tick();

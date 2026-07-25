@@ -68,6 +68,19 @@ for (let i=0;i<3;i++){
   product.add(prong);
 }
 
+// 適合產業標籤刻在底座上，跟商品一起被拖曳旋轉，是模型本身的一部分
+const labelCanvas = document.createElement('canvas'); labelCanvas.width=320; labelCanvas.height=64;
+const lctx = labelCanvas.getContext('2d');
+lctx.font='600 24px -apple-system, sans-serif'; lctx.fillStyle='#e3b873';
+lctx.textAlign='center'; lctx.textBaseline='middle';
+lctx.fillText('適合：電商／3C／家具／潮牌', 160, 32);
+const indPlane = new THREE.Mesh(
+  new THREE.PlaneGeometry(2.2, 0.44),
+  new THREE.MeshBasicMaterial({ map:new THREE.CanvasTexture(labelCanvas), transparent:true })
+);
+indPlane.position.y = -1.4;
+product.add(indPlane);
+
 let rotY = 0.6, rotX = 0.1, velY = 0.003, velX = 0;
 let dragging = false, lastX = 0, lastY = 0;
 

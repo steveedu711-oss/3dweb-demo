@@ -24,12 +24,14 @@
   <div class="kicker">Sterling &amp; Cross · 人身傷害律師事務所</div>
   <h1>We fight for the <span class="kw" id="kw1">justice</span> you deserve, with <span class="kw" id="kw2">relentless</span> resolve.</h1>
   <p>捲動頁面時，關鍵字的字重（font-weight）與字距會依捲動速度即時變化——速度越快字越粗、越張揚，靜止時回到正常粗細，是強調權威感文案常見的手法。</p>
+  <!-- 適合產業直接是被套用同一組動態字重效果的關鍵字，不是額外貼上去的標籤 -->
+  <p style="margin-top:14px">最適合 <span class="kw" id="kw3">人身傷害律師事務所</span> 這類需要權威感的產業。</p>
   <div class="hint">↓ 捲動看關鍵字變化 ↓</div>
   <div style="height:60vh"></div>
 </main>
 
 <script>
-const kws = [document.getElementById('kw1'), document.getElementById('kw2')];
+const kws = [document.getElementById('kw1'), document.getElementById('kw2'), document.getElementById('kw3')];
 let lastY = scrollY, velocity = 0;
 
 function onScroll(){

@@ -17,6 +17,15 @@
     background:radial-gradient(circle 260px at var(--x,50%) var(--y,50%), rgba(0,255,170,.16), rgba(0,255,170,.04) 40%, transparent 70%);
     transition:background .05s linear;
   }
+  /* 適合產業文字藏在畫面裡，只有游標光暈掃過的範圍會被 mask 揭露出來，是效果本身的一部分 */
+  .hidden-industry{
+    position:fixed;inset:0;z-index:1;pointer-events:none;
+    display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:40px;
+    font-family:monospace;font-size:14px;letter-spacing:.1em;color:#00ffaa;
+    -webkit-mask-image:radial-gradient(circle 220px at var(--x,50%) var(--y,50%), black 0%, transparent 75%);
+    mask-image:radial-gradient(circle 220px at var(--x,50%) var(--y,50%), black 0%, transparent 75%);
+  }
+  .hidden-industry span{opacity:.9}
   .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
     background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(6px)}
   .badge b{color:#00ffaa}
@@ -32,6 +41,9 @@
 <body>
 <div class="badge">效果類型：<b>Cursor Spotlight</b>（游標光暈遮罩，用 CSS 變數即時更新）</div>
 <div class="grid-bg"></div>
+<div class="hidden-industry" id="hidden-ind">
+  <span>[適合] 資安產業</span><span>[適合] 神秘感品牌</span><span>[適合] Hacker 風工具</span><span>[適合] 夜店娛樂</span>
+</div>
 <div class="spotlight" id="spot"></div>
 <main>
   <div class="kicker">// ZERO_TRACE.SEC — zero-trust access control</div>
@@ -42,9 +54,12 @@
 </main>
 <script>
 const spot = document.getElementById('spot');
+const hiddenInd = document.getElementById('hidden-ind');
 addEventListener('mousemove', (e) => {
   spot.style.setProperty('--x', e.clientX + 'px');
   spot.style.setProperty('--y', e.clientY + 'px');
+  hiddenInd.style.setProperty('--x', e.clientX + 'px');
+  hiddenInd.style.setProperty('--y', e.clientY + 'px');
 });
 </script>
 </body>

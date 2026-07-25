@@ -31,8 +31,9 @@
 
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script>
-const colors = [[0x8fa6c9,0x2a3448],[0xc9a76b,0x3a2f1e],[0x9bb98f,0x233020],[0xb98f9b,0x30222a]];
-const labels = ['Cliffside Modern','Harbor Loft','Meadow Estate','Skyline Residence'];
+const colors = [[0x8fa6c9,0x2a3448],[0xc9a76b,0x3a2f1e],[0x9bb98f,0x233020],[0xb98f9b,0x30222a],[0xe8b866,0x2a2010]];
+// 適合產業直接當作第 5 個物件磁磚的標籤，套用同一組 WebGL 扭曲 shader，是效果本身的一部分
+const labels = ['Cliffside Modern','Harbor Loft','Meadow Estate','Skyline Residence','適合：房地產／攝影／時尚電商'];
 const grid = document.getElementById('grid');
 
 colors.forEach((cols, idx) => {

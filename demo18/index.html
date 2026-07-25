@@ -53,6 +53,15 @@ function drawFrame(progress){
   ctx.strokeStyle = 'rgba(124,255,176,.15)';
   ctx.beginPath(); ctx.moveTo(0, H*0.72); ctx.lineTo(W, H*0.72); ctx.stroke();
 
+  // 適合產業當作 HUD 字幕畫進每一格影格裡，隨 progress 淡入，是影格序列本身的一部分
+  ctx.save();
+  ctx.globalAlpha = Math.min(1, progress*2);
+  ctx.fillStyle = '#7cffb0';
+  ctx.font = '600 15px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('適合：汽車／運動品牌／產品發表會', W/2, 40);
+  ctx.restore();
+
   ctx.save();
   ctx.translate(W/2, H*0.62);
 

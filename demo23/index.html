@@ -25,6 +25,7 @@
 <nav>
   <button id="btnHome" class="active">Home</button>
   <button id="btnWork">Work</button>
+  <button id="btnInd">Suited For</button>
 </nav>
 <canvas id="c"></canvas>
 <div class="content" id="content">
@@ -44,7 +45,8 @@ const scene = new THREE.Scene();
 
 const pages = {
   home: { colorA: new THREE.Color(0x1a1a1f), colorB: new THREE.Color(0xff4d5e), title: 'We Break Convention.', desc: '切換上方 Home / Work 按鈕，背景會用 GLSL noise 做出有機溶解式過場，取代普通的淡入淡出。' },
-  work: { colorA: new THREE.Color(0x0e1a1c), colorB: new THREE.Color(0x4dfff0), title: 'Selected Works, 2026.', desc: '每個作品的頁面切換都經過相同的溶解過場處理，維持整站一致的過渡語言。' }
+  work: { colorA: new THREE.Color(0x0e1a1c), colorB: new THREE.Color(0x4dfff0), title: 'Selected Works, 2026.', desc: '每個作品的頁面切換都經過相同的溶解過場處理，維持整站一致的過渡語言。' },
+  ind: { colorA: new THREE.Color(0x1a1508), colorB: new THREE.Color(0xffb454), title: 'Suited For', desc: '適合：創意代理商／精品品牌形象站——這種有機溶解過場最能凸顯品牌的獨特調性。' }
 };
 
 const mat = new THREE.ShaderMaterial({
@@ -95,13 +97,22 @@ const btnWork = document.getElementById('btnWork');
 const title = document.getElementById('title');
 const desc = document.getElementById('desc');
 
-function go(page, btn, other){
-  target = page === 'work' ? 1 : 0;
-  btn.classList.add('active'); other.classList.remove('active');
+const btnInd = document.getElementById('btnInd');
+const allBtns = [btnHome, btnWork, btnInd];
+
+function go(page, btn){
+  if (page !== 'home') {
+    mat.uniforms.uColorA2.value.copy(pages[page].colorA);
+    mat.uniforms.uColorB2.value.copy(pages[page].colorB);
+  }
+  target = page === 'home' ? 0 : 1;
+  allBtns.forEach(b => b.classList.toggle('active', b === btn));
   setTimeout(() => { title.textContent = pages[page].title; desc.textContent = pages[page].desc; }, 350);
 }
-btnHome.addEventListener('click', () => go('home', btnHome, btnWork));
-btnWork.addEventListener('click', () => go('work', btnWork, btnHome));
+btnHome.addEventListener('click', () => go('home', btnHome));
+btnWork.addEventListener('click', () => go('work', btnWork));
+// 適合產業做成第三個導覽狀態，套用同一組 shader 溶解過場，是效果本身的一部分
+btnInd.addEventListener('click', () => go('ind', btnInd));
 </script>
 </body>
 </html>

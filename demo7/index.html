@@ -90,6 +90,24 @@ const mat = new THREE.ShaderMaterial({
 const blob = new THREE.Mesh(geo, mat);
 scene.add(blob);
 
+// 適合產業標籤：畫進 3D 場景繞著變形球體公轉，隨音波振幅一起跳動
+function makeLabelSprite(text){
+  const c = document.createElement('canvas'); c.width=256; c.height=64;
+  const cx = c.getContext('2d');
+  cx.font='600 28px -apple-system, sans-serif'; cx.fillStyle='#fff';
+  cx.textAlign='center'; cx.textBaseline='middle';
+  cx.shadowColor='rgba(142,59,255,0.9)'; cx.shadowBlur=16;
+  cx.fillText(text,128,32);
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map:new THREE.CanvasTexture(c), transparent:true, depthWrite:false }));
+  sprite.scale.set(1.5,0.38,1);
+  return sprite;
+}
+const industryLabels = ['音樂產業','創意產業','新創品牌'].map((t,i)=>{
+  const s = makeLabelSprite(t);
+  s.userData.angle = (i/3)*Math.PI*2; s.userData.radius = 2.0;
+  scene.add(s); return s;
+});
+
 const clock = new THREE.Clock();
 function tick(){
   requestAnimationFrame(tick);
@@ -99,6 +117,11 @@ function tick(){
   const beat = Math.abs(Math.sin(t*2.4)) * 0.5 + Math.abs(Math.sin(t*0.7)) * 0.3;
   mat.uniforms.uAmp.value += ((0.16 + beat*0.28) - mat.uniforms.uAmp.value) * 0.15;
   blob.rotation.y = t*0.18;
+  industryLabels.forEach(s => {
+    const a = s.userData.angle + t*0.3;
+    const r = s.userData.radius + beat*0.4;
+    s.position.set(Math.cos(a)*r, Math.sin(a*1.3)*0.5, Math.sin(a)*r);
+  });
   renderer.render(scene, camera);
 }
 tick();

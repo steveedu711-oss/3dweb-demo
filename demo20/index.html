@@ -56,6 +56,12 @@ function renderSet(){
     d.innerHTML = `<i></i>${n}`;
     frag.appendChild(d);
   });
+  // 適合產業直接當作跑馬燈裡的一塊「標誌」，跟其他 logo 一起橫向捲動，是效果本身的一部分
+  const ind = document.createElement('div');
+  ind.className = 'logo';
+  ind.style.color = '#3a5bff';
+  ind.innerHTML = `<i style="background:#fff;border:2px solid #3a5bff"></i>適合：B2B SaaS／顧問／企業服務`;
+  frag.appendChild(ind);
   return frag;
 }
 track.appendChild(renderSet());

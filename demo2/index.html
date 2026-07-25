@@ -54,6 +54,13 @@ const mouse = { x: -9999, y: -9999 };
 addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 
+// 適合產業節點：直接畫進粒子網路裡，跟一般粒子一起參與連線運算，不是外掛的 HTML 文字
+const industryHubs = ['AI Agent 平台', '資安', '網路基礎設施'].map((label, i) => ({
+  label,
+  x: W*(0.2 + i*0.3), y: H*(0.35 + (i%2)*0.3),
+  r: 4, hub: true
+}));
+
 function tick(){
   ctx.clearRect(0,0,W,H);
   for (const p of particles) {
@@ -67,12 +74,14 @@ function tick(){
     p.x = Math.max(0, Math.min(W, p.x));
     p.y = Math.max(0, Math.min(H, p.y));
   }
-  for (let i=0;i<particles.length;i++){
-    for (let j=i+1;j<particles.length;j++){
-      const a = particles[i], b = particles[j];
+  const allNodes = particles.concat(industryHubs);
+  for (let i=0;i<allNodes.length;i++){
+    for (let j=i+1;j<allNodes.length;j++){
+      const a = allNodes[i], b = allNodes[j];
       const d = Math.hypot(a.x-b.x, a.y-b.y);
-      if (d < 110) {
-        ctx.strokeStyle = `rgba(255,180,84,${(1-d/110)*0.35})`;
+      const maxD = (a.hub || b.hub) ? 220 : 110;
+      if (d < maxD) {
+        ctx.strokeStyle = `rgba(255,180,84,${(1-d/maxD)*((a.hub||b.hub)?0.5:0.35)})`;
         ctx.lineWidth = 1;
         ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
       }
@@ -83,6 +92,18 @@ function tick(){
     ctx.fillStyle = 'rgba(255,180,84,0.9)';
     ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
     ctx.fill();
+  }
+  for (const hub of industryHubs) {
+    ctx.beginPath();
+    ctx.fillStyle = '#ffb454';
+    ctx.shadowColor = '#ffb454'; ctx.shadowBlur = 16;
+    ctx.arc(hub.x, hub.y, hub.r, 0, Math.PI*2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.font = '600 13px -apple-system, sans-serif';
+    ctx.fillStyle = 'rgba(255,180,84,0.9)';
+    ctx.textAlign = 'center';
+    ctx.fillText(hub.label, hub.x, hub.y - 14);
   }
   requestAnimationFrame(tick);
 }

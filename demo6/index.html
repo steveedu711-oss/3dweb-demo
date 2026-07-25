@@ -27,6 +27,8 @@
   .tilt h3{font-size:18px;margin-bottom:8px;transform:translateZ(20px)}
   .tilt p.desc{font-size:13px;color:#c9b8a5;line-height:1.6;transform:translateZ(15px);margin:0}
   .tilt .price{margin-top:16px;font-weight:700;color:#e0a458;transform:translateZ(25px)}
+  .tilt.ind{background:transparent;border:1px dashed rgba(224,164,88,.5);display:flex;align-items:center;justify-content:center;text-align:center}
+  .tilt.ind p{transform:translateZ(20px);color:#e0a458;font-weight:700;font-size:15px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -40,6 +42,8 @@
   <div class="tilt" data-tilt><div class="orb"></div><h3>Ethiopia Yirgacheffe</h3><p class="desc">花香調、柑橘酸質明亮，淺焙單品。</p><div class="price">$680 / 200g</div></div>
   <div class="tilt" data-tilt><div class="orb" style="background:radial-gradient(circle at 35% 30%,#c97b4a,#5a2f16)"></div><h3>Guatemala Antigua</h3><p class="desc">堅果巧克力調，中焙均衡口感。</p><div class="price">$620 / 200g</div></div>
   <div class="tilt" data-tilt><div class="orb" style="background:radial-gradient(circle at 35% 30%,#a85c2e,#3d2010)"></div><h3>Sumatra Mandheling</h3><p class="desc">濃郁土壤香氣，深焙醇厚回甘。</p><div class="price">$590 / 200g</div></div>
+  <!-- 適合產業卡片跟其他商品卡共用同一組 data-tilt 邏輯，傾斜行為完全一致，是效果本身的一部分 -->
+  <div class="tilt ind" data-tilt><p>這種立體傾斜卡<br>適合<br>電商 ／ 餐飲 ／ 精品零售</p></div>
 </div>
 
 <script>

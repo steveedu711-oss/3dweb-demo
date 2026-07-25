@@ -40,8 +40,21 @@ addEventListener('mousemove', (e) => {
   if (trail.length > 40) trail.shift();
 });
 
+const indText = '適合：醫美健康／精品品牌';
 function tick(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
+  // 適合產業文字本身也用跟游標軌跡一樣的柔光 gradient 畫出來，游標越靠近字越亮，是同一套繪製邏輯
+  const tx = canvas.width/2, ty = canvas.height*0.7;
+  const last = trail[trail.length-1];
+  const near = last ? Math.max(0, 1 - Math.hypot(last.x-tx, last.y-ty)/260) : 0;
+  ctx.save();
+  ctx.font = '600 22px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = 'rgba(201,138,99,0.9)';
+  ctx.shadowBlur = 10 + near*20;
+  ctx.fillStyle = `rgba(201,138,99,${0.35 + near*0.5})`;
+  ctx.fillText(indText, tx, ty);
+  ctx.restore();
   for (let i=0;i<trail.length;i++){
     const p = trail[i];
     p.life -= 0.025;
