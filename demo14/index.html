@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurum — Fine Jewelry, Viewed in 3D</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#12100d;color:#f6efe2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;overflow-x:hidden}
+  canvas{position:fixed;inset:0;z-index:0;cursor:grab}
+  canvas:active{cursor:grabbing}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}
+  .badge b{color:#e3b873}
+  main{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:24px 24px 90px;pointer-events:none}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#e3b873;margin-bottom:16px}
+  h1{font-size:clamp(30px,5.4vw,54px);font-weight:700;letter-spacing:-.02em;max-width:600px}
+  p{color:#b8ab94;max-width:420px;margin:16px auto 0;line-height:1.7}
+  .hint{margin-top:22px;font-size:12px;color:#8a7d64;letter-spacing:.08em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>3D Product Viewer</b>（拖曳自由旋轉 360° 商品模型）</div>
+<canvas id="c"></canvas>
+<main>
+  <div class="kicker">Aurum · 精品珠寶</div>
+  <h1>Every Angle, Every Sparkle</h1>
+  <p>用滑鼠/手指拖曳畫面即可 360° 旋轉戒指模型，放開後會保留慣性緩慢轉動——真正的 Three.js 3D 模型，不是預錄的旋轉影片。</p>
+  <div class="hint">← Drag to rotate →</div>
+</main>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth, innerHeight);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(40, innerWidth/innerHeight, 0.1, 100);
+camera.position.set(0, 0.3, 5.5);
+
+scene.add(new THREE.AmbientLight(0xfff0d8, 0.5));
+const key = new THREE.PointLight(0xffe3ad, 4, 20); key.position.set(3,4,4); scene.add(key);
+const rim = new THREE.PointLight(0x8fb0ff, 2, 20); rim.position.set(-4,-2,-3); scene.add(rim);
+
+const product = new THREE.Group();
+scene.add(product);
+
+const band = new THREE.Mesh(
+  new THREE.TorusGeometry(1.1, 0.14, 32, 100),
+  new THREE.MeshStandardMaterial({ color: 0xe3b873, metalness: 1, roughness: 0.22 })
+);
+band.rotation.x = Math.PI/2;
+product.add(band);
+
+const gem = new THREE.Mesh(
+  new THREE.OctahedronGeometry(0.55, 0),
+  new THREE.MeshPhysicalMaterial({ color: 0xbfe8ff, metalness: 0, roughness: 0.05, transmission: 0.9, thickness: 1.2, ior: 2.2, clearcoat: 1 })
+);
+gem.position.y = 1.05;
+product.add(gem);
+
+for (let i=0;i<3;i++){
+  const prong = new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,0.5,8), new THREE.MeshStandardMaterial({ color:0xe3b873, metalness:1, roughness:.2 }));
+  const a = (i/3)*Math.PI*2;
+  prong.position.set(Math.cos(a)*0.35, 0.75, Math.sin(a)*0.35);
+  product.add(prong);
+}
+
+let rotY = 0.6, rotX = 0.1, velY = 0.003, velX = 0;
+let dragging = false, lastX = 0, lastY = 0;
+
+canvas.addEventListener('pointerdown', (e) => { dragging = true; lastX = e.clientX; lastY = e.clientY; velY = 0; velX = 0; });
+addEventListener('pointerup', () => { dragging = false; });
+addEventListener('pointermove', (e) => {
+  if (!dragging) return;
+  const dx = e.clientX - lastX, dy = e.clientY - lastY;
+  velY = dx * 0.005; velX = dy * 0.003;
+  rotY += velY; rotX = Math.max(-0.6, Math.min(0.6, rotX + velX));
+  lastX = e.clientX; lastY = e.clientY;
+});
+
+function tick(){
+  requestAnimationFrame(tick);
+  if (!dragging) { rotY += velY; velY *= 0.96; }
+  product.rotation.y = rotY;
+  product.rotation.x = rotX;
+  gem.rotation.y += 0.01;
+  renderer.render(scene, camera);
+}
+tick();
+addEventListener('resize', () => {
+  camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

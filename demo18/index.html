@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volt Prime — Electric Vehicle Reveal</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#050505;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}
+  .badge b{color:#7cffb0}
+  .stage{height:400vh;position:relative}
+  .pin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  canvas{max-width:90vw;max-height:70vh}
+  .fg{position:absolute;bottom:8vh;text-align:center;padding:0 24px}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#7cffb0;margin-bottom:10px}
+  h1{font-size:clamp(24px,4.2vw,40px);font-weight:700;letter-spacing:-.01em}
+  p{color:#9aa39a;max-width:440px;margin:10px auto 0;font-size:14px;line-height:1.6}
+  .bar{position:fixed;left:0;top:0;height:3px;background:#7cffb0;width:0%;z-index:20}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>Video Scrub</b>（捲動位置控制影格播放進度）</div>
+<div class="bar" id="bar"></div>
+
+<div class="stage">
+  <div class="pin">
+    <canvas id="c" width="900" height="500"></canvas>
+    <div class="fg">
+      <div class="kicker">Volt Prime · 純電旗艦</div>
+      <h1>Scroll to Reveal</h1>
+      <p>畫布上的車型輪廓依捲動進度逐格繪製，原理跟真正的「影片捲軸」一樣：把一段畫面拆成連續影格，用 scrollY 換算成 frame index 去 seek，只是這裡用程式即時畫格取代真的影片檔。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const stage = document.querySelector('.stage');
+const bar = document.getElementById('bar');
+const TOTAL_FRAMES = 60;
+
+function drawFrame(progress){
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+
+  // 背景漸層地平線
+  const g = ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0, '#0a0f0c'); g.addColorStop(1, '#050505');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle = 'rgba(124,255,176,.15)';
+  ctx.beginPath(); ctx.moveTo(0, H*0.72); ctx.lineTo(W, H*0.72); ctx.stroke();
+
+  ctx.save();
+  ctx.translate(W/2, H*0.62);
+
+  // 車身隨 progress 旋轉 + 揭露（0~1）
+  const angle = progress * Math.PI * 2.2;
+  const reveal = Math.min(1, progress*1.6);
+  ctx.rotate(Math.sin(angle)*0.15);
+  ctx.scale(0.7 + reveal*0.3, 0.7 + reveal*0.3);
+
+  ctx.globalAlpha = reveal;
+  // 車身
+  ctx.fillStyle = '#101512';
+  roundRect(ctx, -220, -60, 440, 90, 40); ctx.fill();
+  ctx.fillStyle = '#7cffb0';
+  roundRect(ctx, -190, -95, 260, 50, 30); ctx.globalAlpha = reveal*0.9; ctx.fill();
+  ctx.globalAlpha = reveal;
+  // 車窗
+  ctx.fillStyle = '#050505';
+  roundRect(ctx, -150, -88, 200, 40, 18); ctx.fill();
+  // 輪子
+  ctx.fillStyle = '#000';
+  ctx.beginPath(); ctx.arc(-140, 40, 42, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(140, 40, 42, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#7cffb0';
+  ctx.beginPath(); ctx.arc(-140, 40, 14, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(140, 40, 14, 0, Math.PI*2); ctx.fill();
+  // 車頭燈
+  ctx.fillStyle = `rgba(124,255,176,${0.4+0.6*Math.abs(Math.sin(angle*2))})`;
+  ctx.beginPath(); ctx.arc(210, -10, 8, 0, Math.PI*2); ctx.fill();
+
+  ctx.restore();
+}
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+
+function onScroll(){
+  const rect = stage.getBoundingClientRect();
+  const total = stage.offsetHeight - innerHeight;
+  const scrolled = Math.min(Math.max(-rect.top, 0), total);
+  const progress = total > 0 ? scrolled/total : 0;
+  bar.style.width = (progress*100)+'%';
+  drawFrame(progress);
+}
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>

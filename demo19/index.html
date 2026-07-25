@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenFund — Climate Crowdfunding</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0a120d;color:#eef7f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;min-height:100vh}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}
+  .badge b{color:#5ee08a}
+  header{text-align:center;padding:90px 24px 20px}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#5ee08a;margin-bottom:16px}
+  h1{font-size:clamp(30px,5.4vw,54px);font-weight:700;letter-spacing:-.02em;max-width:700px;margin:0 auto}
+  p{color:#9fb3a4;max-width:480px;margin:16px auto 0;line-height:1.7}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:900px;margin:60px auto 40px;padding:0 24px}
+  .stat{padding:30px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);text-align:center}
+  .stat b{display:block;font-size:38px;font-weight:800;color:#5ee08a;font-variant-numeric:tabular-nums}
+  .stat span{font-size:12px;color:#8aa08e;text-transform:uppercase;letter-spacing:.08em}
+
+  .odometer-wrap{max-width:420px;margin:0 auto 100px;text-align:center;padding:0 24px}
+  .odometer-wrap .label{font-size:12px;color:#8aa08e;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+  .odometer{display:inline-flex;gap:4px;font-size:56px;font-weight:800;font-variant-numeric:tabular-nums}
+  .digit{width:1ch;height:1.15em;overflow:hidden;position:relative;background:rgba(255,255,255,.05);border-radius:6px}
+  .digit .col{position:absolute;left:0;top:0;display:flex;flex-direction:column;transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+  .digit .col div{height:1.15em;display:flex;align-items:center;justify-content:center;color:#5ee08a}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>Number Counter / Odometer</b>（數字捲動進入畫面後跳動到目標值）</div>
+<header>
+  <div class="kicker">GreenFund · 氣候行動群眾募資</div>
+  <h1>Every Dollar, Tracked in Real Time</h1>
+  <p>下方統計數字在捲動進入畫面時才開始跳動到目標值（IntersectionObserver 觸發 + easing 動畫），旗艦數字還做了真的裡程表式的逐位滾輪效果。</p>
+</header>
+
+<div class="stats">
+  <div class="stat"><b data-target="4128" data-suffix="">0</b><span>Active Projects</span></div>
+  <div class="stat"><b data-target="892" data-suffix="k">0</b><span>Tons CO₂ Offset</span></div>
+  <div class="stat"><b data-target="99" data-suffix="%">0</b><span>Funds to Field</span></div>
+</div>
+
+<div class="odometer-wrap">
+  <div class="label">Total Raised (USD)</div>
+  <div class="odometer" id="odo"></div>
+</div>
+
+<script>
+// 一般數字：捲動進場後 ease 跳到目標值
+const counters = document.querySelectorAll('.stat b');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (!en.isIntersecting) return;
+    io.unobserve(en.target);
+    const el = en.target;
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const start = performance.now();
+    const dur = 1400;
+    function step(now){
+      const p = Math.min(1, (now-start)/dur);
+      const eased = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(target*eased).toLocaleString() + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => io.observe(c));
+
+// 裡程表式逐位數字滾輪
+const odo = document.getElementById('odo');
+const finalValue = '5842910';
+[...finalValue].forEach((d) => {
+  const digit = document.createElement('div');
+  digit.className = 'digit';
+  const col = document.createElement('div');
+  col.className = 'col';
+  for (let n=0;n<=9;n++){ const row=document.createElement('div'); row.textContent=n; col.appendChild(row); }
+  digit.appendChild(col);
+  odo.appendChild(digit);
+  digit.dataset.target = d;
+});
+
+const odoIO = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (!en.isIntersecting) return;
+    odoIO.unobserve(en.target);
+    document.querySelectorAll('.digit').forEach((digit, i) => {
+      const n = parseInt(digit.dataset.target, 10);
+      const col = digit.querySelector('.col');
+      setTimeout(() => { col.style.transform = `translateY(-${n*1.15}em)`; }, i*90);
+    });
+  });
+}, { threshold: 0.5 });
+odoIO.observe(odo);
+</script>
+</body>
+</html>

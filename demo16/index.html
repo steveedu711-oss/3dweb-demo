@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glace Pay — Liquid Glass Fintech</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#070a12;color:#eef1ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;overflow-x:hidden;min-height:100vh}
+  .blob{position:fixed;border-radius:50%;filter:blur(60px);z-index:0}
+  .b1{width:40vw;height:40vw;background:#4f7cff;top:-10%;left:-8%;animation:mv1 14s ease-in-out infinite}
+  .b2{width:34vw;height:34vw;background:#7c5cff;bottom:-10%;right:-6%;animation:mv2 18s ease-in-out infinite}
+  .b3{width:26vw;height:26vw;background:#4fd1c5;top:30%;right:20%;animation:mv1 20s ease-in-out infinite reverse}
+  @keyframes mv1{0%,100%{transform:translate(0,0)}50%{transform:translate(8%,6%)}}
+  @keyframes mv2{0%,100%{transform:translate(0,0)}50%{transform:translate(-6%,-8%)}}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px)}
+  .badge b{color:#8fb4ff}
+  main{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8fb4ff;margin-bottom:18px}
+  h1{font-size:clamp(34px,6vw,66px);font-weight:700;letter-spacing:-.02em;max-width:700px}
+  p{color:#a9b0d0;max-width:460px;margin:20px auto 40px;line-height:1.7}
+
+  .glass-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+  .glass-card{
+    position:relative;width:230px;padding:26px;border-radius:24px;overflow:hidden;
+    background:rgba(255,255,255,.08);backdrop-filter:blur(18px) saturate(160%);
+    border:1px solid rgba(255,255,255,.35);
+    box-shadow:0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.4);
+  }
+  .glass-card::before{
+    content:"";position:absolute;inset:-50%;
+    background:conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,.5) 20deg, transparent 40deg);
+    animation:sheen 4s linear infinite;
+  }
+  .glass-card > *{position:relative;z-index:1}
+  @keyframes sheen{to{transform:rotate(360deg)}}
+  .glass-card .tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#c8d3ff;margin-bottom:10px}
+  .glass-card .amt{font-size:24px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>Liquid Glassmorphism</b>（液態玻璃質感 + 光線折射掃光）</div>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<main>
+  <div class="kicker">Glace Pay · 新世代金融科技</div>
+  <h1>Banking That Feels Like Glass</h1>
+  <p>卡片用 backdrop-filter 做出通透玻璃感，內層再疊一層旋轉的 conic-gradient 掃光，模擬液態玻璃的光線折射，是近年金融科技/高階 SaaS 常見的視覺語言。</p>
+  <div class="glass-row">
+    <div class="glass-card"><div class="tag">Checking</div><div class="amt">$12,480.30</div></div>
+    <div class="glass-card"><div class="tag">Savings</div><div class="amt">$48,910.12</div></div>
+    <div class="glass-card"><div class="tag">Invest</div><div class="amt">$9,204.77</div></div>
+  </div>
+</main>
+</body>
+</html>

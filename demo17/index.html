@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linea Studio — Architecture &amp; Design</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f7f5f0;color:#141210;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;min-height:100vh}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(20,18,16,.06);border:1px solid rgba(20,18,16,.15)}
+  .badge b{color:#b5461f}
+  main{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b5461f;font-weight:800;margin-bottom:20px}
+  h1{font-size:clamp(28px,5vw,50px);font-weight:800;letter-spacing:-.02em;max-width:600px}
+  p{color:#5c564a;max-width:440px;margin:18px auto 34px;line-height:1.7}
+  svg{width:min(90vw,520px);height:auto}
+  path{fill:none;stroke:#141210;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .accent{stroke:#b5461f}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>SVG Line Draw</b>（路徑描邊動畫，線條依序畫出圖形）</div>
+<main>
+  <div class="kicker">Linea Studio · 建築設計事務所</div>
+  <h1>Every Line Has Intention</h1>
+  <p>下方建築線稿用 SVG path，透過控制 stroke-dasharray / stroke-dashoffset 從 0 動畫到完整長度，做出「線條被畫出來」的效果，一進頁面就觸發。</p>
+  <svg viewBox="0 0 400 220" fill="none">
+    <path id="p1" d="M40 200 L40 90 L120 40 L200 90 L200 200" />
+    <path id="p2" d="M60 200 L60 120 L100 120 L100 200" />
+    <path id="p3" class="accent" d="M140 200 L140 130 L180 130 L180 200" />
+    <path id="p4" d="M220 200 L220 60 L300 20 L380 60 L380 200 L220 200" />
+    <path id="p5" class="accent" d="M250 200 L250 150 L285 150 L285 200" />
+    <path id="p6" d="M310 200 L310 140 L350 140 L350 200" />
+  </svg>
+</main>
+
+<script>
+document.querySelectorAll('svg path').forEach((path, i) => {
+  const len = path.getTotalLength();
+  path.style.strokeDasharray = len;
+  path.style.strokeDashoffset = len;
+  path.animate(
+    [{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+    { duration: 900, delay: i * 220, fill: 'forwards', easing: 'ease-in-out' }
+  );
+});
+</script>
+</body>
+</html>
