@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reweave — Sustainable Fashion</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f4f1ea;color:#1c1a15;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(28,26,21,.06);border:1px solid rgba(28,26,21,.15)}
+  .badge b{color:#3f6b3f}
+  section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:60px 24px;text-align:center}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#3f6b3f;font-weight:800;margin-bottom:18px}
+  .reveal-line{overflow:hidden}
+  .reveal-line span{display:inline-block;transform:translateY(120%)}
+  h2{font-size:clamp(32px,6vw,64px);font-weight:800;letter-spacing:-.02em;line-height:1.1;max-width:840px}
+  p{color:#5a5647;max-width:460px;margin:20px auto 0;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>Text Reveal</b>（overflow:hidden 逐行百葉窗式顯現，捲動觸發）</div>
+
+<section>
+  <div>
+    <div class="kicker">Reweave · 永續時尚</div>
+    <h2>
+      <div class="reveal-line"><span>Fashion Woven</span></div>
+      <div class="reveal-line"><span>From Ocean</span></div>
+      <div class="reveal-line"><span>Plastic.</span></div>
+    </h2>
+    <p>每一行標題用 overflow:hidden 包住，內層文字往上滑入，捲動到畫面內才觸發，是專業作品集常見的標題進場動畫。</p>
+  </div>
+</section>
+
+<section>
+  <div>
+    <div class="kicker">Chapter 02</div>
+    <h2>
+      <div class="reveal-line"><span>Every Fiber</span></div>
+      <div class="reveal-line"><span>Traced Back</span></div>
+      <div class="reveal-line"><span>To Its Source.</span></div>
+    </h2>
+    <p>往下捲動可以看到第二段標題也用相同手法顯現，示範同一技巧可以重複套用在多個段落。</p>
+  </div>
+</section>
+
+<section>
+  <div>
+    <div class="kicker">Join Us</div>
+    <h2>
+      <div class="reveal-line"><span>Wear the Change</span></div>
+      <div class="reveal-line"><span>You Believe In.</span></div>
+    </h2>
+    <p>2026 秋季系列，100% 回收海洋塑料纖維，限量預購中。</p>
+  </div>
+</section>
+
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+document.querySelectorAll('section').forEach((sec) => {
+  const lines = sec.querySelectorAll('.reveal-line span');
+  gsap.to(lines, {
+    y: '0%', duration: 0.9, stagger: 0.12, ease: 'power4.out',
+    scrollTrigger: { trigger: sec, start: 'top 70%' }
+  });
+});
+</script>
+</body>
+</html>

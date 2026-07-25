@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexverse — VR Fitness Metaverse</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0a0612;color:#f1eaff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}
+  .badge b{color:#ff5ec4}
+  .intro{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#ff5ec4;font-weight:800;margin-bottom:16px}
+  h1{font-size:clamp(32px,5.8vw,60px);font-weight:800;letter-spacing:-.02em;max-width:760px}
+  h1 span{background:linear-gradient(135deg,#ff5ec4,#7c5cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  p{color:#b3a7cf;max-width:480px;margin:18px auto 0;line-height:1.7}
+
+  .h-section{height:500vh;position:relative}
+  .h-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
+  .track{display:flex;gap:28px;padding:0 6vw;will-change:transform}
+  .card{
+    flex:0 0 auto;width:min(70vw,420px);height:56vh;border-radius:24px;
+    background:linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.14);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:28px;
+  }
+  .card .tag{font-size:12px;color:#ff5ec4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+  .card h3{font-size:24px;margin-bottom:8px}
+  .card p{color:#b3a7cf;font-size:14px;margin:0;max-width:none}
+  .c1{background:radial-gradient(circle at 30% 20%, #ff5ec4, #2a0f3d 70%)}
+  .c2{background:radial-gradient(circle at 30% 20%, #7c5cff, #150a33 70%)}
+  .c3{background:radial-gradient(circle at 30% 20%, #5eead4, #06231f 70%)}
+  .c4{background:radial-gradient(circle at 30% 20%, #ffb454, #331e05 70%)}
+  .c5{background:radial-gradient(circle at 30% 20%, #ff5d3b, #2e0d05 70%)}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>Horizontal Scroll Gallery</b>（垂直捲動轉換成畫廊橫向位移）</div>
+
+<div class="intro">
+  <div class="kicker">Flexverse · VR 元宇宙健身房</div>
+  <h1>Train in <span>Any World You Imagine</span></h1>
+  <p>繼續往下捲動，畫廊會固定在畫面上，垂直捲動的距離被換算成橫向位移——這是水平捲動畫廊最常見的實作方式。</p>
+</div>
+
+<div class="h-section">
+  <div class="h-pin">
+    <div class="track" id="track">
+      <div class="card c1"><div class="tag">Cardio World</div><h3>火山熔岩訓練場</h3><p>邊躲熔岩邊完成高強度間歇訓練。</p></div>
+      <div class="card c2"><div class="tag">Strength World</div><h3>零重力太空艙</h3><p>模擬失重環境的核心肌群訓練。</p></div>
+      <div class="card c3"><div class="tag">Yoga World</div><h3>深海珊瑚靜心島</h3><p>伴隨海浪聲的沉浸式瑜伽課程。</p></div>
+      <div class="card c4"><div class="tag">Boxing World</div><h3>賽博龐克擂台</h3><p>跟 AI 教練對打，即時姿勢校正。</p></div>
+      <div class="card c5"><div class="tag">Social World</div><h3>雲端跑步俱樂部</h3><p>跟全球好友同場競速，即時排行榜。</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="intro"><h1>戴上頭盔，走進下一個訓練世界</h1></div>
+
+<script>
+const section = document.querySelector('.h-section');
+const track = document.getElementById('track');
+
+function onScroll(){
+  const rect = section.getBoundingClientRect();
+  const total = section.offsetHeight - innerHeight;
+  const scrolled = Math.min(Math.max(-rect.top, 0), total);
+  const progress = total > 0 ? scrolled / total : 0;
+  const maxX = Math.max(0, track.scrollWidth - innerWidth + 96);
+  track.style.transform = `translateX(${-progress*maxX}px)`;
+}
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', onScroll);
+onScroll();
+</script>
+</body>
+</html>

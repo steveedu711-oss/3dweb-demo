@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyra — Urban Air Taxi</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(circle at 50% -10%, #14203a, #060810 60%);color:#eef2ff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;min-height:100vh}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(6px)}
+  .badge b{color:#5ec9ff}
+  main{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#5ec9ff;margin-bottom:20px}
+  h1{font-size:clamp(38px,7vw,76px);font-weight:700;letter-spacing:-.02em;line-height:1.06;max-width:760px}
+  h1 span{background:linear-gradient(135deg,#5ec9ff,#7c5cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  p{color:#9aa3c4;font-size:17px;max-width:480px;margin:22px 0 44px;line-height:1.7}
+  .mag-wrap{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .magnetic-btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:17px 34px;border-radius:999px;
+    font-weight:700;font-size:16px;cursor:pointer;border:none}
+  .magnetic-btn.primary{background:linear-gradient(135deg,#5ec9ff,#3a7bff);color:#04070f;box-shadow:0 14px 34px rgba(94,201,255,.4)}
+  .magnetic-btn.ghost{background:rgba(255,255,255,.06);color:#eef2ff;border:1px solid rgba(255,255,255,.2)}
+  .hint{position:relative;z-index:1;margin-top:60px;font-size:12px;color:#6b7396;letter-spacing:.08em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>Magnetic Button</b>（游標靠近時被吸附、離開彈簧回彈）</div>
+<main>
+  <div class="kicker">Skyra Air Mobility · 城市空中計程機</div>
+  <h1>Skip Traffic. <span>Take the Sky.</span></h1>
+  <p>把游標移到下面兩個按鈕附近試試——按鈕會被「吸」向游標，離開範圍後用彈簧曲線彈回原位，是高階作品集網站常見的招牌互動。</p>
+  <div class="mag-wrap">
+    <button class="magnetic-btn primary">預約試飛 →</button>
+    <button class="magnetic-btn ghost">觀看降落實況</button>
+  </div>
+  <div class="hint">↑ Move your cursor near the buttons</div>
+</main>
+
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+document.querySelectorAll('.magnetic-btn').forEach((btn) => {
+  const strength = 0.45;
+  btn.addEventListener('mousemove', (e) => {
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width/2);
+    const y = e.clientY - (r.top + r.height/2);
+    gsap.to(btn, { x: x*strength, y: y*strength, duration: 0.3, ease: 'power2.out' });
+  });
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+  });
+});
+</script>
+</body>
+</html>
