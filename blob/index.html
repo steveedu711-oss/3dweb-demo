@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Organic — Morphing Blob Product Page</title>
+<meta name="description" content="Vertex Shader 變形有機球體 + 磁性按鈕 + 文字遮罩顯現 技巧示範">
+<style>
+  :root{
+    --text:#101014;
+    --muted:#6b7080;
+    --accent:#ff5d3b;
+    --accent2:#ffb703;
+    --line:rgba(16,16,20,.1);
+    --bg:#f5f2ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    color:var(--text);background:var(--bg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  canvas#webgl{position:fixed;top:0;right:0;z-index:0;width:60vw;height:100vh;pointer-events:none}
+  @media (max-width:900px){canvas#webgl{width:100vw;opacity:.5}}
+
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;padding:22px 28px;
+  }
+  .logo{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:-.02em;font-size:18px}
+  .logo-mark{width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+
+  .magnetic-btn{
+    position:relative;display:inline-flex;align-items:center;gap:10px;
+    padding:15px 30px;border-radius:999px;font-weight:700;font-size:15px;
+    background:var(--text);color:#fff;cursor:pointer;border:none;
+    transition:background .3s ease;
+  }
+  .magnetic-btn:hover{background:var(--accent)}
+  .magnetic-btn .inner{display:inline-flex;align-items:center;gap:8px}
+
+  header.hero{
+    position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 28px 60px;max-width:640px;
+  }
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+  h1.hero-title{
+    font-size:clamp(42px,7vw,88px);line-height:.98;font-weight:800;letter-spacing:-.03em;
+  }
+  .reveal-line{overflow:hidden}
+  .reveal-line span{display:inline-block;transform:translateY(110%)}
+  .hero p.sub{color:var(--muted);font-size:18px;max-width:420px;margin:26px 0 36px;line-height:1.65}
+
+  section{position:relative;z-index:1;padding:110px 28px}
+  .eyebrow{color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+  .section-title{font-size:clamp(30px,4.4vw,48px);font-weight:800;letter-spacing:-.02em;max-width:600px}
+
+  .marquee{
+    position:relative;z-index:1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:24px 0;overflow:hidden;white-space:nowrap;background:var(--bg);
+  }
+  .marquee .track{display:inline-flex;gap:60px;animation:scrollX 22s linear infinite}
+  .marquee span{font-size:15px;font-weight:700;color:var(--muted);letter-spacing:.02em}
+  .marquee span b{color:var(--text)}
+  @keyframes scrollX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:48px}
+  .card{
+    padding:30px;border-radius:22px;background:#fff;border:1px solid var(--line);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease;
+  }
+  .card:hover{transform:translateY(-8px) rotate(-0.5deg);box-shadow:0 30px 50px rgba(16,16,20,.12)}
+  .card .num{font-size:13px;color:var(--accent);font-weight:800;margin-bottom:14px}
+  .card h3{font-size:19px;margin-bottom:10px;font-weight:700}
+  .card p{color:var(--muted);font-size:14px;line-height:1.7}
+
+  .cta-panel{
+    text-align:center;padding:90px 32px;border-radius:32px;margin:0 24px 100px;
+    background:var(--text);color:#fff;
+  }
+  .cta-panel .section-title{margin:0 auto 30px;color:#fff}
+
+  footer{position:relative;z-index:1;padding:32px 28px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;flex-wrap:wrap;gap:12px}
+
+  .gsap-fade{opacity:0;transform:translateY(24px)}
+</style>
+</head>
+<body>
+
+<canvas id="webgl"></canvas>
+
+<nav>
+  <div class="logo"><span class="logo-mark"></span>Nova Organic</div>
+  <div class="nav-links">
+    <a href="../">← 上一個範例（Shader 星雲）</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Product Page Demo</div>
+  <h1 class="hero-title">
+    <div class="reveal-line"><span>Shapes That</span></div>
+    <div class="reveal-line"><span>Breathe &amp;</span></div>
+    <div class="reveal-line"><span>React.</span></div>
+  </h1>
+  <p class="sub">右側的有機球體是用 Vertex Shader 即時扭曲的網格，滑鼠移動越快，表面噪聲振幅越大 — 純運算沒有任何貼圖。</p>
+  <button class="magnetic-btn" id="magBtn"><span class="inner">體驗互動 ↓</span></button>
+</header>
+
+<div class="marquee">
+  <div class="track">
+    <span><b>Vertex Displacement</b> Shader</span>
+    <span><b>Magnetic</b> Buttons</span>
+    <span><b>Clip-path</b> Text Reveal</span>
+    <span><b>Infinite</b> Marquee</span>
+    <span><b>Vertex Displacement</b> Shader</span>
+    <span><b>Magnetic</b> Buttons</span>
+    <span><b>Clip-path</b> Text Reveal</span>
+    <span><b>Infinite</b> Marquee</span>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="gsap-fade">
+      <div class="eyebrow">Technique breakdown</div>
+      <h2 class="section-title">跟上一個範例不同的三個技巧</h2>
+    </div>
+    <div class="grid3">
+      <div class="card gsap-fade"><div class="num">01</div><h3>Simplex Noise 頂點位移</h3><p>球體每個頂點沿法線方向依 3D simplex noise 位移，noise 隨時間與滑鼠速度變化，做出「呼吸」般的有機動態。</p></div>
+      <div class="card gsap-fade"><div class="num">02</div><h3>磁性按鈕</h3><p>滑鼠靠近按鈕一定範圍時，按鈕會被「吸」向游標；離開範圍會用彈簧曲線彈回原位，是很多高階作品集網站的招牌互動。</p></div>
+      <div class="card gsap-fade"><div class="num">03</div><h3>Clip-path 文字顯現</h3><p>標題每一行文字用 overflow:hidden 包住，內層文字從下往上滑入，模擬百葉窗式的專業標題進場動畫。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="wrap">
+    <div class="cta-panel gsap-fade">
+      <h2 class="section-title">兩種截然不同的視覺語言，同一套技巧庫。</h2>
+      <a class="magnetic-btn" id="magBtn2" href="https://github.com/steveedu711-oss/3dweb-demo" target="_blank" rel="noopener" style="background:#fff;color:#101014"><span class="inner">查看原始碼 →</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Nova Organic Demo — Three.js Vertex Shader + GSAP 技巧示範</span>
+  <span>Deployed on Cloudflare Pages</span>
+</footer>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ---------- Three.js 有機變形球體 ----------
+const canvas = document.getElementById('webgl');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+function sizeCanvas() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  renderer.setSize(w, h, false);
+  return w / h;
+}
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, sizeCanvas(), 0.1, 100);
+camera.position.set(0, 0, 4.2);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+const l1 = new THREE.PointLight(0xff5d3b, 3, 20); l1.position.set(3, 2, 3); scene.add(l1);
+const l2 = new THREE.PointLight(0xffb703, 2.4, 20); l2.position.set(-3, -2, 2); scene.add(l2);
+
+// Ashima simplex 3D noise（GLSL）
+const noiseGLSL = `
+vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x,289.0);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+float snoise(vec3 v){
+  const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+  const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+  vec3 i  = floor(v + dot(v, C.yyy));
+  vec3 x0 = v - i + dot(i, C.xxx);
+  vec3 g = step(x0.yzx, x0.xyz);
+  vec3 l = 1.0 - g;
+  vec3 i1 = min(g.xyz, l.zxy);
+  vec3 i2 = max(g.xyz, l.zxy);
+  vec3 x1 = x0 - i1 + C.xxx;
+  vec3 x2 = x0 - i2 + C.yyy;
+  vec3 x3 = x0 - D.yyy;
+  i = mod(i, 289.0);
+  vec4 p = permute(permute(permute(
+      i.z + vec4(0.0, i1.z, i2.z, 1.0))
+    + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+    + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+  float n_ = 1.0/7.0;
+  vec3 ns = n_ * D.wyz - D.xzx;
+  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+  vec4 x_ = floor(j * ns.z);
+  vec4 y_ = floor(j - 7.0 * x_);
+  vec4 x = x_ *ns.x + ns.yyyy;
+  vec4 y = y_ *ns.x + ns.yyyy;
+  vec4 h = 1.0 - abs(x) - abs(y);
+  vec4 b0 = vec4(x.xy, y.xy);
+  vec4 b1 = vec4(x.zw, y.zw);
+  vec4 s0 = floor(b0)*2.0 + 1.0;
+  vec4 s1 = floor(b1)*2.0 + 1.0;
+  vec4 sh = -step(h, vec4(0.0));
+  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
+  vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+  vec3 p0 = vec3(a0.xy, h.x);
+  vec3 p1 = vec3(a0.zw, h.y);
+  vec3 p2 = vec3(a1.xy, h.z);
+  vec3 p3 = vec3(a1.zw, h.w);
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+  vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+  m = m * m;
+  return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+}
+`;
+
+const blobGeo = new THREE.IcosahedronGeometry(1.15, 64);
+const blobMat = new THREE.ShaderMaterial({
+  uniforms: {
+    uTime: { value: 0 },
+    uAmp: { value: 0.25 },
+    uColorA: { value: new THREE.Color(0xff5d3b) },
+    uColorB: { value: new THREE.Color(0xffb703) }
+  },
+  vertexShader: `
+    ${noiseGLSL}
+    uniform float uTime;
+    uniform float uAmp;
+    varying float vNoise;
+    varying vec3 vNormal;
+    void main(){
+      float n = snoise(position * 1.6 + uTime * 0.35);
+      vNoise = n;
+      vNormal = normal;
+      vec3 displaced = position + normal * n * uAmp;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
+    }
+  `,
+  fragmentShader: `
+    varying float vNoise;
+    varying vec3 vNormal;
+    uniform vec3 uColorA;
+    uniform vec3 uColorB;
+    void main(){
+      float fresnel = pow(1.0 - abs(vNormal.z), 2.2);
+      vec3 base = mix(uColorA, uColorB, vNoise * 0.5 + 0.5);
+      vec3 col = base + fresnel * 0.5;
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `
+});
+const blob = new THREE.Mesh(blobGeo, blobMat);
+scene.add(blob);
+
+// 滑鼠速度 -> 振幅
+let lastX = null, lastY = null, targetAmp = 0.22;
+window.addEventListener('mousemove', (e) => {
+  if (lastX !== null) {
+    const vx = e.clientX - lastX, vy = e.clientY - lastY;
+    const speed = Math.min(Math.sqrt(vx*vx + vy*vy) / 40, 1.4);
+    targetAmp = 0.22 + speed * 0.35;
+  }
+  lastX = e.clientX; lastY = e.clientY;
+});
+
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  blobMat.uniforms.uTime.value = t;
+  blobMat.uniforms.uAmp.value += (targetAmp - blobMat.uniforms.uAmp.value) * 0.06;
+  targetAmp += (0.22 - targetAmp) * 0.01; // 緩慢回落到基準振幅
+  blob.rotation.y = t * 0.15;
+  blob.rotation.x = Math.sin(t * 0.2) * 0.15;
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = sizeCanvas();
+  camera.updateProjectionMatrix();
+});
+
+// ---------- 磁性按鈕 ----------
+document.querySelectorAll('.magnetic-btn').forEach((btn) => {
+  const strength = 0.4;
+  btn.addEventListener('mousemove', (e) => {
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width / 2);
+    const y = e.clientY - (r.top + r.height / 2);
+    gsap.to(btn, { x: x * strength, y: y * strength, duration: 0.3, ease: 'power2.out' });
+  });
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+  });
+});
+
+// ---------- 標題行顯現 ----------
+gsap.to('.reveal-line span', {
+  y: '0%', duration: 0.9, stagger: 0.12, ease: 'power4.out', delay: 0.2
+});
+
+// ---------- 區塊淡入 ----------
+gsap.utils.toArray('.gsap-fade').forEach((el) => {
+  gsap.to(el, {
+    opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: el, start: 'top 85%' }
+  });
+});
+</script>
+
+</body>
+</html>
