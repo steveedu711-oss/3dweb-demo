@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fracture Studio — Creative Agency</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0b0b0d;color:#f2f2f5;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;overflow:hidden;height:100vh}
+  canvas{position:fixed;inset:0;z-index:0}
+  .badge{position:fixed;top:18px;left:18px;z-index:10;font-size:12px;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}
+  .badge b{color:#ff4d5e}
+  nav{position:fixed;top:18px;right:18px;z-index:10;display:flex;gap:10px}
+  nav button{padding:10px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:#fff;font-weight:600;cursor:pointer}
+  nav button.active{background:#ff4d5e;border-color:#ff4d5e}
+  .content{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;pointer-events:none}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ff4d5e;margin-bottom:16px}
+  h1{font-size:clamp(30px,5.6vw,56px);font-weight:700;letter-spacing:-.02em;max-width:700px}
+  p{color:#a5a6ad;max-width:460px;margin:16px auto 0;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="badge">效果類型：<b>WebGL Page Transition</b>（切換頁面用 shader 材質有機溶解過場）</div>
+<nav>
+  <button id="btnHome" class="active">Home</button>
+  <button id="btnWork">Work</button>
+</nav>
+<canvas id="c"></canvas>
+<div class="content" id="content">
+  <div class="kicker">Fracture Studio · 創意代理商</div>
+  <h1 id="title">We Break Convention.</h1>
+  <p id="desc">切換上方 Home / Work 按鈕，背景會用 GLSL noise 做出有機溶解式過場，取代普通的淡入淡出——這種效果通常搭配真正的路由切換使用。</p>
+</div>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth, innerHeight);
+const camera = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+const scene = new THREE.Scene();
+
+const pages = {
+  home: { colorA: new THREE.Color(0x1a1a1f), colorB: new THREE.Color(0xff4d5e), title: 'We Break Convention.', desc: '切換上方 Home / Work 按鈕，背景會用 GLSL noise 做出有機溶解式過場，取代普通的淡入淡出。' },
+  work: { colorA: new THREE.Color(0x0e1a1c), colorB: new THREE.Color(0x4dfff0), title: 'Selected Works, 2026.', desc: '每個作品的頁面切換都經過相同的溶解過場處理，維持整站一致的過渡語言。' }
+};
+
+const mat = new THREE.ShaderMaterial({
+  uniforms: {
+    uProgress: { value: 0 },
+    uColorA1: { value: pages.home.colorA }, uColorB1: { value: pages.home.colorB },
+    uColorA2: { value: pages.work.colorA }, uColorB2: { value: pages.work.colorB },
+    uTime: { value: 0 }
+  },
+  vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position,1.0); }`,
+  fragmentShader: `
+    varying vec2 vUv;
+    uniform float uProgress, uTime;
+    uniform vec3 uColorA1, uColorB1, uColorA2, uColorB2;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(41.3,289.1)))*43758.5453); }
+    float noise(vec2 p){
+      vec2 i=floor(p), f=fract(p);
+      float a=hash(i), b=hash(i+vec2(1,0)), c=hash(i+vec2(0,1)), d=hash(i+vec2(1,1));
+      vec2 u=f*f*(3.0-2.0*f);
+      return mix(a,b,u.x)+(c-a)*u.y*(1.0-u.x)+(d-b)*u.x*u.y;
+    }
+    void main(){
+      vec2 uv = vUv*3.0;
+      float n = noise(uv + uTime*0.02) * 0.6 + noise(uv*2.0 - uTime*0.015) * 0.4;
+      float threshold = smoothstep(uProgress-0.15, uProgress+0.15, n);
+      vec3 colFrom = mix(uColorA1, uColorB1, vUv.y);
+      vec3 colTo = mix(uColorA2, uColorB2, vUv.y);
+      vec3 col = mix(colTo, colFrom, threshold);
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `
+});
+scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), mat));
+
+let target = 0;
+const clock = new THREE.Clock();
+function tick(){
+  requestAnimationFrame(tick);
+  mat.uniforms.uTime.value = clock.getElapsedTime();
+  mat.uniforms.uProgress.value += (target - mat.uniforms.uProgress.value) * 0.05;
+  renderer.render(scene, camera);
+}
+tick();
+addEventListener('resize', () => renderer.setSize(innerWidth, innerHeight));
+
+const btnHome = document.getElementById('btnHome');
+const btnWork = document.getElementById('btnWork');
+const title = document.getElementById('title');
+const desc = document.getElementById('desc');
+
+function go(page, btn, other){
+  target = page === 'work' ? 1 : 0;
+  btn.classList.add('active'); other.classList.remove('active');
+  setTimeout(() => { title.textContent = pages[page].title; desc.textContent = pages[page].desc; }, 350);
+}
+btnHome.addEventListener('click', () => go('home', btnHome, btnWork));
+btnWork.addEventListener('click', () => go('work', btnWork, btnHome));
+</script>
+</body>
+</html>
