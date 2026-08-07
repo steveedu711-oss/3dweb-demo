@@ -170,7 +170,7 @@ function render(){
   });
   count.textContent=`顯示 ${list.length} / ${DATA.length}`;
   grid.innerHTML = list.length ? list.map(d=>`
-    <a class="item" href="./index${d[0]}.html">
+    <a class="item" href="./index${d[0]}">
       <div class="thumb" style="--c1:${d[5]};--c2:${d[6]}">
         <div class="fx" style="background:${FX[d[3]]}"></div>
         <span class="no">${String(d[0]).padStart(2,'0')}</span>
