@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>颯行 SUXING — 都會電動機車</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08090c;--fg:#f0f2f5;--mut:#878d99;--acc:#c8ff3d;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(8,9,12,.76);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px;position:relative;z-index:2}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(34px,6.4vw,74px);line-height:1.06;letter-spacing:-.03em;font-weight:900}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:6px;background:var(--acc);color:#08090c;font-weight:900;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:2;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：影格捲動 --- */
+.stage{height:360vh;position:relative}
+.sticky{position:sticky;top:0;height:100svh;overflow:hidden}
+#seq{position:absolute;inset:0;width:100%;height:100%}
+.copy{position:absolute;left:0;right:0;bottom:9vh;z-index:3;padding:0 22px;pointer-events:none}
+.copy .in{max-width:1040px;margin:0 auto}
+.cap{opacity:0;transform:translateY(18px);transition:opacity .4s,transform .5s cubic-bezier(.16,1,.3,1);position:absolute;bottom:0}
+.cap.on{opacity:1;transform:translateY(0);position:relative}
+.cap b{display:block;font-size:clamp(20px,3vw,32px);font-weight:800}
+.cap span{color:var(--mut);font-size:15px}
+.top{position:absolute;left:0;right:0;top:14vh;z-index:3;padding:0 22px}
+.top .in{max-width:1040px;margin:0 auto}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:16px}
+h1 em{font-style:normal;color:var(--acc)}
+.hint{margin-top:20px;font-size:13px;color:#6b7079}
+.spec{margin-top:38px;border-top:1px solid var(--line)}
+.spec div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.spec div b{color:var(--fg);font-weight:700}
+.frameno{position:absolute;right:22px;top:14vh;z-index:3;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--mut);letter-spacing:.16em}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 18：<b>影格捲動</b></i><i class="ind">產業：電動機車</i></div>
+</div>
+
+<div class="stage" id="stage">
+  <div class="sticky">
+    <canvas id="seq"></canvas>
+    <div class="top"><div class="in">
+      <div class="kick">颯行 SUXING ／ ES-1 都會通勤車</div>
+      <h1>換電三秒，<br><em>比加油還快</em></h1>
+      <p class="hint">（往下捲：車體會 360 度轉一圈，這是逐格運算出來的序列，不是影片檔）</p>
+    </div></div>
+    <div class="frameno">FRAME <span id="fno">000</span> / 120</div>
+    <div class="copy"><div class="in">
+      <div class="cap" data-i="0"><b>雙電池・續航 110 公里</b><span>台北到桃園來回不用充電，站點全台超過 2,600 個。</span></div>
+      <div class="cap" data-i="1"><b>7.2kW 水冷馬達</b><span>0–50 km/h 只要 3.6 秒，紅燈起步不會被卡在車陣裡。</span></div>
+      <div class="cap" data-i="2"><b>26 公升車廂</b><span>放得下一頂全罩安全帽加一個後背包。</span></div>
+      <div class="cap" data-i="3"><b>ABS ＋ TCS</b><span>雨天下坡煞得住。全車系標配，不是選配加價。</span></div>
+    </div></div>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <h2>為什麼是電動車</h2>
+  <div class="grid">
+    <div class="card"><h3>每公里 0.28 元</h3><p>以現行電池資費計算，通勤族一個月油錢大約省 700 元。</p></div>
+    <div class="card"><h3>不用換機油</h3><p>年度保養只換煞車皮與齒輪油，維護成本約為燃油車的三分之一。</p></div>
+    <div class="card"><h3>補助可疊加</h3><p>環境部汰舊換新加上各縣市加碼，最高可折抵 15,000 元。</p></div>
+    <div class="card"><h3>安靜</h3><p>凌晨牽車出門不會吵醒鄰居，這件事久了很有感。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>規格與售價</h2>
+  <div class="spec">
+    <div><b>ES-1 標準版</b><span>78,800 元（含補助後約 63,800 元起）</span></div>
+    <div><b>ES-1 Plus 雙電版</b><span>92,800 元，續航 110 公里</span></div>
+    <div><b>電池資費</b><span>輕量 299 元／月起，吃到飽 899 元／月</span></div>
+    <div><b>保固</b><span>車體兩年或兩萬公里，馬達與控制器五年</span></div>
+    <div><b>試乘</b><span>全台 48 個門市可線上預約，帶駕照即可</span></div>
+  </div>
+  <a class="btn" href="#c">預約試乘</a>
+</div></section>
+
+<footer><b>效果原理：</b>沒有影片檔也沒有圖片序列——120 個影格是即時運算出來的：車體由一組 3D 座標點構成，捲動進度換算成 Y 軸旋轉角，用最基本的透視投影公式把 3D 點壓成 2D 再畫進 canvas。真實專案會把這裡換成事先算圖的 120 張 JPG 並預先載入，做法完全相同——關鍵都是「捲動位置 → 影格索引」這條對映。</footer>
+
+<script>
+const cv=document.getElementById('seq'), ctx=cv.getContext('2d');
+const stage=document.getElementById('stage'), fno=document.getElementById('fno');
+const caps=[...document.querySelectorAll('.cap')];
+let W,H,DPR=Math.min(devicePixelRatio,2);
+function size(){
+  W=cv.width=cv.clientWidth*DPR; H=cv.height=cv.clientHeight*DPR;
+}
+addEventListener('resize',()=>{size();render(prog)});
+
+// --- 極簡 3D：定義車體輪廓點（側視），沿 Z 擠出成有厚度的量體 ---
+const body=[[-1.55,.05],[-1.30,-.30],[-.75,-.42],[-.30,-.30],[.20,-.34],[.62,-.62],[1.05,-.66],[1.30,-.40],[1.42,-.02],[1.28,.30],[.55,.36],[-.10,.30],[-.62,.40],[-1.20,.42]];
+const Zs=[-.34,.34];
+function proj(x,y,z,rot){
+  const c=Math.cos(rot), s=Math.sin(rot);
+  const X=x*c - z*s, Z=x*s + z*c;
+  const d=4.6, f=d/(d+Z);
+  return [W/2 + X*f*W*0.20, H/2 + y*f*W*0.20 + H*0.04, f];
+}
+function wheel(cx,cy,r,rot){
+  const pts=[];
+  for(let i=0;i<=28;i++){
+    const a=i/28*Math.PI*2;
+    pts.push(proj(cx+Math.cos(a)*r, cy+Math.sin(a)*r, 0, rot));
+  }
+  return pts;
+}
+function poly(pts,close=true){
+  ctx.beginPath();
+  pts.forEach((p,i)=> i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
+  if(close) ctx.closePath();
+}
+function render(p){
+  const frame=Math.round(p*119);
+  fno.textContent=String(frame).padStart(3,'0');
+  const rot=p*Math.PI*2;
+  ctx.clearRect(0,0,W,H);
+  // 地面光暈
+  const g=ctx.createRadialGradient(W/2,H*0.66,0,W/2,H*0.66,W*0.34);
+  g.addColorStop(0,'rgba(200,255,61,.16)'); g.addColorStop(1,'transparent');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+  ctx.lineWidth=1.2*DPR;
+  // 側板（兩片）
+  Zs.forEach((z,zi)=>{
+    const pts=body.map(([x,y])=>proj(x,y,z,rot));
+    poly(pts);
+    ctx.fillStyle= zi===0 ? 'rgba(200,255,61,.10)' : 'rgba(255,255,255,.05)';
+    ctx.fill();
+    ctx.strokeStyle='rgba(200,255,61,.75)'; ctx.stroke();
+  });
+  // 連接兩片側板的橫向線（做出厚度）
+  ctx.strokeStyle='rgba(255,255,255,.22)';
+  body.forEach(([x,y])=>{
+    const a=proj(x,y,Zs[0],rot), b=proj(x,y,Zs[1],rot);
+    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+  });
+  // 前後輪
+  [[-1.05,.62,.46],[1.05,.62,.46]].forEach(([cx,cy,r])=>{
+    Zs.forEach(z=>{
+      const pts=[];
+      for(let i=0;i<=30;i++){
+        const a=i/30*Math.PI*2;
+        pts.push(proj(cx+Math.cos(a)*r, cy+Math.sin(a)*r*1.0, z, rot));
+      }
+      poly(pts);
+      ctx.strokeStyle='rgba(255,255,255,.55)'; ctx.lineWidth=1.4*DPR; ctx.stroke();
+    });
+    // 輪輻
+    for(let k=0;k<6;k++){
+      const a=k/6*Math.PI*2 + p*9;
+      const o=proj(cx,cy,0,rot), e=proj(cx+Math.cos(a)*r*.86, cy+Math.sin(a)*r*.86,0,rot);
+      ctx.beginPath(); ctx.moveTo(o[0],o[1]); ctx.lineTo(e[0],e[1]);
+      ctx.strokeStyle='rgba(200,255,61,.4)'; ctx.lineWidth=1*DPR; ctx.stroke();
+    }
+  });
+  // 頭燈
+  const hl=proj(1.38,-.10,0,rot);
+  ctx.beginPath(); ctx.arc(hl[0],hl[1],9*DPR*hl[2],0,7);
+  ctx.fillStyle='rgba(240,255,200,'+(0.35+0.6*Math.max(0,Math.cos(rot)))+')'; ctx.fill();
+
+  const idx=Math.min(Math.floor(p*4),3);
+  caps.forEach((c,i)=>c.classList.toggle('on',i===idx));
+}
+let prog=0, ticking=false;
+function upd(){
+  const total=stage.offsetHeight-innerHeight;
+  prog=Math.min(Math.max(-stage.getBoundingClientRect().top/total,0),1);
+  render(prog); ticking=false;
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd);}},{passive:true});
+requestAnimationFrame(()=>{size();upd();});
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>聯付金流 — 中小商家收款服務</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080b16;--fg:#eef1fa;--mut:#8b93ad;--acc:#7aa2ff;--line:rgba(255,255,255,.14);--card:rgba(255,255,255,.05)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(8,11,22,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px;position:relative;z-index:2}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(32px,5.6vw,62px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#080b16;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:2;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：液態玻璃 --- */
+.aur{position:fixed;inset:-15%;z-index:0;filter:blur(90px)}
+.aur i{position:absolute;border-radius:50%;opacity:.55}
+.aur i:nth-child(1){width:46vw;height:46vw;background:#3b5bdb;top:4%;left:6%;animation:f1 21s ease-in-out infinite}
+.aur i:nth-child(2){width:40vw;height:40vw;background:#9b5de5;top:34%;right:4%;animation:f2 26s ease-in-out infinite}
+.aur i:nth-child(3){width:36vw;height:36vw;background:#2dd4bf;bottom:6%;left:32%;animation:f1 30s ease-in-out infinite reverse}
+@keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(10vw,7vh)}}
+@keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(-11vw,-6vh)}}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:80px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+.glass{position:relative;border-radius:26px;padding:clamp(24px,4vw,42px);
+  background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(22px) saturate(1.7);-webkit-backdrop-filter:blur(22px) saturate(1.7);
+  box-shadow:0 30px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(255,255,255,.08)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:26px;pointer-events:none;
+  background:radial-gradient(circle 320px at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.20),transparent 62%);
+  transition:background .12s linear}
+.hero .glass{max-width:660px}
+.tiles{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:38px}
+.tile{border-radius:20px;padding:22px;background:linear-gradient(150deg,rgba(255,255,255,.11),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28);transition:transform .3s cubic-bezier(.2,.9,.25,1)}
+.tile{position:relative;overflow:hidden}
+.tile::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle 200px at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.18),transparent 62%)}
+.tile:hover{transform:translateY(-6px)}
+.tile b{display:block;font-size:26px;font-weight:800;color:#fff}
+.tile span{color:var(--mut);font-size:14px}
+.rate{display:flex;gap:34px;flex-wrap:wrap;margin-top:30px}
+.rate div b{display:block;font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1;color:#fff}
+.rate div span{color:var(--mut);font-size:13px}
+.hint{margin-top:24px;font-size:13px;color:#727a94}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 16：<b>液態玻璃</b></i><i class="ind">產業：金流／收款服務</i></div>
+</div>
+<div class="aur"><i></i><i></i><i></i></div>
+
+<section class="hero"><div class="wrap">
+  <div class="glass" id="g1">
+    <div class="kick">聯付金流 UNIPAY ／ 電子支付機構許可</div>
+    <h1>今天收的錢，<br>明天早上就入帳</h1>
+    <p class="lead">信用卡、LINE Pay、街口、Apple Pay 一組 QR Code 全收。撥款 T+1，不用等七天，也沒有月租費。</p>
+    <div class="rate">
+      <div><b>2.2%</b><span>單筆手續費（一般費率）</span></div>
+      <div><b>T+1</b><span>撥款速度</span></div>
+      <div><b>0 元</b><span>開通與月租</span></div>
+    </div>
+    <a class="btn" href="#c">線上開通</a>
+    <p class="hint">（滑鼠移過卡片：玻璃表面的光澤會跟著游標走）</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>適合這些店</h2>
+  <div class="tiles">
+    <div class="tile" data-g><b>餐飲店</b><span>桌邊掃碼結帳，尖峰時段不用排隊等刷卡機。</span></div>
+    <div class="tile" data-g><b>美容美髮</b><span>支援預約金線上收取，客人放鳥的比例會下降。</span></div>
+    <div class="tile" data-g><b>市集攤商</b><span>只要一支手機，不用帶讀卡機也不用押金。</span></div>
+    <div class="tile" data-g><b>電商官網</b><span>三行程式碼串接，支援分期與定期定額。</span></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <div class="glass" id="g2">
+    <h2>開通要準備什麼</h2>
+    <p class="lead">負責人身分證、商業登記證明、公司或行號存摺封面。線上上傳後最快兩個工作天完成審核，審核期間可以先測試串接。個人賣家也可申請，額度較低但流程一樣。</p>
+    <a class="btn" href="#c">開始申請</a>
+  </div>
+</div></section>
+
+<footer><b>效果原理：</b>玻璃質感靠三件事疊出來：<code>backdrop-filter:blur()+saturate()</code> 取用背後的模糊底色、半透明白色漸層當表面、以及 <code>inset box-shadow</code> 在上下緣畫出一條高光邊。游標的光澤是 <code>::before</code> 的 radial-gradient 跟著 <code>--gx/--gy</code> 跑。背後刻意放會緩慢移動的彩色光暈，玻璃才有東西可以折射。</footer>
+
+<script>
+document.querySelectorAll('.glass,[data-g]').forEach(el=>{
+  el.addEventListener('pointermove',e=>{
+    const r=el.getBoundingClientRect();
+    el.style.setProperty('--gx',((e.clientX-r.left)/r.width*100)+'%');
+    el.style.setProperty('--gy',((e.clientY-r.top)/r.height*100)+'%');
+  });
+});
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

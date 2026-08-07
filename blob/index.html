@@ -3,9 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
 <title>Nova Organic — Morphing Blob Product Page</title>
 <meta name="description" content="Vertex Shader 變形有機球體 + 磁性按鈕 + 文字遮罩顯現 技巧示範">
 <style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
   :root{
     --text:#101014;
     --muted:#6b7080;
@@ -322,5 +326,6 @@ gsap.utils.toArray('.gsap-fade').forEach((el) => {
 });
 </script>
 
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
 </body>
 </html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>銳陽精密雷射 — 金屬雷射切割設備</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#05070c;--fg:#eef2f8;--mut:#8b97ad;--acc:#43e0ff;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.7;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(5,7,12,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,120px) 22px;position:relative}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:clamp(34px,6vw,68px);line-height:1.12;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,38px);letter-spacing:-.01em;margin-bottom:14px}
+.lead{color:var(--mut);max-width:56ch;margin-top:18px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:38px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:14px 30px;border-radius:999px;background:var(--acc);color:#05070c;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效 --- */
+#gl{position:fixed;inset:0;z-index:-1}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:70px}
+.kick{font-size:12px;letter-spacing:.24em;color:var(--acc);margin-bottom:20px}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--acc),#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stats{display:flex;flex-wrap:wrap;gap:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0;margin-top:60px}
+.stats div b{display:block;font-size:clamp(28px,4vw,44px);color:var(--acc);font-weight:800;line-height:1}
+.stats div span{color:var(--mut);font-size:14px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 01：<b>Shader 能量流</b></i><i class="ind">產業：精密雷射切割設備</i></div>
+</div>
+<canvas id="gl"></canvas>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">銳陽精密雷射 ／ 自 1998 年</div>
+  <h1>切得動 25mm 鋼板，<br>也切得出 <em>0.05mm 的細節</em></h1>
+  <p class="lead">光纖雷射切割、雷射焊接與自動化上下料整線規劃。從單機採購到整廠導入，我們負責到你的產線真的跑起來為止。</p>
+  <a class="btn" href="#c">預約設備試切</a>
+  <div class="stats">
+    <div><b>12kW</b><span>最高輸出功率</span></div>
+    <div><b>±0.03mm</b><span>重複定位精度</span></div>
+    <div><b>430+</b><span>台灣廠區導入案例</span></div>
+    <div><b>4hr</b><span>全台到廠支援</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>我們做什麼</h2>
+  <p class="lead">不是只賣一台機器，是把你車間裡「切割這件事」整段重做一次。</p>
+  <div class="grid">
+    <div class="card"><h3>光纖雷射切割機</h3><p>2kW 至 12kW 全系列，碳鋼、不鏽鋼、鋁、銅、鍍鋅板一機通吃，換料不換機。</p></div>
+    <div class="card"><h3>自動化上下料</h3><p>料塔式倉儲搭配交換工作台，夜間無人化連續切割，早上來收成品。</p></div>
+    <div class="card"><h3>套料軟體導入</h3><p>導入自動套料排版，實測平均提升板材利用率 11%～17%，一年就把軟體錢賺回來。</p></div>
+    <div class="card"><h3>保養與耗材</h3><p>保護鏡片、噴嘴、切割頭原廠料件常備庫存，報修 4 小時內到廠。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>帶著你的圖檔來試切</h2>
+  <p class="lead">寄 DWG／DXF 給我們，一週內回你實際切件、切割參數表與單件工時試算。不必先談價錢。</p>
+  <a class="btn" href="#c">索取試切樣品</a>
+</div></section>
+
+<footer><b>效果原理：</b>Three.js 全螢幕平面套自訂 fragment shader，用多層 FBM 值噪疊出流動的能量場，時間 uniform 推進造成緩慢飄移，滑鼠座標餵進 shader 讓亮度中心跟著游標偏移。整段只有一個 draw call，手機也跑得動。</footer>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+const cv = document.getElementById('gl');
+const renderer = new THREE.WebGLRenderer({canvas:cv, antialias:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+const scene = new THREE.Scene();
+const cam = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+const uni = {
+  t:{value:0},
+  res:{value:new THREE.Vector2()},
+  mouse:{value:new THREE.Vector2(.5,.5)}
+};
+const mat = new THREE.ShaderMaterial({
+  uniforms:uni,
+  vertexShader:`void main(){gl_Position=vec4(position,1.0);}`,
+  fragmentShader:`
+  precision highp float;
+  uniform float t; uniform vec2 res; uniform vec2 mouse;
+  float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  float noise(vec2 p){
+    vec2 i=floor(p), f=fract(p);
+    vec2 u=f*f*(3.0-2.0*f);
+    return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),
+               mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);
+  }
+  float fbm(vec2 p){
+    float v=0.0, a=0.5;
+    for(int i=0;i<5;i++){ v+=a*noise(p); p*=2.03; a*=0.5; }
+    return v;
+  }
+  void main(){
+    vec2 uv=(gl_FragCoord.xy-0.5*res)/res.y;
+    vec2 q=uv*1.6;
+    float warp=fbm(q+vec2(t*0.05,t*0.03));
+    float n=fbm(q*1.4+warp*1.8+vec2(-t*0.04,t*0.02));
+    vec2 m=(mouse-0.5)*vec2(res.x/res.y,1.0);
+    float glow=0.10/(0.10+distance(uv,m*1.2));
+    vec3 cold=vec3(0.02,0.05,0.09);
+    vec3 beam=vec3(0.26,0.88,1.0);
+    vec3 violet=vec3(0.62,0.50,0.98);
+    vec3 col=cold;
+    col=mix(col,beam,smoothstep(0.42,0.86,n)*0.85);
+    col=mix(col,violet,smoothstep(0.60,0.95,n)*0.45);
+    col+=beam*glow*0.18;
+    float scan=sin((uv.y+t*0.10)*160.0)*0.012;
+    col+=scan;
+    col*=1.0-0.55*length(uv*0.66);
+    gl_FragColor=vec4(col,1.0);
+  }`
+});
+scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), mat));
+function size(){
+  renderer.setSize(innerWidth, innerHeight, false);
+  uni.res.value.set(cv.width, cv.height);
+}
+addEventListener('resize', size); size();
+addEventListener('pointermove', e=>{
+  uni.mouse.value.set(e.clientX/innerWidth, 1-e.clientY/innerHeight);
+});
+let start=performance.now();
+(function loop(now){
+  uni.t.value=(now-start)/1000;
+  renderer.render(scene,cam);
+  requestAnimationFrame(loop);
+})(start);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

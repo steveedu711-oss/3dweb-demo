@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>晶徑人才 — 半導體與科技業獵才</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#06080b;--fg:#e9eef5;--mut:#7e8a9a;--acc:#7cf3d0;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(6,8,11,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px;position:relative;z-index:2}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(30px,5vw,56px);line-height:1.16;letter-spacing:-.02em;font-weight:800;
+  font-family:ui-monospace,SFMono-Regular,Menlo,"PingFang TC",monospace}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:6px;background:var(--acc);color:#06080b;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:2;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：文字解碼 --- */
+.rain{position:fixed;inset:0;z-index:0;opacity:.20}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:70px}
+.kick{font-size:12px;letter-spacing:.24em;color:var(--acc);margin-bottom:20px;font-family:ui-monospace,Menlo,monospace}
+h1 .sc{color:var(--acc)}
+.jobs{margin-top:44px;border-top:1px solid var(--line)}
+.job{display:flex;justify-content:space-between;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);
+  flex-wrap:wrap;cursor:pointer;transition:padding-left .2s,background .2s}
+.job:hover{padding-left:12px;background:rgba(124,243,208,.05)}
+.job b{font-weight:700;font-family:ui-monospace,Menlo,monospace;font-size:16px}
+.job span{color:var(--mut);font-size:14px}
+.job .sal{color:var(--acc);font-weight:700;font-family:ui-monospace,Menlo,monospace}
+.hint{margin-top:24px;font-size:13px;color:#5c6675;font-family:ui-monospace,Menlo,monospace}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.stats{display:flex;gap:38px;flex-wrap:wrap;margin-top:44px;border-top:1px solid var(--line);padding-top:30px}
+.stats div b{display:block;font-size:clamp(26px,4vw,42px);color:var(--acc);font-weight:800;line-height:1;font-family:ui-monospace,Menlo,monospace}
+.stats div span{color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 34：<b>文字解碼</b></i><i class="ind">產業：科技業獵才</i></div>
+</div>
+<canvas class="rain" id="rain"></canvas>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">晶徑人才 ／ 半導體・IC 設計・光電製程</div>
+  <h1><span id="l1"></span><br><span class="sc" id="l2"></span></h1>
+  <p class="lead">我們只做半導體與科技製造。顧問全部有產業背景，看得懂你的履歷在寫什麼，也知道哪家公司的加班文化真實情況。</p>
+  <p class="hint">（標題文字正在被逐字「解碼」，游標移到職缺上也會重新解碼一次）</p>
+
+  <div class="jobs" id="jobs">
+    <div class="job"><b data-t="製程整合工程師 PIE">製程整合工程師 PIE</b><span>新竹・晶圓廠・輪班</span><span class="sal" data-t="140–190 萬/年">140–190 萬/年</span></div>
+    <div class="job"><b data-t="類比 IC 設計工程師">類比 IC 設計工程師</b><span>竹北・IC 設計・不輪班</span><span class="sal" data-t="180–260 萬/年">180–260 萬/年</span></div>
+    <div class="job"><b data-t="設備工程師 EE">設備工程師 EE</b><span>台南・封測廠・日夜輪</span><span class="sal" data-t="95–130 萬/年">95–130 萬/年</span></div>
+    <div class="job"><b data-t="良率分析工程師 YE">良率分析工程師 YE</b><span>台中・記憶體廠</span><span class="sal" data-t="120–165 萬/年">120–165 萬/年</span></div>
+    <div class="job"><b data-t="韌體工程師 FW">韌體工程師 FW</b><span>台北內湖・可遠端兩天</span><span class="sal" data-t="130–200 萬/年">130–200 萬/年</span></div>
+  </div>
+
+  <div class="stats">
+    <div><b>21</b><span>顧問平均產業年資（年）</span></div>
+    <div><b>68%</b><span>推薦後進入複試比例</span></div>
+    <div><b>0 元</b><span>求職者付費</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>我們會告訴你的事</h2>
+  <div class="grid">
+    <div class="card"><h3>真實加班狀況</h3><p>不是講「偶爾需要配合」。我們會給你該部門近半年的實際下班時間分布。</p></div>
+    <div class="card"><h3>薪資結構拆解</h3><p>本薪、伙食、輪班津貼、分紅配股的比例與發放時點，一項一項講清楚。</p></div>
+    <div class="card"><h3>主管風格</h3><p>過去推薦進去的人怎麼說。這件事沒有人會寫在職缺說明上。</p></div>
+    <div class="card"><h3>不適合就直說</h3><p>履歷跟職缺落差太大時我們會直接告訴你，不會硬投讓你被刷掉浪費時間。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>投遞方式</h2>
+  <p class="lead">寄履歷或直接約 30 分鐘線上聊。我們不會在你沒同意前把履歷送出去，也不會同一份履歷亂槍打鳥投十家。目前在職者可指定避開特定公司，我們會列入排除清單。</p>
+  <a class="btn" href="#c">投遞履歷</a>
+</div></section>
+
+<footer><b>效果原理：</b>解碼動畫的做法是逐幀重繪整串文字：每個字都有一個「解鎖幀數」，還沒到就顯示隨機亂碼字元，到了就固定成正確的字。因為解鎖幀數依索引遞增並帶隨機偏移，看起來就像由左往右逐字解出來。背景的字元雨則是另一支 canvas，每欄各自以不同速度往下掉。</footer>
+
+<script>
+const POOL='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&@*+=<>/\\|';
+function scramble(el, text, {speed=1.6, delay=0}={}){
+  const chars=[...text];
+  const lock=chars.map((_,i)=>i*speed+Math.random()*speed*3);
+  let f=0;
+  clearInterval(el._iv);
+  setTimeout(()=>{
+    el._iv=setInterval(()=>{
+      f++;
+      el.textContent=chars.map((c,i)=>{
+        if(c===' ') return ' ';
+        return f>=lock[i] ? c : POOL[(Math.random()*POOL.length)|0];
+      }).join('');
+      if(f>Math.max(...lock)+1) clearInterval(el._iv);
+    },34);
+  },delay);
+}
+scramble(document.getElementById('l1'),'你的下一份工作',{speed:3});
+scramble(document.getElementById('l2'),'不該是履歷海投來的',{speed:3,delay:420});
+document.querySelectorAll('.job').forEach(j=>{
+  j.addEventListener('pointerenter',()=>{
+    j.querySelectorAll('[data-t]').forEach(el=>scramble(el,el.dataset.t,{speed:1.1}));
+  });
+});
+
+// 背景字元雨
+const cv=document.getElementById('rain'), x=cv.getContext('2d');
+let cols,drops,FS=15;
+function size(){
+  cv.width=innerWidth; cv.height=innerHeight;
+  cols=Math.ceil(innerWidth/FS);
+  drops=Array.from({length:cols},()=>Math.random()*-60);
+}
+addEventListener('resize',size); size();
+let last=0;
+(function loop(now){
+  requestAnimationFrame(loop);
+  if(now-last<70) return; last=now;
+  x.fillStyle='rgba(6,8,11,.22)'; x.fillRect(0,0,cv.width,cv.height);
+  x.fillStyle='#7cf3d0'; x.font=FS+'px ui-monospace,Menlo,monospace';
+  for(let i=0;i<cols;i++){
+    x.fillText(POOL[(Math.random()*POOL.length)|0], i*FS, drops[i]*FS);
+    if(drops[i]*FS>cv.height && Math.random()>0.975) drops[i]=0;
+    drops[i]++;
+  }
+})(0);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

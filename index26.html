@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>經緯管理顧問 — 中小企業經營顧問</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c1014;--fg:#eef2f5;--mut:#8794a0;--acc:#4fd1c5;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(12,16,20,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:10px;background:var(--acc);color:#0c1014;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：卡片翻牌堆疊 --- */
+.hero{padding-top:110px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.deckwrap{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center;margin-top:52px}
+.deck{position:relative;height:330px;perspective:1400px}
+.pc{position:absolute;inset:0;border-radius:20px;padding:28px;transform-style:preserve-3d;cursor:pointer;
+  background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.02));
+  border:1px solid var(--line);backdrop-filter:blur(6px);
+  transition:transform .7s cubic-bezier(.2,.9,.25,1),opacity .5s,box-shadow .5s}
+.pc .n{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.2em;color:var(--acc)}
+.pc h3{font-size:22px;margin:12px 0 10px;font-weight:800}
+.pc p{color:var(--mut);font-size:14.5px}
+.pc .kpi{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:22px;flex-wrap:wrap}
+.pc .kpi b{display:block;font-size:22px;color:var(--acc);font-weight:800;line-height:1}
+.pc .kpi span{font-size:12px;color:var(--mut)}
+.deckhint{margin-top:18px;font-size:13px;color:#6e7b86;text-align:center}
+.ctrl{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.ctrl button{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);
+  font-family:inherit;font-size:13px;cursor:pointer;transition:.2s}
+.ctrl button:hover{border-color:var(--acc);color:var(--fg)}
+@media(max-width:900px){.deckwrap{grid-template-columns:1fr}.deck{height:340px}}
+.svc{margin-top:38px;border-top:1px solid var(--line)}
+.svc div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.svc div b{color:var(--fg);font-weight:700}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 26：<b>卡片翻牌堆疊</b></i><i class="ind">產業：企業管理顧問</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">經緯管理顧問 ／ 服務台灣中小企業 22 年</div>
+  <h1>老闆一個人扛，<br><em>公司就長不大</em></h1>
+  <p class="lead">我們不寫兩百頁沒人看的報告。進場三個月，把制度、數字與人的問題各處理一件，讓你有辦法放手。</p>
+  <div class="deckwrap">
+    <div>
+      <div class="deck" id="deck">
+        <div class="pc">
+          <div class="n">CASE 01 ／ 食品加工廠・員工 68 人</div>
+          <h3>接單接到手軟，卻在賠錢</h3>
+          <p>沒有單品成本表，業務報價全憑感覺。我們用三週建立單品毛利模型，砍掉毛利為負的四條產品線。</p>
+          <div class="kpi"><div><b>+11.4%</b><span>毛利率</span></div><div><b>−22%</b><span>SKU 數量</span></div><div><b>6 個月</b><span>見效時間</span></div></div>
+        </div>
+        <div class="pc">
+          <div class="n">CASE 02 ／ 機械零件廠・員工 34 人</div>
+          <h3>老師傅退休，技術就斷了</h3>
+          <p>建立作業標準書與影像化教學，把二十年經驗拆成可交接的步驟。新人上手時間從八個月降到十週。</p>
+          <div class="kpi"><div><b>−68%</b><span>新人培訓期</span></div><div><b>142 份</b><span>SOP 文件</span></div><div><b>0</b><span>技術斷層風險</span></div></div>
+        </div>
+        <div class="pc">
+          <div class="n">CASE 03 ／ 連鎖餐飲・11 家門市</div>
+          <h3>展店越多，總部越亂</h3>
+          <p>重新設計督導制度與門市週報表，讓總部一週看得到十一家店的異常，而不是月底才發現。</p>
+          <div class="kpi"><div><b>−34%</b><span>食材損耗</span></div><div><b>1 週</b><span>問題發現週期</span></div><div><b>+3 家</b><span>年內展店</span></div></div>
+        </div>
+        <div class="pc">
+          <div class="n">CASE 04 ／ 家族企業・第二代接班</div>
+          <h3>父子兩套做法，員工不知道聽誰的</h3>
+          <p>用半年時間逐步分權，明確劃出決策清單。哪些事第二代自己決定、哪些要一起談，白紙黑字寫下來。</p>
+          <div class="kpi"><div><b>18 個月</b><span>完成交棒</span></div><div><b>0 人</b><span>核心幹部流失</span></div><div><b>+27%</b><span>營收成長</span></div></div>
+        </div>
+      </div>
+      <div class="ctrl"><button id="prev">← 上一件</button><button id="next">下一件 →</button></div>
+      <p class="deckhint">（點卡片或按按鈕：最上面那張會翻起飛走，後面的往前遞補）</p>
+    </div>
+    <div>
+      <h2 style="font-size:22px">我們怎麼收費</h2>
+      <p class="lead" style="margin-top:12px">診斷期一個月固定 8 萬，交付一份「你公司現在最該處理的三件事」。做不做後續由你決定，報告一樣給你。</p>
+      <p class="lead">後續專案依範圍報價，月費制，可隨時終止，不綁年約。</p>
+      <a class="btn" href="#c">預約診斷</a>
+    </div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>服務範圍</h2>
+  <div class="svc">
+    <div><b>經營診斷</b><span>財務、流程、組織三面向，一個月完成</span></div>
+    <div><b>成本與定價</b><span>單品成本模型、報價制度、毛利管理</span></div>
+    <div><b>制度導入</b><span>SOP、績效考核、幹部培訓</span></div>
+    <div><b>接班與傳承</b><span>股權規劃、決策分權、二代培育</span></div>
+    <div><b>政府資源</b><span>SBIR、小型企業創新研發計畫等補助案撰寫</span></div>
+  </div>
+  <a class="btn" href="#c">聯絡我們</a>
+</div></section>
+
+<footer><b>效果原理：</b>四張卡片絕對定位重疊，用一個索引決定每張的「距離頂端第幾層」，再依層數給不同的 <code>translateY / scale / opacity</code>，做出往後退的堆疊感。翻牌時把最上層那張加上 <code>rotateX</code> 與大幅位移飛出畫面，同時整體索引 +1，後面的卡片各自補上一層。全部只用 transform，卡片內容不重繪。</footer>
+
+<script>
+const deck=document.getElementById('deck');
+const cards=[...deck.children];
+let topIdx=0;
+function layout(anim=true){
+  cards.forEach((c,i)=>{
+    const d=(i-topIdx+cards.length)%cards.length;
+    c.style.transition= anim ? '' : 'none';
+    c.style.zIndex=String(cards.length-d);
+    if(d===0){
+      c.style.transform='translateY(0) scale(1) rotateX(0)';
+      c.style.opacity='1';
+      c.style.boxShadow='0 26px 60px rgba(0,0,0,.45)';
+    }else if(d<3){
+      c.style.transform=`translateY(${d*16}px) scale(${1-d*0.045}) rotateX(0)`;
+      c.style.opacity=String(1-d*0.22);
+      c.style.boxShadow='none';
+    }else{
+      c.style.transform='translateY(52px) scale(.86)';
+      c.style.opacity='0';
+      c.style.boxShadow='none';
+    }
+  });
+}
+function next(){
+  const c=cards[topIdx];
+  c.style.transform='translateY(-120%) scale(.9) rotateX(46deg)';
+  c.style.opacity='0';
+  setTimeout(()=>{ topIdx=(topIdx+1)%cards.length; layout(); },420);
+}
+function prev(){
+  topIdx=(topIdx-1+cards.length)%cards.length;
+  const c=cards[topIdx];
+  c.style.transition='none';
+  c.style.transform='translateY(-120%) scale(.9) rotateX(46deg)';
+  c.style.opacity='0';
+  requestAnimationFrame(()=>{ c.style.transition=''; layout(); });
+}
+document.getElementById('next').addEventListener('click',next);
+document.getElementById('prev').addEventListener('click',prev);
+deck.addEventListener('click',e=>{ if(e.target.closest('.pc')===cards[topIdx]) next(); });
+layout(false);
+requestAnimationFrame(()=>layout(true));
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

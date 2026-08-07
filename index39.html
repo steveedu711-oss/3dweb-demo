@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>昇鋼扣件 — 精密螺絲與扣件製造</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c0e10;--fg:#eceff2;--mut:#858e97;--acc:#5aa9e6;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(12,14,16,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:6px;background:var(--acc);color:#0c0e10;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：捲動歷程軸 --- */
+.hero{padding-top:118px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.hint{margin-top:22px;font-size:13px;color:#6d757e}
+.tl{position:relative;margin-top:70px;padding-left:clamp(40px,9vw,110px)}
+.tl::before{content:"";position:absolute;left:clamp(14px,3.6vw,44px);top:8px;bottom:8px;width:2px;background:rgba(255,255,255,.11)}
+.tl .fill{position:absolute;left:clamp(14px,3.6vw,44px);top:8px;width:2px;background:var(--acc);height:0;
+  box-shadow:0 0 12px rgba(90,169,230,.7)}
+.ev{position:relative;padding-bottom:clamp(50px,7vw,84px);opacity:.3;transform:translateY(18px);
+  transition:opacity .5s ease,transform .6s cubic-bezier(.16,1,.3,1)}
+.ev.on{opacity:1;transform:none}
+.ev::before{content:"";position:absolute;left:calc(clamp(14px,3.6vw,44px) - clamp(40px,9vw,110px) - 6px);top:9px;
+  width:14px;height:14px;border-radius:50%;background:#0c0e10;border:2px solid rgba(255,255,255,.25);transition:.4s}
+.ev.on::before{border-color:var(--acc);background:var(--acc);box-shadow:0 0 0 6px rgba(90,169,230,.14)}
+.ev .yr{font-family:ui-monospace,Menlo,monospace;font-size:clamp(26px,4vw,40px);font-weight:800;color:var(--acc);line-height:1}
+.ev h3{font-size:clamp(19px,2.6vw,25px);margin:10px 0 8px;font-weight:800}
+.ev p{color:var(--mut);font-size:15px;max-width:60ch}
+.ev .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.ev .tags span{padding:5px 13px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+.tbl{margin-top:30px;border-top:1px solid var(--line)}
+.tbl div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.tbl div b{color:var(--fg);font-weight:700}
+.stats{display:flex;gap:38px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--line);padding-top:30px}
+.stats div b{display:block;font-size:clamp(26px,4vw,42px);color:var(--acc);font-weight:800;line-height:1;font-family:ui-monospace,Menlo,monospace}
+.stats div span{color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 39：<b>捲動歷程軸</b></i><i class="ind">產業：金屬扣件製造</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">昇鋼扣件股份有限公司 ／ 高雄岡山・自 1978</div>
+  <h1>一顆螺絲差 0.02mm，<br><em>整批引擎就得退回</em></h1>
+  <p class="lead">汽車、自行車與航太扣件製造。從線材到熱處理與表面處理全在自家廠內完成，不外發，因為外發就控不住公差。</p>
+  <div class="stats">
+    <div><b>48</b><span>年產業經驗</span></div>
+    <div><b>0.01mm</b><span>製程公差控制</span></div>
+    <div><b>22</b><span>外銷國家</span></div>
+    <div><b>IATF</b><span>16949 認證</span></div>
+  </div>
+  <p class="hint">（往下捲：左側時間軸的線會跟著捲動長出來，經過的年份逐一亮起）</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="tl" id="tl">
+    <div class="fill" id="fill"></div>
+    <div class="ev"><div class="yr">1978</div><h3>三台成型機起家</h3>
+      <p>創辦人在岡山租下 60 坪鐵皮廠房，接台灣自行車廠的一般螺絲代工。當時全廠五個人，兩班制。</p>
+      <div class="tags"><span>自行車扣件</span><span>員工 5 人</span></div></div>
+    <div class="ev"><div class="yr">1994</div><h3>導入熱處理自有產線</h3>
+      <p>過去熱處理外發，品質不穩且交期受制於人。投資自有連續式熱處理爐，硬度不良率從 3.2% 降到 0.4%。</p>
+      <div class="tags"><span>連續爐</span><span>不良率 −87%</span></div></div>
+    <div class="ev"><div class="yr">2003</div><h3>取得 TS 16949，進入汽車供應鏈</h3>
+      <p>花了兩年重建整套品保系統與追溯機制。開始供貨日系一階車廠，單一料號年用量首次突破千萬顆。</p>
+      <div class="tags"><span>汽車一階</span><span>全料號可追溯</span></div></div>
+    <div class="ev"><div class="yr">2012</div><h3>自建實驗室</h3>
+      <p>鹽霧試驗、金相分析、扭力與拉力測試全部自己來。客戶稽核不再需要等外部報告，當天就能給數據。</p>
+      <div class="tags"><span>鹽霧 1,000hr</span><span>金相分析</span></div></div>
+    <div class="ev"><div class="yr">2019</div><h3>導入自動光學檢測</h3>
+      <p>全自動 AOI 分選機取代人工目檢，每分鐘檢測 1,200 顆，尺寸與外觀同時判定，漏檢率低於百萬分之十。</p>
+      <div class="tags"><span>AOI 全檢</span><span>PPM &lt; 10</span></div></div>
+    <div class="ev"><div class="yr">2026</div><h3>航太扣件認證中</h3>
+      <p>正在申請 AS9100 與 NADCAP 熱處理特殊製程認證，預計 2027 年進入航太供應鏈。第二廠已動土。</p>
+      <div class="tags"><span>AS9100 申請中</span><span>第二廠興建中</span></div></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>產品與詢價</h2>
+  <div class="tbl">
+    <div><b>規格範圍</b><span>M2 – M20，長度 4 – 200mm</span></div>
+    <div><b>材質</b><span>碳鋼、合金鋼、不鏽鋼 304／316、鈦合金（小量）</span></div>
+    <div><b>表面處理</b><span>達克羅、鋅鎳、電鍍鋅、黑染，皆可提供鹽霧測試報告</span></div>
+    <div><b>最小訂量</b><span>標準品 10,000 顆；客製品 50,000 顆起，開模費另計</span></div>
+    <div><b>樣品</b><span>標準品免費寄樣；客製品打樣 3～5 週</span></div>
+    <div><b>詢價需附</b><span>2D 圖面（含公差）、材質要求、年用量、表面處理規格</span></div>
+  </div>
+  <a class="btn" href="#c">寄圖面詢價</a>
+</div></section>
+
+<footer><b>效果原理：</b>時間軸的填充線不是動畫，是把「軸線在畫面中的可見比例」直接換算成高度：以視窗中線為基準，算出捲動已經走過整條軸的百分之幾，乘上軸長寫進 height。每個年份節點則各自比對自己的位置有沒有被線超過，超過就加 class 亮起。因為讀的是同一個捲動值，線與節點永遠同步，不會有各跑各的時序問題。</footer>
+
+<script>
+const tl=document.getElementById('tl'), fill=document.getElementById('fill');
+const evs=[...document.querySelectorAll('.ev')];
+let ticking=false;
+function upd(){
+  const r=tl.getBoundingClientRect();
+  const mid=innerHeight*0.62;
+  const p=Math.min(Math.max((mid-r.top)/r.height,0),1);
+  fill.style.height=(p*(r.height-16))+'px';
+  const line=r.top+p*r.height;
+  evs.forEach(ev=>{
+    const er=ev.getBoundingClientRect();
+    ev.classList.toggle('on', line>=er.top+10);
+  });
+  ticking=false;
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd);}},{passive:true});
+addEventListener('resize',upd); upd();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

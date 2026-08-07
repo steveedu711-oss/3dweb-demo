@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>囍映婚禮攝影 — 婚禮紀錄與類婚紗</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#100e0e;--fg:#f4efeb;--mut:#998e88;--acc:#d8a4a4;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(16,14,14,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px;position:relative;z-index:3}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.16;letter-spacing:-.01em;font-weight:700}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:700}
+.lead{color:var(--mut);max-width:52ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#100e0e;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:3;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：游標圖片殘影 --- */
+.trailzone{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:70px;overflow:hidden}
+.ghost{position:absolute;width:min(23vw,250px);aspect-ratio:3/4;border-radius:6px;pointer-events:none;
+  transform:translate(-50%,-50%) scale(.82);opacity:0;z-index:1;
+  background:linear-gradient(160deg,var(--a),var(--b));
+  box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.ghost::after{content:"";position:absolute;inset:0;border-radius:6px;
+  background:repeating-linear-gradient(var(--ang,30deg),rgba(255,255,255,.08) 0 2px,transparent 2px 16px)}
+.tz-copy{position:relative;z-index:2;pointer-events:none}
+.tz-copy .wrap > *{pointer-events:auto}
+.kick{font-size:12px;letter-spacing:.28em;color:var(--acc);margin-bottom:20px}
+h1 em{font-style:normal;color:var(--acc)}
+.hint{margin-top:24px;font-size:13px;color:#7a706a}
+.pk{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:34px}
+.p{border:1px solid var(--line);border-radius:20px;padding:26px;background:var(--card)}
+.p.hot{border-color:var(--acc);background:rgba(216,164,164,.07)}
+.p b{font-size:13px;letter-spacing:.16em;color:var(--acc)}
+.p .price{font-size:32px;font-weight:800;margin:10px 0 4px}
+.p .price small{font-size:14px;color:var(--mut);font-weight:400}
+.p ul{list-style:none;margin-top:14px;color:var(--mut);font-size:14px}
+.p li{padding:6px 0;border-bottom:1px solid var(--line)}
+.qa{margin-top:34px;border-top:1px solid var(--line)}
+.qa div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.qa div b{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 31：<b>游標圖片殘影</b></i><i class="ind">產業：婚禮攝影</i></div>
+</div>
+
+<div class="trailzone" id="tz">
+  <div class="tz-copy"><div class="wrap">
+    <div class="kick">囍映婚禮攝影 ／ 雙攝影師・全台接案</div>
+    <h1>不用「來，看鏡頭」，<br><em>那天你本來就很好看</em></h1>
+    <p class="lead">我們做紀實婚攝。不排大合照以外的擺拍，不打斷流程，讓你們專心結婚，我們負責記得。</p>
+    <a class="btn" href="#c">查看檔期</a>
+    <p class="hint">（在這一區移動滑鼠：作品照片會沿著游標軌跡一張張浮現再淡去）</p>
+  </div></div>
+</div>
+
+<section><div class="wrap">
+  <h2>方案</h2>
+  <div class="pk">
+    <div class="p"><b>單人半天</b><div class="price">18,000<small> 元</small></div>
+      <ul><li>迎娶或宴客擇一</li><li>最多 6 小時</li><li>精修 80 張</li><li>全部原始檔</li></ul></div>
+    <div class="p hot"><b>雙人全天</b><div class="price">36,000<small> 元</small></div>
+      <ul><li>迎娶到送客完整紀錄</li><li>主攝＋副攝雙機位</li><li>精修 250 張</li><li>婚禮當天快剪快播</li><li>全部原始檔</li></ul></div>
+    <div class="p"><b>類婚紗外拍</b><div class="price">15,000<small> 元</small></div>
+      <ul><li>4 小時、兩個場景</li><li>精修 60 張</li><li>不含禮服與新祕</li></ul></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>合作細節</h2>
+  <div class="qa">
+    <div><b>交件時間</b><span>原始檔一週內，精修檔 30 個工作天內</span></div>
+    <div><b>訂金</b><span>6,000 元保留檔期，尾款婚禮當天結清</span></div>
+    <div><b>延長</b><span>超時每小時 2,500 元，當天現場確認即可</span></div>
+    <div><b>交通</b><span>台北出發，中南部與東部另計 2,000～4,000 元</span></div>
+    <div><b>取消</b><span>婚期前 60 天以上取消，訂金退還八成</span></div>
+    <div><b>肖像使用</b><span>作品是否公開由你們勾選，不勾就不會出現在任何地方</span></div>
+  </div>
+  <a class="btn" href="#c">詢問檔期</a>
+</div></section>
+
+<footer><b>效果原理：</b>預先在容器內放好一疊隱藏的圖片節點，游標每移動超過一段門檻距離（這裡是 120px）就取出下一張、放到當前座標並播放「浮現→放大→淡出」的動畫，用完循環回第一張。門檻距離是關鍵：不設門檻會每幀都觸發、整片糊掉；門檻太大則跟不上手速。圖片刻意用不同的旋轉角，讓軌跡看起來像隨手撒落的相片。</footer>
+
+<script>
+const tz=document.getElementById('tz');
+const PAL=[['#8e6f5a','#2a1f18'],['#5d6f7a','#1b232a'],['#7a5f6b','#241a20'],['#6b7a5f','#20261a'],
+           ['#9a7a5a','#2e2318'],['#5f6a8a','#1a1e2a'],['#8a6a6a','#2a1e1e'],['#6a8a7a','#1e2a26']];
+const ghosts=PAL.map((c,i)=>{
+  const d=document.createElement('div');
+  d.className='ghost';
+  d.style.setProperty('--a',c[0]); d.style.setProperty('--b',c[1]);
+  d.style.setProperty('--ang',(20+i*17)+'deg');
+  d.dataset.rot=(i%2?1:-1)*(4+i*1.6);
+  tz.appendChild(d);
+  return d;
+});
+let idx=0, lx=null, ly=null;
+const GAP=120;
+tz.addEventListener('pointermove',e=>{
+  const r=tz.getBoundingClientRect();
+  const x=e.clientX-r.left, y=e.clientY-r.top;
+  if(lx!==null && Math.hypot(x-lx,y-ly)<GAP) return;
+  lx=x; ly=y;
+  const g=ghosts[idx%ghosts.length]; idx++;
+  g.style.transition='none';
+  g.style.left=x+'px'; g.style.top=y+'px';
+  g.style.transform=`translate(-50%,-50%) scale(.84) rotate(${g.dataset.rot}deg)`;
+  g.style.opacity='0';
+  g.getBoundingClientRect();   // 強制 reflow，讓下面的 transition 生效
+  g.style.transition='transform .9s cubic-bezier(.16,1,.3,1), opacity .9s ease';
+  g.style.transform=`translate(-50%,-50%) scale(1) rotate(${g.dataset.rot}deg)`;
+  g.style.opacity='1';
+  clearTimeout(g._t);
+  g._t=setTimeout(()=>{ g.style.opacity='0'; },380);
+});
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

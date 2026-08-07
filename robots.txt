@@ -1,0 +1,5 @@
+# 這是設計範例站（demo.hunglun.com），內容為虛構品牌與價格，
+# 僅供展示網頁特效與版面設計。不希望被搜尋引擎索引，
+# 以免與正式官網 www.hunglun.com 的內容混淆。
+User-agent: *
+Disallow: /

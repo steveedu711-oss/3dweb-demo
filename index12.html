@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>翼視空拍 — 工程與行銷空拍服務</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c0e12;--fg:#f0f2f6;--mut:#8b93a3;--acc:#ff8a4c;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(12,14,18,.76);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(32px,5.8vw,64px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:10px;background:var(--acc);color:#0c0e12;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：捲動釘選（Pin） --- */
+.hero{min-height:96svh;display:flex;align-items:center;padding-top:100px;
+  background:radial-gradient(70vw 50vw at 82% 10%,rgba(255,138,76,.13),transparent 60%)}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.hint{margin-top:26px;font-size:13px;color:#6f7686}
+/* pin 區：外層拉高，內層 sticky */
+.pinwrap{height:420vh;position:relative}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center;
+  background:linear-gradient(180deg,#0c0e12,#121620 60%,#0c0e12)}
+.pin .inner{max-width:1040px;margin:0 auto;padding:0 22px;width:100%;position:relative}
+.steps{position:relative;min-height:290px}
+.step{position:absolute;inset:0;opacity:0;transform:translateY(26px);transition:opacity .45s ease,transform .55s cubic-bezier(.16,1,.3,1)}
+.step.on{opacity:1;transform:translateY(0)}
+.step .n{font-family:ui-monospace,Menlo,monospace;font-size:13px;letter-spacing:.22em;color:var(--acc)}
+.step h2{margin:12px 0 8px}
+.track{display:flex;gap:8px;margin-bottom:36px}
+.track i{height:3px;flex:1;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden;position:relative}
+.track i b{position:absolute;inset:0;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .3s linear}
+.alt{position:absolute;right:0;top:50%;transform:translateY(-50%);width:min(38vw,330px);aspect-ratio:1;border-radius:24px;
+  border:1px solid var(--line);background:radial-gradient(circle at 50% 40%,rgba(255,138,76,.22),transparent 62%);display:grid;place-items:center}
+.alt b{font-family:ui-monospace,Menlo,monospace;font-size:clamp(30px,5vw,56px);color:var(--acc)}
+.alt span{position:absolute;bottom:22px;font-size:11px;letter-spacing:.2em;color:var(--mut)}
+@media(max-width:860px){.alt{display:none}}
+.price{margin-top:38px;border-top:1px solid var(--line)}
+.price div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.price div b{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 12：<b>捲動釘選 Pin</b></i><i class="ind">產業：空拍與航測服務</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">翼視空拍 ／ 交通部民航局遙控無人機專業操作證</div>
+  <h1>工地進度、廠房外觀、<br><em>屋頂漏水點</em>，一次拍清楚</h1>
+  <p class="lead">不是只把空拍機飛上去拍漂亮畫面。我們做正射影像、3D 建模與缺陷判讀，出的是可以拿去開會的成果檔。</p>
+  <p class="hint">（往下捲：畫面會被釘住，內容隨捲動一段一段換，右上高度同步變化）</p>
+</div></section>
+
+<div class="pinwrap" id="pw">
+  <div class="pin"><div class="inner">
+    <div class="track"><i><b id="p0"></b></i><i><b id="p1"></b></i><i><b id="p2"></b></i><i><b id="p3"></b></i></div>
+    <div class="steps">
+      <div class="step" data-i="0">
+        <div class="n">STEP 01 ／ 起飛前</div>
+        <h2>空域申請與現勘</h2>
+        <p class="lead">先查禁航區與地面風險，該申請的送件、該通知的通知。台北市與桃園機場周邊我們有完整送件經驗，不會臨時飛不了。</p>
+      </div>
+      <div class="step" data-i="1">
+        <div class="n">STEP 02 ／ 高度 60m</div>
+        <h2>航線自動化拍攝</h2>
+        <p class="lead">依重疊率規劃航線自動飛行，同一個案場每個月拍出來的角度都一致，方便逐月比對進度。</p>
+      </div>
+      <div class="step" data-i="2">
+        <div class="n">STEP 03 ／ 高度 120m</div>
+        <h2>正射影像與 3D 模型</h2>
+        <p class="lead">照片經空三運算輸出正射圖與點雲，可直接量測距離、面積與土方量，誤差可控制在 3 公分內（需佈設地面控制點）。</p>
+      </div>
+      <div class="step" data-i="3">
+        <div class="n">STEP 04 ／ 交付</div>
+        <h2>報告與後續維護</h2>
+        <p class="lead">交付原始檔、正射圖、模型與一份缺陷標註報告。長期合約可每月固定回訪，累積成完整的案場時間軸。</p>
+      </div>
+    </div>
+    <div class="alt"><b id="alt">0m</b><span>FLIGHT ALTITUDE</span></div>
+  </div></div>
+</div>
+
+<section><div class="wrap">
+  <h2>常見用途</h2>
+  <div class="grid">
+    <div class="card"><h3>營建工程進度</h3><p>每月一次固定角度紀錄，業主與監造遠端就能看到現場。</p></div>
+    <div class="card"><h3>太陽能板檢測</h3><p>熱像鏡頭找出發電異常的模組，不用一片片爬上去看。</p></div>
+    <div class="card"><h3>屋頂與外牆</h3><p>不搭鷹架就能檢查防水層破損與磁磚剝落，先看再決定要不要修。</p></div>
+    <div class="card"><h3>建案行銷影片</h3><p>景觀環景與生活圈路徑，剪成 60 秒版本可直接投放。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>收費方式</h2>
+  <div class="price">
+    <div><b>單次拍攝（半日）</b><span>18,000 元起，含原始檔與基本調色</span></div>
+    <div><b>正射影像與 3D 模型</b><span>依面積計，5 公頃以內 32,000 元起</span></div>
+    <div><b>月度進度追蹤</b><span>12,000 元／次，簽半年約另議</span></div>
+    <div><b>離島與跨縣市</b><span>另計交通與住宿，事前報價不追加</span></div>
+  </div>
+  <a class="btn" href="#c">索取正式報價</a>
+</div></section>
+
+<footer><b>效果原理：</b>外層容器拉高到 420vh，內層用 <code>position:sticky;top:0</code> 釘在畫面上；捲動時算出「已進入外層多少百分比」，換算成目前該顯示第幾段，並同步推動進度條與高度數字。純 CSS sticky 加一點 JS，不需要 ScrollTrigger 這類函式庫，也不會像改 <code>position:fixed</code> 那樣造成版面跳動。</footer>
+
+<script>
+const pw=document.getElementById('pw');
+const steps=[...document.querySelectorAll('.step')];
+const bars=[0,1,2,3].map(i=>document.getElementById('p'+i));
+const alt=document.getElementById('alt');
+const ALTS=[0,60,120,120];
+let ticking=false;
+function upd(){
+  const r=pw.getBoundingClientRect();
+  const total=pw.offsetHeight-innerHeight;
+  const p=Math.min(Math.max(-r.top/total,0),1);
+  const seg=p*steps.length;
+  const idx=Math.min(Math.floor(seg),steps.length-1);
+  steps.forEach((s,i)=>s.classList.toggle('on',i===idx));
+  bars.forEach((b,i)=>{
+    const local=Math.min(Math.max(seg-i,0),1);
+    b.style.transform='scaleX('+local+')';
+  });
+  const from=ALTS[idx], to=ALTS[Math.min(idx+1,ALTS.length-1)];
+  alt.textContent=Math.round(from+(to-from)*(seg-idx))+'m';
+  ticking=false;
+}
+addEventListener('scroll',()=>{ if(!ticking){ticking=true;requestAnimationFrame(upd);} },{passive:true});
+addEventListener('resize',upd); upd();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>木理家具 — 實木訂製家具</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#100d0a;--fg:#f2ebe1;--mut:#9b8e7e;--acc:#c99a5b;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(16,13,10,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.16;letter-spacing:-.01em;font-weight:700}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:700}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:8px;background:var(--acc);color:#100d0a;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：拖曳無限畫布 --- */
+.canvaswrap{position:relative;height:100svh;overflow:hidden;cursor:grab;touch-action:none;
+  background:radial-gradient(60vw 50vw at 50% 40%,rgba(201,154,91,.08),transparent 62%)}
+.canvaswrap:active{cursor:grabbing}
+.plane{position:absolute;inset:0;will-change:transform}
+.item{position:absolute;width:210px;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);user-select:none}
+.item .ph{aspect-ratio:4/3;background:linear-gradient(155deg,var(--a),var(--b));position:relative}
+.item .ph::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(88deg,rgba(0,0,0,.14) 0 1px,transparent 1px 9px)}
+.item .cap{padding:12px 14px}
+.item .cap b{display:block;font-size:14px}
+.item .cap span{color:var(--mut);font-size:12px}
+.overlay{position:absolute;left:0;right:0;top:0;padding:100px 22px 0;pointer-events:none;z-index:5}
+.overlay .in{max-width:1040px;margin:0 auto}
+.overlay .in > *{pointer-events:auto}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:16px}
+h1 em{font-style:normal;color:var(--acc)}
+.hint{margin-top:20px;font-size:13px;color:#7d7263;
+  background:rgba(16,13,10,.6);display:inline-block;padding:6px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+.fade{position:absolute;inset:0;pointer-events:none;z-index:4;
+  background:linear-gradient(180deg,rgba(16,13,10,.92) 4%,transparent 34%,transparent 72%,rgba(16,13,10,.85))}
+.tbl{margin-top:30px;border-top:1px solid var(--line)}
+.tbl div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.tbl div b{color:var(--fg);font-weight:700}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 33：<b>拖曳無限畫布</b></i><i class="ind">產業：實木訂製家具</i></div>
+</div>
+
+<div class="canvaswrap" id="cw">
+  <div class="plane" id="plane"></div>
+  <div class="fade"></div>
+  <div class="overlay"><div class="in">
+    <div class="kick">木理家具 ／ 台南新化・自有木工廠</div>
+    <h1>沒有貼皮，<br><em>切開來裡面還是那塊木頭</em></h1>
+    <p class="hint">← 按住任意處拖曳，作品牆會無限延伸，四個方向都走得完 →</p>
+  </div></div>
+</div>
+
+<section><div class="wrap">
+  <h2>我們用的木料</h2>
+  <div class="grid">
+    <div class="card"><h3>北美白橡</h3><p>硬度高、紋理直，適合餐桌與地板。價格中上但耐用度最好。</p></div>
+    <div class="card"><h3>胡桃木</h3><p>深色帶不規則紋路，做櫃體與床架很好看，但單價高、料源不穩。</p></div>
+    <div class="card"><h3>台灣杉</h3><p>輕、有香氣，適合層架與兒童家具。硬度較低，會有使用痕跡。</p></div>
+    <div class="card"><h3>回收老料</h3><p>拆屋樑柱與舊家具重製。每批都不一樣，有釘孔與蟲蛀痕，我們保留不填補。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>訂製流程與價格</h2>
+  <div class="tbl">
+    <div><b>丈量與提案</b><span>雙北、桃竹苗、台南高雄免費到府；其他縣市 2,000 元（訂製可折抵）</span></div>
+    <div><b>設計圖</b><span>兩版草圖含尺寸與木料選擇，確認後付訂金 40%</span></div>
+    <div><b>製作</b><span>單件約 4～6 週，全屋案 8～12 週</span></div>
+    <div><b>餐桌參考價</b><span>白橡 180×90cm 實木一體桌板約 68,000 元起</span></div>
+    <div><b>保固</b><span>結構終身保固；木材本身的開裂與變形屬自然現象，提供免費調整兩次</span></div>
+  </div>
+  <a class="btn" href="#c">預約丈量</a>
+</div></section>
+
+<footer><b>效果原理：</b>無限畫布的關鍵是取餘數：拖曳時累積位移量，每個作品的實際位置用 <code>((原始座標 + 位移) % 週期 + 週期) % 週期</code> 算出來——超出邊界的會從另一邊繞回來，所以四個方向都走不到盡頭，但實際上 DOM 節點只有二十幾個，不會越拖越吃記憶體。放開手後位移量以慣性繼續衰減滑行。</footer>
+
+<script>
+const cw=document.getElementById('cw'), plane=document.getElementById('plane');
+const WOOD=[['#b98a52','#5c3d1e','白橡餐桌 180×90','北美白橡・一體桌板'],
+  ['#7a5236','#301c0e','胡桃木電視櫃','實木榫接・無五金外露'],
+  ['#c2a06a','#6b5227','台灣杉層架','三層可調・附壁固'],
+  ['#8f6b43','#402a15','老料長凳','拆屋樑重製・保留釘孔'],
+  ['#a97c4d','#4c3419','橡木單椅','曲木椅背・手工修磨'],
+  ['#6e4a2e','#2a1a0c','胡桃書桌 140','含走線槽與抽屜'],
+  ['#c9a97a','#6f5732','杉木兒童桌椅','高度可隨年齡調整'],
+  ['#96703f','#453017','白橡床架 雙人','排骨架・免螺絲組裝'],
+  ['#7f5a38','#382412','餐邊櫃 120','木製滑軌・軟關門'],
+  ['#b08a5a','#553b1c','玄關穿鞋椅','含底層開放收納'],
+  ['#8a6237','#3d2810','實木門片 訂製','可搭配系統櫃體'],
+  ['#c0995f','#63492a','原木托盤','邊料再利用・每片不同']];
+const COLS=4, ROWS=3, CW_=250, CH_=248;
+const PW=COLS*CW_, PH=ROWS*CH_;
+const items=[];
+WOOD.forEach((w,i)=>{
+  const d=document.createElement('div');
+  d.className='item';
+  d.innerHTML=`<div class="ph" style="--a:${w[0]};--b:${w[1]}"></div><div class="cap"><b>${w[2]}</b><span>${w[3]}</span></div>`;
+  const bx=(i%COLS)*CW_, by=Math.floor(i/COLS)*CH_ + (i%2?34:0);
+  d.dataset.bx=bx; d.dataset.by=by;
+  plane.appendChild(d);
+  items.push(d);
+});
+let ox=0, oy=0, vx=0, vy=0, drag=false, lx=0, ly=0;
+function layout(){
+  const w=cw.clientWidth, h=cw.clientHeight;
+  const cols=Math.ceil(w/PW)+2, rows=Math.ceil(h/PH)+2;
+  items.forEach(d=>{
+    const bx=+d.dataset.bx, by=+d.dataset.by;
+    // 只放一份，靠餘數繞回
+    let x=((bx+ox)%PW+PW)%PW, y=((by+oy)%PH+PH)%PH;
+    d.style.transform=`translate3d(${x-CW_}px,${y-CH_}px,0)`;
+  });
+  // 為了填滿畫面，複製多份格點
+  clones.forEach(({el,dx,dy,bx,by})=>{
+    let x=((bx+ox)%PW+PW)%PW + dx*PW;
+    let y=((by+oy)%PH+PH)%PH + dy*PH;
+    el.style.transform=`translate3d(${x-CW_}px,${y-CH_}px,0)`;
+  });
+}
+// 建立足夠覆蓋畫面的複本
+const clones=[];
+function buildClones(){
+  clones.forEach(c=>c.el.remove()); clones.length=0;
+  const nx=Math.ceil(cw.clientWidth/PW)+1, ny=Math.ceil(cw.clientHeight/PH)+1;
+  for(let dx=0;dx<=nx;dx++) for(let dy=0;dy<=ny;dy++){
+    if(dx===0&&dy===0) continue;
+    items.forEach(src=>{
+      const el=src.cloneNode(true);
+      plane.appendChild(el);
+      clones.push({el,dx,dy,bx:+src.dataset.bx,by:+src.dataset.by});
+    });
+  }
+  layout();
+}
+buildClones();
+addEventListener('resize',buildClones);
+cw.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;cw.setPointerCapture(e.pointerId)});
+cw.addEventListener('pointermove',e=>{
+  if(!drag) return;
+  vx=e.clientX-lx; vy=e.clientY-ly;
+  ox+=vx; oy+=vy; lx=e.clientX; ly=e.clientY;
+  layout();
+});
+addEventListener('pointerup',()=>drag=false);
+(function inertia(){
+  if(!drag && (Math.abs(vx)>0.2||Math.abs(vy)>0.2)){
+    vx*=0.94; vy*=0.94; ox+=vx; oy+=vy; layout();
+  }
+  requestAnimationFrame(inertia);
+})();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

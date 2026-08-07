@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>帳雲 — 中小企業雲端記帳系統</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0b0d12;--fg:#eef1f6;--mut:#89909e;--acc:#6ea8fe;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(11,13,18,.76);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(32px,5.6vw,62px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:10px;background:var(--acc);color:#0b0d12;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：Logo 跑馬牆 --- */
+.hero{padding-top:112px;text-align:center;background:radial-gradient(64vw 40vw at 50% 0%,rgba(110,168,254,.14),transparent 64%)}
+.hero .lead{margin-left:auto;margin-right:auto}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.marquee{overflow:hidden;position:relative;padding:14px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee .track{display:flex;gap:14px;width:max-content;animation:slide var(--dur,34s) linear infinite}
+.marquee.rev .track{animation-direction:reverse}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.logo{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:14px 24px;border:1px solid var(--line);border-radius:12px;
+  background:rgba(255,255,255,.03);color:var(--mut);font-size:15px;white-space:nowrap;transition:color .2s,border-color .2s,background .2s}
+.logo:hover{color:#fff;border-color:var(--acc);background:rgba(110,168,254,.10)}
+.logo i{width:22px;height:22px;border-radius:6px;background:var(--lc,#6ea8fe);opacity:.85;flex:0 0 auto}
+.mq{margin-top:56px}
+.hint{margin-top:26px;font-size:13px;color:#6d7482}
+.price{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:34px}
+.pl{border:1px solid var(--line);border-radius:18px;padding:26px}
+.pl.hot{border-color:var(--acc);background:rgba(110,168,254,.06)}
+.pl b{font-size:13px;letter-spacing:.16em;color:var(--acc)}
+.pl .p{font-size:34px;font-weight:900;margin:8px 0 2px}
+.pl .p small{font-size:14px;color:var(--mut);font-weight:400}
+.pl ul{list-style:none;margin-top:14px;color:var(--mut);font-size:14px}
+.pl li{padding:6px 0;border-bottom:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 20：<b>Logo 跑馬牆</b></i><i class="ind">產業：雲端記帳 SaaS</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">帳雲 LEDGERLY ／ 中小企業雲端記帳</div>
+  <h1>會計師要的檔案，<br><em>一鍵就匯得出來</em></h1>
+  <p class="lead">發票自動匯入、銀行對帳自動比對、財報即時產生。不用再每個月月底把一疊單據搬去事務所。</p>
+  <a class="btn" href="#c">免費試用 30 天</a>
+  <p class="hint">（下面三排 Logo 牆持續橫向捲動，滑鼠移上去會暫停，方向交錯造成層次）</p>
+</div></section>
+
+<div class="mq">
+  <div class="marquee" style="--dur:38s"><div class="track" data-dup>
+    <span class="logo" style="--lc:#6ea8fe"><i></i>晉泰五金行</span>
+    <span class="logo" style="--lc:#f59f00"><i></i>好初早餐（六間店）</span>
+    <span class="logo" style="--lc:#37b24d"><i></i>綠禾有機農場</span>
+    <span class="logo" style="--lc:#e64980"><i></i>小步舞曲美髮沙龍</span>
+    <span class="logo" style="--lc:#7950f2"><i></i>禾光室內裝修</span>
+    <span class="logo" style="--lc:#15aabf"><i></i>三合科技股份有限公司</span>
+  </div></div>
+  <div class="marquee rev" style="--dur:44s"><div class="track" data-dup>
+    <span class="logo" style="--lc:#fa5252"><i></i>阿正鐵板燒</span>
+    <span class="logo" style="--lc:#4c6ef5"><i></i>宏遠貨運行</span>
+    <span class="logo" style="--lc:#12b886"><i></i>青田牙醫診所</span>
+    <span class="logo" style="--lc:#fab005"><i></i>元亨補習班</span>
+    <span class="logo" style="--lc:#be4bdb"><i></i>拾光攝影工作室</span>
+    <span class="logo" style="--lc:#22b8cf"><i></i>永昌機械工廠</span>
+  </div></div>
+  <div class="marquee" style="--dur:52s"><div class="track" data-dup>
+    <span class="logo" style="--lc:#82c91e"><i></i>山海民宿</span>
+    <span class="logo" style="--lc:#fd7e14"><i></i>豐味食品有限公司</span>
+    <span class="logo" style="--lc:#4dabf7"><i></i>安心保經代理</span>
+    <span class="logo" style="--lc:#f06595"><i></i>花間集花藝</span>
+    <span class="logo" style="--lc:#20c997"><i></i>樂居家清潔服務</span>
+    <span class="logo" style="--lc:#845ef7"><i></i>啟明資訊社</span>
+  </div></div>
+</div>
+
+<section><div class="wrap">
+  <h2>省下來的是這些時間</h2>
+  <div class="grid">
+    <div class="card"><h3>發票自動匯入</h3><p>串接財政部電子發票平台，進項銷項自動落帳，不用一張張打。</p></div>
+    <div class="card"><h3>銀行對帳</h3><p>上傳對帳單自動比對，抓出漏記與重複記帳，月結時間平均縮短 6 小時。</p></div>
+    <div class="card"><h3>會計師協作</h3><p>開一個唯讀帳號給事務所，他們自己去看，不用來回寄檔案。</p></div>
+    <div class="card"><h3>行動裝置拍收據</h3><p>拍照即辨識金額與統編，跑外務的老闆在車上就能處理完。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>方案</h2>
+  <div class="price">
+    <div class="pl"><b>單人版</b><div class="p">399<small> 元／月</small></div>
+      <ul><li>1 個使用者</li><li>每月 200 張憑證</li><li>基本財報</li></ul></div>
+    <div class="pl hot"><b>公司版</b><div class="p">1,290<small> 元／月</small></div>
+      <ul><li>5 個使用者</li><li>憑證不限量</li><li>銀行對帳與會計師帳號</li><li>API 串接電商平台</li></ul></div>
+    <div class="pl"><b>事務所版</b><div class="p">另議</div>
+      <ul><li>管理多家客戶帳本</li><li>批次匯出申報檔</li><li>專屬客服窗口</li></ul></div>
+  </div>
+  <a class="btn" href="#c">開始免費試用</a>
+</div></section>
+
+<footer><b>效果原理：</b>跑馬燈的關鍵是「內容複製一份接在後面」，動畫只跑 <code>translateX(-50%)</code>，因為後半段跟前半段一模一樣，回到起點時視覺上完全接得起來，形成無縫循環。左右兩端的淡出是 <code>mask-image</code>，不是漸層蓋色塊，所以背景是什麼顏色都不用改。<code>:hover</code> 時把 <code>animation-play-state</code> 設成 paused 就能停住讓人看清楚。</footer>
+
+<script>
+// 把每條軌道的內容複製一份，才能無縫循環
+document.querySelectorAll('[data-dup]').forEach(t=>t.innerHTML+=t.innerHTML);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

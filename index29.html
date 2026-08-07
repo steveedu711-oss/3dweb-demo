@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>安穩保險經紀人 — 保單健檢與規劃</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1219;--fg:#eef3f8;--mut:#8593a3;--acc:#5ec9a8;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.05)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(13,18,25,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:12px;background:var(--acc);color:#0d1219;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：黏性堆疊卡 --- */
+.hero{padding-top:118px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.hint{margin-top:22px;font-size:13px;color:#6d7b8a}
+.stack{margin-top:60px;padding-bottom:20vh}
+.sc{position:sticky;top:calc(70px + var(--i)*18px);
+  border-radius:24px;padding:clamp(26px,4vw,44px);margin-bottom:26px;
+  border:1px solid var(--line);background:var(--g);
+  box-shadow:0 -8px 40px rgba(0,0,0,.35);
+  transform-origin:50% 0}
+.sc .n{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.2em;color:var(--acc)}
+.sc h3{font-size:clamp(22px,3.2vw,32px);margin:12px 0 12px;font-weight:800}
+.sc p{color:#c4d0dc;font-size:15.5px;max-width:60ch}
+.sc .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.sc .tags span{padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);font-size:13px;color:#d6e0ea}
+.tbl{margin-top:30px;border-top:1px solid var(--line)}
+.tbl div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.tbl div b{color:var(--fg);font-weight:700}
+.warn{margin-top:20px;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:13.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 29：<b>黏性堆疊卡</b></i><i class="ind">產業：保險經紀</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">安穩保險經紀人 ／ 全台服務・經紀人執照字號 XXXX</div>
+  <h1>不推最好賣的，<br><em>推你缺的那一塊</em></h1>
+  <p class="lead">我們是經紀人不是業務員，可比較 21 家保險公司的商品。第一次見面只做保單健檢，把你已經有的先攤開來看。</p>
+  <p class="hint">（往下捲：下面五張卡片會一張黏住一張地疊上來，像實體文件疊在桌上）</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="stack">
+    <div class="sc" style="--i:0;--g:linear-gradient(150deg,#16324a,#0e1d2b)">
+      <div class="n">01 ／ 保單健檢</div>
+      <h3>先搞清楚你現在有什麼</h3>
+      <p>把家裡所有保單攤開，做成一張表：誰保、保什麼、保多少、繳到幾歲、哪些已經失效。多數人第一次看到這張表才發現重複買了三張醫療險，卻完全沒有失能扶助。</p>
+      <div class="tags"><span>免費</span><span>約 90 分鐘</span><span>不推銷</span></div>
+    </div>
+    <div class="sc" style="--i:1;--g:linear-gradient(150deg,#1a3a45,#0f2028)">
+      <div class="n">02 ／ 缺口分析</div>
+      <h3>算出真正需要的保額</h3>
+      <p>用你的房貸餘額、子女教育年數、家庭月支出與現有資產，反推壽險與失能險該保多少。不是「業界建議年收入十倍」這種話，是你家的實際數字。</p>
+      <div class="tags"><span>試算表當場給</span><span>可自行修改參數</span></div>
+    </div>
+    <div class="sc" style="--i:2;--g:linear-gradient(150deg,#1e3a34,#122420)">
+      <div class="n">03 ／ 商品比較</div>
+      <h3>21 家一起比，含我們不賣的</h3>
+      <p>同樣的保障內容，不同公司保費可能差 40%。我們把可比較的方案列在同一張表上，包括我們沒有代理、你得自己去買的那幾張。</p>
+      <div class="tags"><span>21 家壽險</span><span>含產險公司意外險</span><span>比較表可帶走</span></div>
+    </div>
+    <div class="sc" style="--i:3;--g:linear-gradient(150deg,#3a3320,#241f12)">
+      <div class="n">04 ／ 調整而非重買</div>
+      <h3>能改的先改，不要動不動就解約</h3>
+      <p>舊保單常有現在買不到的條件。我們會先看能不能用附約調整、減額繳清或展期定期來處理，解約通常是最後手段，因為那對我們沒有好處也對你沒有好處。</p>
+      <div class="tags"><span>保留舊保單優勢</span><span>降低重複保費</span></div>
+    </div>
+    <div class="sc" style="--i:4;--g:linear-gradient(150deg,#3a2436,#241522)">
+      <div class="n">05 ／ 理賠時真的找得到人</div>
+      <h3>出事那天才知道經紀人有沒有用</h3>
+      <p>住院、失能、身故的理賠申請由我們代辦，包含跟保險公司的來回爭議。過去三年協助爭取的初審被拒案件，有 68% 在複審後獲得理賠。</p>
+      <div class="tags"><span>理賠代辦</span><span>爭議協處</span><span>不另收費</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>常見問題</h2>
+  <div class="tbl">
+    <div><b>你們怎麼賺錢？</b><span>保險公司支付的佣金，跟你直接向保險公司投保的保費完全相同</span></div>
+    <div><b>健檢一定要買嗎？</b><span>不用。健檢報告是你的，帶走自己處理也可以</span></div>
+    <div><b>可以只買一張嗎？</b><span>可以，我們沒有最低件數要求</span></div>
+    <div><b>服務範圍</b><span>雙北、桃竹可到府；其他縣市線上會議或約在當地</span></div>
+  </div>
+  <div class="warn">本頁為服務說明，非保險商品要約。實際保障內容、除外責任與等待期以各保險公司保單條款為準，投保前請詳閱要保書與商品說明書。</div>
+  <a class="btn" href="#c">預約免費保單健檢</a>
+</div></section>
+
+<footer><b>效果原理：</b>每張卡片都設 <code>position:sticky</code>，但 <code>top</code> 值依序遞增（用 <code>--i</code> 變數乘上偏移量）。因此第一張黏在最上面，第二張黏的位置略低，以此類推——後面的卡片捲上來時會蓋住前一張，只露出上緣，形成實體文件堆疊的效果。純 CSS，不需要任何捲動監聽，也不會有 JS 造成的延遲。</footer>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>山丘焙所 — 精品咖啡自家烘焙</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#14100c;--fg:#f3ece2;--mut:#a3927e;--acc:#d9a05b;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.045)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.75;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(20,16,12,.76);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px;position:relative}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:clamp(34px,6vw,66px);line-height:1.14;letter-spacing:-.02em;font-weight:700}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:700}
+.lead{color:var(--mut);max-width:56ch;margin-top:18px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:14px 32px;border-radius:999px;background:var(--acc);color:#14100c;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：3D 傾斜卡 --- */
+.hero{padding-top:120px;background:radial-gradient(70vw 50vw at 20% 0%,rgba(217,160,91,.13),transparent 62%)}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.beans{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));margin-top:56px;perspective:1000px}
+.tilt{position:relative;border-radius:20px;padding:28px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--line);transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.9,.25,1),box-shadow .35s;will-change:transform}
+.tilt.live{transition:transform .08s linear}
+.tilt::after{content:"";position:absolute;inset:0;border-radius:20px;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(circle 240px at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.16),transparent 65%)}
+.tilt:hover::after{opacity:1}
+.tilt:hover{box-shadow:0 26px 60px rgba(0,0,0,.5)}
+.tilt .layer{transform:translateZ(38px)}
+.origin{font-size:12px;letter-spacing:.2em;color:var(--acc)}
+.tilt h3{font-size:24px;margin:10px 0 4px;font-weight:700}
+.tilt .note{color:var(--mut);font-size:14px;min-height:48px}
+.tilt .roast{display:flex;gap:6px;margin:16px 0 14px}
+.tilt .roast i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.13)}
+.tilt .roast i.on{background:var(--acc)}
+.tilt .price{font-size:20px;font-weight:700}
+.tilt .price small{font-size:13px;color:var(--mut);font-weight:400}
+.hint{margin-top:30px;font-size:13px;color:#7d6c5b}
+.rows{margin-top:38px;border-top:1px solid var(--line)}
+.rows div{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px}
+.rows div b{color:var(--fg);font-weight:600;flex:0 0 auto}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 06：<b>3D 傾斜卡</b></i><i class="ind">產業：精品咖啡烘焙</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">山丘焙所 ／ 台中西區・自家烘焙</div>
+  <h1>接單才烘，<br><em>寄到你手上不超過 5 天</em></h1>
+  <p class="lead">咖啡豆的賞味期是從下豆那一刻開始算的。我們每週三、六烘豆，當天出貨，包裝上印的是烘焙日期不是有效期限。</p>
+  <p class="hint">（滑鼠移到豆單卡片上：卡片會跟著游標做 3D 傾斜，並有光澤掃過）</p>
+  <div class="beans">
+    <div class="tilt"><div class="layer">
+      <div class="origin">ETHIOPIA</div>
+      <h3>耶加雪菲 科契爾</h3>
+      <p class="note">日曬處理。草莓果醬、佛手柑、紅茶尾韻，放涼更甜。</p>
+      <div class="roast"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+      <div class="price">480 <small>元／半磅・淺焙</small></div>
+    </div></div>
+    <div class="tilt"><div class="layer">
+      <div class="origin">COLOMBIA</div>
+      <h3>惠蘭 薇拉莊園</h3>
+      <p class="note">水洗處理。焦糖、烤杏仁、柑橘酸質乾淨，手沖義式都好用。</p>
+      <div class="roast"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      <div class="price">420 <small>元／半磅・中焙</small></div>
+    </div></div>
+    <div class="tilt"><div class="layer">
+      <div class="origin">SUMATRA</div>
+      <h3>曼特寧 林東</h3>
+      <p class="note">濕剝法。黑糖、雪松、微微藥草感，加奶不會被蓋掉。</p>
+      <div class="roast"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+      <div class="price">390 <small>元／半磅・深焙</small></div>
+    </div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>訂閱制怎麼算</h2>
+  <div class="rows">
+    <div><b>每兩週一包（半磅）</b><span>依當季推薦輪替，可指定只喝淺焙或只喝深焙，單包折 40 元</span></div>
+    <div><b>每月兩包</b><span>可拆成兩種不同產區，適合家裡兩個人口味不同</span></div>
+    <div><b>研磨服務</b><span>下單備註手沖／義式／美式壺，免費代磨，但建議還是買豆自己磨</span></div>
+    <div><b>暫停與取消</b><span>官網自助，隨時可停，不用打電話跟客服拉扯</span></div>
+  </div>
+  <a class="btn" href="#c">開始訂閱</a>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>不知道自己喜歡什麼？</h2>
+  <p class="lead">寄一組四款各 25g 的濾掛給你，附一張風味紀錄卡。喝完告訴我們哪支最順口，我們再推薦整包的方向。組合價 199 元，含運。</p>
+  <a class="btn" href="#c">來一組風味測試包</a>
+</div></section>
+
+<footer><b>效果原理：</b>父層設 <code>perspective</code>，卡片依游標在卡內的相對位置換算成 <code>rotateX／rotateY</code> 角度（中心為 0，邊緣最大約 9 度），內容層再用 <code>translateZ</code> 浮起造成視差景深。同一組座標同時餵給 <code>::after</code> 的 radial-gradient 當光澤位置。滑出時移除即時 transition，讓它用較長的緩動歸零。</footer>
+
+<script>
+document.querySelectorAll('.tilt').forEach(card=>{
+  const MAX=9;
+  card.addEventListener('pointermove',e=>{
+    const r=card.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+    card.classList.add('live');
+    card.style.transform=`rotateY(${(px-.5)*MAX*2}deg) rotateX(${-(py-.5)*MAX*2}deg) translateY(-4px)`;
+    card.style.setProperty('--gx',px*100+'%');
+    card.style.setProperty('--gy',py*100+'%');
+  });
+  card.addEventListener('pointerleave',()=>{
+    card.classList.remove('live');
+    card.style.transform='rotateY(0) rotateX(0) translateY(0)';
+  });
+});
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

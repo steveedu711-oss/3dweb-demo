@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>雲棲山居 — 阿里山高山民宿</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a1210;--fg:#eaf3ee;--mut:#8ba396;--acc:#a8d6b4;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(10,18,16,.76);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px;position:relative;z-index:3}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(32px,5.6vw,64px);line-height:1.16;letter-spacing:-.01em;font-weight:700}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:700}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:38px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:32px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#0a1210;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:3;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：捲動視差多層山景 --- */
+.scene{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(#0d2230 0%,#173b45 42%,#2b5a4d 72%,#0a1210 100%)}
+.scene .ly{position:absolute;left:-2%;width:104%;bottom:0;will-change:transform}
+.sun{position:absolute;left:50%;top:22%;width:170px;height:170px;margin-left:-85px;border-radius:50%;
+  background:radial-gradient(circle,#ffe6b0,#ffb877 55%,transparent 72%);opacity:.8;will-change:transform}
+.mist{position:absolute;inset:0;background:linear-gradient(transparent 46%,rgba(210,230,225,.14) 62%,transparent 78%);will-change:transform}
+.hero{min-height:110svh;display:flex;align-items:center;padding-top:70px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:20px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+h1,.hero .lead{text-shadow:0 3px 22px rgba(0,0,0,.55)}
+.big{font-size:clamp(60px,15vw,190px);font-weight:900;letter-spacing:-.04em;line-height:.9;opacity:.14;white-space:nowrap;will-change:transform;pointer-events:none}
+.bandwrap{overflow:hidden;padding:40px 0}
+.hint{margin-top:26px;font-size:13px;color:#7d9488}
+.rooms{margin-top:38px;border-top:1px solid var(--line)}
+.rooms div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.rooms div b{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 10：<b>捲動視差</b></i><i class="ind">產業：高山民宿</i></div>
+</div>
+
+<div class="scene">
+  <div class="sun" id="sun"></div>
+  <div class="mist" id="mist"></div>
+  <svg class="ly" id="l3" viewBox="0 0 1200 340" preserveAspectRatio="none" style="height:56vh">
+    <path d="M0,340 L0,180 L120,120 L250,190 L390,90 L520,180 L660,110 L820,200 L960,130 L1100,195 L1200,150 L1200,340 Z" fill="#2c4c58" opacity=".85"/>
+  </svg>
+  <svg class="ly" id="l2" viewBox="0 0 1200 300" preserveAspectRatio="none" style="height:44vh">
+    <path d="M0,300 L0,190 L150,120 L300,205 L470,130 L640,215 L800,150 L980,220 L1200,165 L1200,300 Z" fill="#1d3a3c" opacity=".92"/>
+  </svg>
+  <svg class="ly" id="l1" viewBox="0 0 1200 240" preserveAspectRatio="none" style="height:30vh">
+    <path d="M0,240 L0,160 L180,105 L360,175 L560,120 L760,185 L960,125 L1200,180 L1200,240 Z" fill="#0d1f1e"/>
+  </svg>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">雲棲山居 ／ 嘉義阿里山・海拔 1,420 公尺</div>
+  <h1>雲海不保證每天有，<br>但安靜每天都有</h1>
+  <p class="lead">全館只有 6 間房。沒有電視、沒有卡拉 OK、晚上十點後請小聲說話。我們把這裡做成一個真的能睡飽的地方。</p>
+  <a class="btn" href="#c">查看空房</a>
+  <p class="hint">（往下捲：山稜、雲霧、太陽以不同速度移動，形成景深）</p>
+</div></section>
+
+<div class="bandwrap"><div class="big" id="band">安靜　CLOUD DWELLING　海拔 1420m　安靜　CLOUD DWELLING</div></div>
+
+<section><div class="wrap">
+  <h2>住這裡會是什麼樣子</h2>
+  <div class="grid">
+    <div class="card"><h3>四點半的日出</h3><p>從房間陽台直接看，不用開車去搶位子。天氣不好我們會前一晚就告訴你，不用白起床。</p></div>
+    <div class="card"><h3>一泊二食</h3><p>晚餐是山上自種的菜與放山雞，早餐六點半開始供應，趕日出的人可以先吃。</p></div>
+    <div class="card"><h3>沒有訊號的那兩小時</h3><p>步行 20 分鐘有一段柳杉林步道，中段完全沒有訊號。很多客人說那是最有用的部分。</p></div>
+    <div class="card"><h3>開車注意</h3><p>最後 3 公里是產業道路，會車不易。不建議夜間上山，也不建議底盤太低的車。</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>房型與價格</h2>
+  <div class="rooms">
+    <div><b>雙人山景房（4 間）</b><span>平日 4,200／假日 5,400・含早晚餐</span></div>
+    <div><b>四人family房（1 間）</b><span>平日 6,800／假日 8,200・含早晚餐</span></div>
+    <div><b>整館包棟</b><span>需 12 人以上，平日 32,000 起，可談</span></div>
+    <div><b>加價選項</b><span>日出接駁 300／人、烤火爐 500／晚、寵物 500／隻（限一樓房）</span></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>訂房</h2>
+  <p class="lead">線上即時空房查詢，訂金 30%。因為山上天候變化大，颱風警報或道路中斷可全額退款或無限期保留。</p>
+  <a class="btn" href="#c">查空房並訂房</a>
+</div></section>
+
+<footer><b>效果原理：</b>三層山稜 SVG、雲霧與太陽各自綁不同的位移係數，在 scroll 事件裡統一寫進 <code>transform:translate3d</code>——越遠的層移動越少，就是視差。實際更新包在 <code>requestAnimationFrame</code> 裡並用旗標節流，避免一次捲動觸發上百次重排。大字橫幅則反向移動，強化縱深。</footer>
+
+<script>
+const l1=document.getElementById('l1'),l2=document.getElementById('l2'),l3=document.getElementById('l3'),
+      sun=document.getElementById('sun'),mist=document.getElementById('mist'),band=document.getElementById('band');
+let ticking=false;
+function upd(){
+  const y=scrollY;
+  l1.style.transform=`translate3d(0,${y*0.02}px,0)`;
+  l2.style.transform=`translate3d(0,${-y*0.06}px,0)`;
+  l3.style.transform=`translate3d(0,${-y*0.13}px,0)`;
+  sun.style.transform=`translate3d(0,${-y*0.30}px,0) scale(${1+y*0.0004})`;
+  mist.style.transform=`translate3d(${Math.sin(y*0.002)*40}px,${-y*0.18}px,0)`;
+  const r=band.parentElement.getBoundingClientRect();
+  band.style.transform=`translate3d(${(innerHeight-r.top)*0.22-260}px,0,0)`;
+  ticking=false;
+}
+addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(upd); } },{passive:true});
+upd();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

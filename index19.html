@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>綠川募資 — 台灣在地社會企業募資平台</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f9f5;--fg:#1c2620;--mut:#6b7a71;--acc:#2e8b57;--line:rgba(0,0,0,.11);--card:#ffffff}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(247,249,245,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(32px,5.6vw,62px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#fff;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：數字滾動 Odometer --- */
+.hero{padding-top:110px;background:radial-gradient(70vw 46vw at 78% 6%,rgba(46,139,87,.11),transparent 62%)}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.odo{display:flex;gap:clamp(24px,5vw,64px);flex-wrap:wrap;margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:38px 0}
+.odo .u{min-width:140px}
+.odo .n{display:flex;align-items:baseline;font-weight:900;font-size:clamp(34px,6vw,62px);letter-spacing:-.03em;line-height:1;color:var(--acc)}
+.odo .n .pre,.odo .n .suf{font-size:.42em;font-weight:700;margin:0 2px}
+.reel{display:inline-block;height:1em;overflow:hidden;vertical-align:bottom}
+.reel > span{display:block;line-height:1;transition:transform 1.5s cubic-bezier(.2,.8,.2,1)}
+.odo .u p{color:var(--mut);font-size:14px;margin-top:10px}
+.hint{margin-top:26px;font-size:13px;color:#8a978f}
+.bars{margin-top:38px}
+.prj{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:14px}
+.prj .t{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline}
+.prj b{font-size:17px}
+.prj .pct{color:var(--acc);font-weight:800;font-size:20px}
+.prj .track{height:8px;border-radius:4px;background:rgba(0,0,0,.07);margin-top:14px;overflow:hidden}
+.prj .track i{display:block;height:100%;background:var(--acc);width:0;transition:width 1.7s cubic-bezier(.2,.8,.2,1)}
+.prj p{color:var(--mut);font-size:14px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 19：<b>數字滾動</b></i><i class="ind">產業：社會企業募資平台</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">綠川募資 ／ 台灣在地社會影響力平台</div>
+  <h1>每一筆錢流去哪裡，<br><em>都查得到</em></h1>
+  <p class="lead">我們只上架有明確社會或環境目標的專案，並要求每季公開財務執行報告。募不到目標金額，全額退款。</p>
+
+  <div class="odo" id="odo">
+    <div class="u"><div class="n" data-v="128460000"><span class="pre">NT$</span></div><p>平台累計募得金額</p></div>
+    <div class="u"><div class="n" data-v="1247"></div><p>成功結案專案數</p></div>
+    <div class="u"><div class="n" data-v="93"><span class="suf">%</span></div><p>如期完成執行的比例</p></div>
+    <div class="u"><div class="n" data-v="286400"></div><p>贊助人次</p></div>
+  </div>
+  <p class="hint">（數字進入畫面時會像里程表一樣逐位滾上去，下方進度條同步跑）</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>正在募資的專案</h2>
+  <div class="bars" id="bars">
+    <div class="prj"><div class="t"><b>偏鄉學校電腦教室重建（南投・信義鄉）</b><span class="pct" data-p="187">0%</span></div>
+      <div class="track"><i data-p="187"></i></div>
+      <p>目標 60 萬，已募得 112 萬。超收部分將用於三年期的到校維護與師資培訓。</p></div>
+    <div class="prj"><div class="t"><b>友善耕作稻田・水雉棲地保育</b><span class="pct" data-p="76">0%</span></div>
+      <div class="track"><i data-p="76"></i></div>
+      <p>目標 150 萬，剩 21 天。與台南官田八位農友契作，不使用農藥拌種。</p></div>
+    <div class="prj"><div class="t"><b>身心障礙者庇護工場・烘焙設備汰換</b><span class="pct" data-p="42">0%</span></div>
+      <div class="track"><i data-p="42"></i></div>
+      <p>目標 88 萬，剩 39 天。現有烤箱已使用 14 年，維修零件停產。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>提案給我們</h2>
+  <div class="grid">
+    <div class="card"><h3>誰可以提案</h3><p>立案社福團體、合作社、社會企業，或有具體執行紀錄的個人團隊。</p></div>
+    <div class="card"><h3>審查標準</h3><p>目標明確可驗證、預算合理、團隊有執行能力。平均審查 14 天。</p></div>
+    <div class="card"><h3>平台費用</h3><p>成功結案抽 5%（一般平台約 8%～10%），未達標不收費。</p></div>
+    <div class="card"><h3>結案義務</h3><p>需在三個月內提交執行報告與收據明細，逾期停權一年。</p></div>
+  </div>
+  <a class="btn" href="#c">送出提案</a>
+</div></section>
+
+<footer><b>效果原理：</b>每個數字被拆成一位一位，每位是一條 0–9 的垂直「轉輪」，用 <code>translateY(-n em)</code> 滾到目標數字並給遞增的 transition-delay，造成由左往右依序停住的里程表感。IntersectionObserver 確保只在捲進畫面時才觸發一次；進度條同理，改的是 width 而非用 JS 逐幀繪製。</footer>
+
+<script>
+function reels(el){
+  const raw=el.dataset.v;
+  const txt=Number(raw).toLocaleString('en-US');
+  const pre=el.querySelector('.pre'), suf=el.querySelector('.suf');
+  el.innerHTML='';
+  if(pre) el.appendChild(pre);
+  [...txt].forEach((ch,i)=>{
+    if(!/\d/.test(ch)){ const s=document.createElement('span'); s.textContent=ch; el.appendChild(s); return; }
+    const r=document.createElement('span'); r.className='reel';
+    const col=document.createElement('span');
+    col.textContent='0\n1\n2\n3\n4\n5\n6\n7\n8\n9';
+    col.style.whiteSpace='pre';
+    r.appendChild(col); el.appendChild(r);
+    r.dataset.target=ch; col.style.transitionDelay=(i*0.08)+'s';
+  });
+  if(suf) el.appendChild(suf);
+}
+document.querySelectorAll('.odo .n').forEach(reels);
+function run(el){
+  el.querySelectorAll('.reel').forEach(r=>{
+    r.firstChild.style.transform='translateY(-'+r.dataset.target+'em)';
+  });
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  io.unobserve(e.target);
+  if(e.target.classList.contains('odo')){
+    e.target.querySelectorAll('.n').forEach(run);
+  }else{
+    e.target.querySelectorAll('.track i').forEach(i=>i.style.width=Math.min(i.dataset.p,100)+'%');
+    e.target.querySelectorAll('.pct').forEach(p=>{
+      const to=+p.dataset.p; let c=0;
+      const step=()=>{ c+=Math.max(1,Math.round((to-c)*0.09)); p.textContent=Math.min(c,to)+'%'; if(c<to) requestAnimationFrame(step); };
+      step();
+    });
+  }
+}),{threshold:.3});
+io.observe(document.getElementById('odo'));
+document.querySelectorAll('.prj').forEach(p=>io.observe(p));
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>鹵化銀影像 — 底片沖洗與掃描</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#141210;--fg:#efe9df;--mut:#9c9287;--acc:#e07b39;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(20,18,16,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px;position:relative;z-index:2}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.16;letter-spacing:-.01em;font-weight:700}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:700}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:3px;background:var(--acc);color:#141210;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:2}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：底片顆粒 --- */
+#grain{position:fixed;inset:0;width:100%;height:100%;z-index:50;pointer-events:none;opacity:.30;mix-blend-mode:overlay}
+.vig{position:fixed;inset:0;z-index:49;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,.55) 100%)}
+.halo{position:fixed;inset:0;z-index:48;pointer-events:none;
+  background:radial-gradient(60vw 50vw at 24% 12%,rgba(224,123,57,.11),transparent 60%)}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:70px}
+.kick{font-size:12px;letter-spacing:.28em;color:var(--acc);margin-bottom:20px}
+h1 em{font-style:normal;color:var(--acc)}
+.strip{display:flex;gap:6px;margin-top:44px;padding:10px 8px;background:#0c0a09;border-radius:4px;overflow-x:auto;
+  border-top:2px dashed rgba(255,255,255,.14);border-bottom:2px dashed rgba(255,255,255,.14)}
+.strip .fr{flex:0 0 auto;width:132px;aspect-ratio:3/2;border-radius:2px;position:relative;
+  background:linear-gradient(150deg,var(--a),var(--b));filter:saturate(.86) contrast(1.06)}
+.strip .fr::after{content:attr(data-n);position:absolute;bottom:-2px;right:4px;font-size:9px;color:rgba(255,255,255,.5);font-family:ui-monospace,Menlo,monospace}
+.hint{margin-top:24px;font-size:13px;color:#7a7167}
+.rate{margin-top:38px;border-top:1px solid var(--line)}
+.rate div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.rate div b{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 25：<b>底片顆粒</b></i><i class="ind">產業：底片沖掃工作室</i></div>
+</div>
+<canvas id="grain"></canvas><div class="vig"></div><div class="halo"></div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">鹵化銀影像 ／ 台北大同區・自家沖洗</div>
+  <h1>你的底片不會<br><em>跟別人的一起洗</em></h1>
+  <p class="lead">C-41 與黑白手工沖洗，每捲單獨處理、單獨記錄藥水溫度與顯影時間。掃描用 Noritsu，不做過度銳化與自動修圖。</p>
+  <div class="strip">
+    <div class="fr" data-n="01" style="--a:#8a6a4a;--b:#2a201a"></div>
+    <div class="fr" data-n="02" style="--a:#5c7a6a;--b:#1c2620"></div>
+    <div class="fr" data-n="03" style="--a:#a08256;--b:#332616"></div>
+    <div class="fr" data-n="04" style="--a:#6a6a86;--b:#1e1e2a"></div>
+    <div class="fr" data-n="05" style="--a:#9a5f4a;--b:#2e1a14"></div>
+    <div class="fr" data-n="06" style="--a:#7a8a6a;--b:#232a1c"></div>
+  </div>
+  <a class="btn" href="#c">寄件沖掃</a>
+  <p class="hint">（整個畫面上覆蓋著一層即時運算的底片顆粒，會不斷跳動，就像真的在放映）</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>我們怎麼處理你的底片</h2>
+  <div class="grid">
+    <div class="card"><h3>單捲手沖</h3><p>不併捲。藥水每 20 捲更新一次，並記錄批次，色偏可回溯。</p></div>
+    <div class="card"><h3>不修圖</h3><p>只做基本色彩平衡。刮痕、漏光與失焦我們原樣交件，那本來就是你拍的。</p></div>
+    <div class="card"><h3>掃描規格</h3><p>標準檔 3,000×2,000 px，高解析檔 6,700×4,500 px，皆附 TIFF 選項。</p></div>
+    <div class="card"><h3>底片歸還</h3><p>沖完的底片裝入無酸片套寄回，不代為銷毀，也不留存你的影像檔超過 90 天。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>價目與寄件</h2>
+  <div class="rate">
+    <div><b>135 彩色負片・沖洗＋標準掃描</b><span>320 元／捲</span></div>
+    <div><b>135 黑白・手工沖洗＋掃描</b><span>420 元／捲</span></div>
+    <div><b>120 中片幅</b><span>380 元／捲起，依格式</span></div>
+    <div><b>正片 E-6</b><span>460 元／捲，每週二、五各沖一批</span></div>
+    <div><b>高解析掃描加價</b><span>150 元／捲</span></div>
+    <div><b>寄件</b><span>三捲以上免運，工作日收件後 3～5 天完成並上傳雲端連結</span></div>
+  </div>
+  <a class="btn" href="#c">下單並列印寄件單</a>
+</div></section>
+
+<footer><b>效果原理：</b>顆粒是每幀重新產生的雜訊：直接操作 <code>ImageData</code> 的像素緩衝區填入隨機灰階值，再 <code>putImageData</code> 貼上，並用 <code>mix-blend-mode:overlay</code> 疊在整個頁面上。為了不吃滿 CPU，雜訊只算 1/3 解析度再由瀏覽器放大，而且刻意壓在每秒 12 幀——低幀率反而更像真正的底片放映抖動。</footer>
+
+<script>
+const cv=document.getElementById('grain'), x=cv.getContext('2d',{alpha:true});
+let W,H,img,buf32;
+function size(){
+  W=cv.width=Math.ceil(innerWidth/3); H=cv.height=Math.ceil(innerHeight/3);
+  img=x.createImageData(W,H);
+  buf32=new Uint32Array(img.data.buffer);
+}
+addEventListener('resize',size); size();
+let last=0;
+(function loop(now){
+  requestAnimationFrame(loop);
+  if(now-last<83) return;          // 約 12fps
+  last=now;
+  for(let i=0;i<buf32.length;i++){
+    const v=(Math.random()*255)|0;
+    buf32[i]=(190<<24)|(v<<16)|(v<<8)|v;
+  }
+  x.putImageData(img,0,0);
+})(0);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

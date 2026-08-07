@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>聲林音樂教室 — 成人與兒童樂器教學</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0b0a10;--fg:#f0eef7;--mut:#8c869e;--acc:#a78bfa;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(11,10,16,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px;position:relative;z-index:2}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:28px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#0b0a10;font-weight:800;text-decoration:none;border:0;font-family:inherit;font-size:16px;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:2;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：音波視覺化 --- */
+#wave{position:fixed;left:0;right:0;bottom:0;height:46svh;z-index:0;opacity:.85}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:70px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.inst{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.inst button{padding:11px 20px;border-radius:999px;border:1px solid var(--line);background:rgba(11,10,16,.6);
+  color:var(--mut);font-family:inherit;font-size:14px;cursor:pointer;backdrop-filter:blur(6px);transition:.2s}
+.inst button[aria-pressed="true"]{border-color:var(--acc);color:#fff;background:rgba(167,139,250,.14)}
+.hint{margin-top:22px;font-size:13px;color:#6f6a80}
+.tbl{margin-top:30px;border-top:1px solid var(--line)}
+.tbl div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.tbl div b{color:var(--fg);font-weight:700}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 37：<b>音波視覺化</b></i><i class="ind">產業：音樂教室</i></div>
+</div>
+<canvas id="wave"></canvas>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">聲林音樂教室 ／ 台北古亭・成人班佔六成</div>
+  <h1>三十五歲才開始學，<br><em>一點都不晚</em></h1>
+  <p class="lead">我們一半以上的學生是上班族。沒有檢定壓力、不用從拜爾彈起，第一堂課就挑一首你真的想彈的歌。</p>
+  <div class="inst" id="inst">
+    <button aria-pressed="true" data-h="1,0.5,0.32,0.2,0.12">鋼琴</button>
+    <button aria-pressed="false" data-h="1,0.72,0.55,0.3,0.24">木吉他</button>
+    <button aria-pressed="false" data-h="1,0.28,0.62,0.18,0.4">爵士鼓</button>
+    <button aria-pressed="false" data-h="1,0.86,0.4,0.55,0.2">小提琴</button>
+    <button aria-pressed="false" data-h="1,0.35,0.8,0.22,0.6">電吉他</button>
+  </div>
+  <a class="btn" href="#c">預約體驗課</a>
+  <p class="hint">（下方波形即時運算中；換樂器會改變泛音組成，波形與頻譜跟著變）</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>成人班怎麼上</h2>
+  <div class="grid">
+    <div class="card"><h3>一對一 50 分鐘</h3><p>不併班。進度完全依你的時間調整，這週沒練也不會被念，直接改課上。</p></div>
+    <div class="card"><h3>從你想彈的歌開始</h3><p>把整首拆成你現在做得到的版本，先彈得出來，再慢慢補基本功。</p></div>
+    <div class="card"><h3>彈性調課</h3><p>24 小時前線上改期，不扣堂數。加班族最需要的就是這個。</p></div>
+    <div class="card"><h3>自由琴房</h3><p>學員可免費預約琴房練習，每週兩小時，週末也開放。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>學費與時段</h2>
+  <div class="tbl">
+    <div><b>成人一對一（鋼琴／吉他／烏克麗麗）</b><span>900 元／堂，10 堂 8,500 元</span></div>
+    <div><b>爵士鼓／電吉他</b><span>1,000 元／堂，10 堂 9,500 元</span></div>
+    <div><b>兒童班（4 歲以上）</b><span>850 元／堂，含家長觀課</span></div>
+    <div><b>體驗課</b><span>300 元，報名正課可折抵</span></div>
+    <div><b>營業時間</b><span>週一至週五 12:00–22:00，週六日 10:00–19:00</span></div>
+    <div><b>樂器</b><span>教室提供上課用琴，不強迫購琴。要買時我們會給你預算內的具體建議</span></div>
+  </div>
+  <a class="btn" href="#c">預約體驗課</a>
+</div></section>
+
+<footer><b>效果原理：</b>沒有播放任何音檔——波形是即時合成出來的：把基頻與四個泛音依各自振幅相加，就得到不同樂器的音色波形（這也是真實樂器音色差異的來源）。下半部的長條頻譜則對這組泛音做簡化的能量分布並加上隨機衰減，模擬 FFT 的視覺結果。切換樂器只是換一組泛音振幅陣列。</footer>
+
+<script>
+const cv=document.getElementById('wave'), x=cv.getContext('2d');
+let W,H,DPR=Math.min(devicePixelRatio,2);
+function size(){
+  W=cv.width=innerWidth*DPR; H=cv.height=cv.clientHeight*DPR;
+}
+addEventListener('resize',size); setTimeout(size,0); size();
+
+let harm=[1,0.5,0.32,0.2,0.12];
+let target=harm.slice();
+document.getElementById('inst').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#inst button').forEach(n=>n.setAttribute('aria-pressed',n===b));
+  target=b.dataset.h.split(',').map(Number);
+});
+const BARS=64;
+const bars=new Array(BARS).fill(0);
+(function loop(now){
+  requestAnimationFrame(loop);
+  const t=now*0.001;
+  harm=harm.map((v,i)=>v+((target[i]??0)-v)*0.07);
+  x.clearRect(0,0,W,H);
+
+  // 頻譜長條
+  const bw=W/BARS;
+  for(let i=0;i<BARS;i++){
+    const hIdx=i%harm.length;
+    const base=harm[hIdx]*Math.exp(-i/26);
+    const tgt=Math.max(0,base*(0.55+0.45*Math.sin(t*3.1+i*0.42)+Math.random()*0.18));
+    bars[i]+= (tgt-bars[i])*0.18;
+    const bh=bars[i]*H*0.62;
+    const g=x.createLinearGradient(0,H,0,H-bh);
+    g.addColorStop(0,'rgba(167,139,250,.12)');
+    g.addColorStop(1,'rgba(167,139,250,.62)');
+    x.fillStyle=g;
+    x.fillRect(i*bw+bw*0.18, H-bh, bw*0.64, bh);
+  }
+  // 合成波形
+  x.beginPath();
+  for(let px=0;px<=W;px+=2){
+    const ph=px/W*Math.PI*6 + t*2.2;
+    let y=0;
+    harm.forEach((a,k)=>{ y+=a*Math.sin(ph*(k+1)); });
+    y/= harm.reduce((s,v)=>s+v,0);
+    const yy=H*0.42 + y*H*0.26;
+    px?x.lineTo(px,yy):x.moveTo(px,yy);
+  }
+  x.strokeStyle='rgba(196,175,255,.95)';
+  x.lineWidth=2.2*DPR;
+  x.shadowColor='rgba(167,139,250,.8)'; x.shadowBlur=14*DPR;
+  x.stroke();
+  x.shadowBlur=0;
+})(0);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>初麵食堂 — 台式拌麵連鎖</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fdfaf5;--fg:#2a211a;--mut:#7b6d5f;--acc:#c0392b;--line:rgba(0,0,0,.11);--card:#fff}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(253,250,245,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1100px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:26px;padding:15px 34px;border-radius:12px;background:var(--acc);color:#fff;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：互動門市地圖 --- */
+.hero{padding-top:112px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:16px}
+h1 em{font-style:normal;color:var(--acc)}
+.maprow{display:grid;grid-template-columns:1fr 360px;gap:26px;margin-top:44px;align-items:start}
+.mapbox{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  box-shadow:0 6px 26px rgba(42,33,26,.06)}
+.mapbox svg{display:block;width:100%;height:auto}
+.tw{fill:#efe7db;stroke:#d9cdba;stroke-width:1.5}
+.pin{cursor:pointer}
+.pin circle{fill:#c0392b;stroke:#fff;stroke-width:2;transition:r .22s,opacity .22s}
+.pin.dim circle{opacity:.22}
+.pin.act circle{fill:#8e2a1e}
+.pin .halo{fill:#c0392b;opacity:.2;animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{r:6;opacity:.35}70%{r:20;opacity:0}100%{opacity:0}}
+.pin text{fill:#5c4f42;font-size:9px;pointer-events:none}
+.side{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;position:sticky;top:82px;
+  box-shadow:0 6px 26px rgba(42,33,26,.06)}
+.side .city{font-size:12px;letter-spacing:.2em;color:var(--acc)}
+.side h3{font-size:22px;margin:8px 0 10px;font-weight:800}
+.side p{color:var(--mut);font-size:14.5px}
+.side .rows{margin-top:16px;border-top:1px solid var(--line)}
+.side .rows div{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--mut)}
+.side .rows div b{color:var(--fg);font-weight:600}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.filters button{padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--mut);
+  font-family:inherit;font-size:13px;cursor:pointer;transition:.2s}
+.filters button[aria-pressed="true"]{border-color:var(--acc);color:var(--acc);background:#fdf0ee}
+.hint{margin-top:18px;font-size:13px;color:#948676}
+.tbl{margin-top:30px;border-top:1px solid var(--line)}
+.tbl div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.tbl div b{color:var(--fg);font-weight:700}
+@media(max-width:900px){.maprow{grid-template-columns:1fr}.side{position:static}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 40：<b>互動門市地圖</b></i><i class="ind">產業：連鎖餐飲</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">初麵食堂 ／ 台式拌麵・全台 18 家</div>
+  <h1>一碗麵 79 元，<br><em>醬是每天現拌的</em></h1>
+  <p class="lead">中央廚房只做麵條與滷味，醬料全部由各店當日調製。因為醬放隔夜就會出水，味道差很多。</p>
+  <div class="filters" id="filters">
+    <button aria-pressed="true" data-f="all">全部門市</button>
+    <button aria-pressed="false" data-f="24h">24 小時</button>
+    <button aria-pressed="false" data-f="veg">有素食</button>
+    <button aria-pressed="false" data-f="new">新開幕</button>
+  </div>
+  <div class="maprow">
+    <div class="mapbox">
+      <svg viewBox="0 0 300 460" id="map">
+        <path class="tw" d="M148,18 C176,26 196,54 204,92 C214,140 224,166 232,200 C240,236 236,272 224,306
+          C212,342 196,378 176,406 C160,428 140,442 122,438 C104,434 92,414 84,390
+          C74,358 68,320 62,282 C56,242 52,196 60,152 C68,106 90,60 116,34 C126,24 138,15 148,18 Z"/>
+        <g id="pins"></g>
+      </svg>
+    </div>
+    <div class="side" id="side">
+      <div class="city" id="sCity">TAIPEI ／ 台北</div>
+      <h3 id="sName">中山北店</h3>
+      <p id="sAddr">台北市中山區中山北路二段 XX 號</p>
+      <div class="rows">
+        <div><b>營業時間</b><span id="sHour">11:00–21:00</span></div>
+        <div><b>電話</b><span id="sTel">02-2XXX-XXXX</span></div>
+        <div><b>座位</b><span id="sSeat">28 席</span></div>
+        <div><b>備註</b><span id="sNote">可外帶，無訂位</span></div>
+      </div>
+      <a class="btn" href="#" style="width:100%;text-align:center">帶我去</a>
+    </div>
+  </div>
+  <p class="hint">（點地圖上的紅點切換門市；上方篩選會把不符合的門市淡出）</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>菜單</h2>
+  <div class="tbl">
+    <div><b>招牌麻醬麵</b><span>79 元・芝麻醬每日現調，可選微／中／重</span></div>
+    <div><b>川味紅油抄手</b><span>95 元・八顆，皮薄餡多</span></div>
+    <div><b>蔥油拌麵</b><span>75 元・蔥油每日現爆，賣完為止</span></div>
+    <div><b>滷味拼盤</b><span>60 元起・豆干、海帶、滷蛋、雞翅</span></div>
+    <div><b>素食版本</b><span>麻醬麵與蔥油拌麵可做全素，需事先告知</span></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>加盟資訊</h2>
+  <p class="lead">單店加盟金 45 萬，含設備、教育訓練與開幕支援。要求加盟主必須親自到店，不接受純投資。目前優先開放中南部商圈。</p>
+  <a class="btn" href="#c">索取加盟說明</a>
+</div></section>
+
+<footer><b>效果原理：</b>地圖是一條手繪的 SVG path，門市座標直接用 SVG 的使用者座標系標定——因為 viewBox 會等比縮放，不管容器多寬，點永遠落在正確位置，這是 SVG 比用絕對定位 div 疊在圖片上更可靠的地方。篩選只是切換 class 改變透明度，選取狀態則由同一份資料同時驅動地圖與右側面板，兩邊不會不同步。</footer>
+
+<script>
+const STORES=[
+  {x:172,y:62, city:'TAIPEI ／ 台北', name:'中山北店', addr:'台北市中山區中山北路二段 XX 號', hour:'11:00–21:00', tel:'02-2XXX-XXXX', seat:'28 席', note:'可外帶，無訂位', tags:['veg']},
+  {x:166,y:76, city:'TAIPEI ／ 台北', name:'公館店', addr:'台北市中正區羅斯福路四段 XX 號', hour:'24 小時', tel:'02-2XXX-XXXX', seat:'34 席', note:'鄰台大，宵夜時段常客滿', tags:['24h','veg']},
+  {x:180,y:70, city:'NEW TAIPEI ／ 新北', name:'板橋府中店', addr:'新北市板橋區府中路 XX 號', hour:'11:00–22:00', tel:'02-2XXX-XXXX', seat:'22 席', note:'捷運府中站 3 分鐘', tags:[]},
+  {x:152,y:96, city:'TAOYUAN ／ 桃園', name:'中壢站前店', addr:'桃園市中壢區中正路 XX 號', hour:'11:00–21:30', tel:'03-4XX-XXXX', seat:'26 席', note:'', tags:['new']},
+  {x:130,y:132,city:'HSINCHU ／ 新竹', name:'竹科園區店', addr:'新竹市東區光復路二段 XX 號', hour:'24 小時', tel:'03-5XX-XXXX', seat:'40 席', note:'園區加班族最愛', tags:['24h']},
+  {x:104,y:186,city:'TAICHUNG ／ 台中', name:'一中店', addr:'台中市北區一中街 XX 號', hour:'11:00–23:00', tel:'04-22XX-XXXX', seat:'30 席', note:'', tags:['veg']},
+  {x:96, y:204,city:'TAICHUNG ／ 台中', name:'逢甲店', addr:'台中市西屯區文華路 XX 號', hour:'11:00–01:00', tel:'04-24XX-XXXX', seat:'24 席', note:'夜市商圈，假日排隊', tags:['new']},
+  {x:88, y:252,city:'CHIAYI ／ 嘉義', name:'文化路店', addr:'嘉義市東區文化路 XX 號', hour:'11:00–22:00', tel:'05-2XX-XXXX', seat:'20 席', note:'', tags:['veg']},
+  {x:96, y:300,city:'TAINAN ／ 台南', name:'成大店', addr:'台南市東區大學路 XX 號', hour:'11:00–22:00', tel:'06-2XX-XXXX', seat:'26 席', note:'學生證折 5 元', tags:['veg','new']},
+  {x:110,y:352,city:'KAOHSIUNG ／ 高雄', name:'三多商圈店', addr:'高雄市前鎮區三多三路 XX 號', hour:'11:00–22:00', tel:'07-3XX-XXXX', seat:'32 席', note:'', tags:[]},
+  {x:122,y:376,city:'KAOHSIUNG ／ 高雄', name:'瑞豐夜市店', addr:'高雄市左營區裕誠路 XX 號', hour:'16:00–01:00', tel:'07-5XX-XXXX', seat:'18 席', note:'週一公休', tags:['24h']},
+  {x:196,y:214,city:'HUALIEN ／ 花蓮', name:'花蓮站前店', addr:'花蓮縣花蓮市國聯一路 XX 號', hour:'11:00–21:00', tel:'03-8XX-XXXX', seat:'22 席', note:'', tags:['new']}
+];
+const g=document.getElementById('pins');
+const S={city:'sCity',name:'sName',addr:'sAddr',hour:'sHour',tel:'sTel',seat:'sSeat',note:'sNote'};
+let cur=0, filter='all';
+STORES.forEach((s,i)=>{
+  const el=document.createElementNS('http://www.w3.org/2000/svg','g');
+  el.setAttribute('class','pin');
+  el.innerHTML=`<circle class="halo" cx="${s.x}" cy="${s.y}" r="6"/>
+    <circle cx="${s.x}" cy="${s.y}" r="5.5"/>
+    <text x="${s.x+9}" y="${s.y+3}">${s.name}</text>`;
+  el.addEventListener('click',()=>select(i));
+  g.appendChild(el);
+});
+const pins=[...g.children];
+function select(i){
+  cur=i; const s=STORES[i];
+  document.getElementById(S.city).textContent=s.city;
+  document.getElementById(S.name).textContent=s.name;
+  document.getElementById(S.addr).textContent=s.addr;
+  document.getElementById(S.hour).textContent=s.hour;
+  document.getElementById(S.tel).textContent=s.tel;
+  document.getElementById(S.seat).textContent=s.seat;
+  document.getElementById(S.note).textContent=s.note||'—';
+  paint();
+}
+function paint(){
+  pins.forEach((p,i)=>{
+    const s=STORES[i];
+    const pass = filter==='all' || s.tags.includes(filter);
+    p.classList.toggle('dim',!pass);
+    p.classList.toggle('act',i===cur);
+  });
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(n=>n.setAttribute('aria-pressed',n===b));
+  filter=b.dataset.f;
+  if(filter!=='all' && !STORES[cur].tags.includes(filter)){
+    const first=STORES.findIndex(s=>s.tags.includes(filter));
+    if(first>=0) return select(first);
+  }
+  paint();
+});
+select(0);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>裂相創意 — 品牌廣告代理商</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0c;--fg:#f4f4f6;--mut:#8b8b96;--acc:#ff4d6d;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(10,10,12,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+h1{font-size:clamp(34px,6.4vw,74px);line-height:1.04;letter-spacing:-.03em;font-weight:900}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:900}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:0;background:var(--acc);color:#0a0a0c;font-weight:900;text-decoration:none;letter-spacing:.04em}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:5;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：WebGL 頁面轉場 --- */
+#gl{position:fixed;inset:0;z-index:0}
+.pages{position:fixed;inset:0;z-index:2;pointer-events:none}
+.page{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity .32s ease}
+.page.on{opacity:1}
+.page .wrap{width:100%;pointer-events:auto}
+.kick{font-size:12px;letter-spacing:.28em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.nav{position:fixed;left:0;right:0;bottom:26px;z-index:4;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:0 16px}
+.nav button{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:rgba(10,10,12,.6);
+  backdrop-filter:blur(8px);color:var(--mut);font-size:13px;cursor:pointer;font-family:inherit;transition:.2s}
+.nav button[aria-current="true"]{border-color:var(--acc);color:#fff;background:rgba(255,77,109,.14)}
+.spacer{height:100svh}
+.stat{display:flex;gap:36px;flex-wrap:wrap;margin-top:34px}
+.stat div b{display:block;font-size:clamp(26px,4vw,42px);font-weight:900;line-height:1;color:var(--acc)}
+.stat div span{color:var(--mut);font-size:13px}
+.hint{margin-top:22px;font-size:13px;color:#6d6d78}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 23：<b>WebGL 頁面轉場</b></i><i class="ind">產業：廣告代理商</i></div>
+</div>
+<canvas id="gl"></canvas>
+
+<div class="pages" id="pages">
+  <div class="page on"><div class="wrap">
+    <div class="kick">裂相創意 FRACTURE ／ 台北・整合行銷</div>
+    <h1>我們不做<br><em>看起來很厲害</em><br>的東西</h1>
+    <p class="lead">我們做賣得動的東西。策略、影片、社群、投放一條龍，用同一組人，不轉包給下游再加一手。</p>
+    <div class="stat">
+      <div><b>7 年</b><span>平均客戶合作年限</span></div>
+      <div><b>34</b><span>目前服務品牌數</span></div>
+      <div><b>4.2x</b><span>去年平均投放 ROAS</span></div>
+    </div>
+    <p class="hint">（點下方按鈕切換：畫面會用 shader 撕裂再重組，不是淡入淡出）</p>
+  </div></div>
+
+  <div class="page"><div class="wrap">
+    <div class="kick">SERVICES ／ 服務項目</div>
+    <h1>策略先行，<br><em>不從做圖開始</em></h1>
+    <p class="lead">品牌定位與溝通策略／KV 與影音製作／社群經營與 KOL 操作／Meta 與 Google 投放／電商轉換優化。可單項合作，但我們會直說哪一項對你現階段最沒用。</p>
+    <div class="stat">
+      <div><b>2 週</b><span>策略提案交付</span></div>
+      <div><b>月結</b><span>成效報告含原始數據</span></div>
+      <div><b>0</b><span>綁約年限，隨時可停</span></div>
+    </div>
+  </div></div>
+
+  <div class="page"><div class="wrap">
+    <div class="kick">WORK ／ 近期作品</div>
+    <h1>做過的事<br><em>比講的話重要</em></h1>
+    <p class="lead">連鎖火鍋品牌年菜檔期・單月營收成長 214%／傳產工具機海外形象重塑・詢盤數翻倍／保養品新品上市・首月完售 12,000 組／地方創生小鎮觀光campaign・入選金點設計獎。</p>
+  </div></div>
+
+  <div class="page"><div class="wrap">
+    <div class="kick">CONTACT ／ 合作</div>
+    <h1>先聊 60 分鐘，<br><em>不收費也不簡報</em></h1>
+    <p class="lead">帶著你目前的困擾來，我們會直接告訴你這件事該不該找代理商做、預算大概要多少、以及自己做的可行性。談完覺得不需要我們，也是好結果。</p>
+    <a class="btn" href="#">預約會談</a>
+  </div></div>
+</div>
+
+<div class="nav" id="nav">
+  <button aria-current="true">首頁</button>
+  <button>服務項目</button>
+  <button>近期作品</button>
+  <button>合作</button>
+</div>
+
+<div class="spacer"></div>
+<footer><b>效果原理：</b>四個頁面其實一直都在，切換時把「轉場進度」餵給全螢幕 shader：shader 依據噪聲把畫面切成不規則碎塊，各碎塊依自己的隨機值在不同時間點被推開再回位，中間穿插色差偏移。因為背景是 WebGL 而文字是 HTML，兩者用同一條時間軸控制透明度，就能做到「文字在碎塊重組完成時剛好接上」。</footer>
+
+<script>
+const cv=document.getElementById('gl');
+const gl=cv.getContext('webgl');
+const VS=`attribute vec2 p;varying vec2 uv;void main(){uv=p*0.5+0.5;gl_Position=vec4(p,0.,1.);}`;
+const FS=`precision highp float;
+varying vec2 uv; uniform float t; uniform float prog; uniform vec3 cA; uniform vec3 cB; uniform vec2 res;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
+ return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
+void main(){
+  vec2 q=uv;
+  vec2 cell=floor(q*vec2(14.0,9.0));
+  float r=hash(cell);
+  // prog 從 0 到 1：0.5 前撕開、之後歸位
+  float k=sin(prog*3.14159);
+  vec2 dir=normalize(vec2(hash(cell+3.1)-0.5, hash(cell+7.7)-0.5)+1e-5);
+  q += dir*k*(0.06+r*0.16);
+  float n=noise(q*3.0+t*0.06);
+  float band=smoothstep(0.35,0.75,n);
+  vec3 col=mix(cA,cB,band);
+  col+=vec3(0.9,0.2,0.35)*pow(k,2.0)*r*0.55;         // 撕裂時的紅色閃光
+  col.r+=k*0.10*hash(cell+t);                         // 色差
+  col.b-=k*0.06*hash(cell+9.0);
+  float grid=step(0.985,fract(q.x*14.0))+step(0.985,fract(q.y*9.0));
+  col+=grid*0.04;
+  col*=1.0-0.55*length(uv-0.5);
+  gl_FragColor=vec4(col,1.0);
+}`;
+function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+const pr=gl.createProgram();
+gl.attachShader(pr,sh(gl.VERTEX_SHADER,VS));
+gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));
+gl.linkProgram(pr); gl.useProgram(pr);
+const b=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,b);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+const loc=gl.getAttribLocation(pr,'p'); gl.enableVertexAttribArray(loc);
+gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+const U=n=>gl.getUniformLocation(pr,n);
+const PAL=[[[0.09,0.09,0.12],[0.22,0.06,0.12]],[[0.06,0.10,0.13],[0.05,0.18,0.20]],
+           [[0.12,0.08,0.05],[0.24,0.12,0.05]],[[0.08,0.07,0.14],[0.18,0.08,0.26]]];
+function size(){
+  const d=Math.min(devicePixelRatio,1.5);
+  cv.width=innerWidth*d; cv.height=innerHeight*d;
+  gl.viewport(0,0,cv.width,cv.height);
+  gl.uniform2f(U('res'),cv.width,cv.height);
+}
+addEventListener('resize',size); size();
+
+const pages=[...document.querySelectorAll('.page')];
+const btns=[...document.querySelectorAll('#nav button')];
+let cur=0, prog=0, animating=false;
+function paint(i){
+  gl.uniform3fv(U('cA'),PAL[i][0]);
+  gl.uniform3fv(U('cB'),PAL[i][1]);
+}
+paint(0);
+function go(i){
+  if(animating||i===cur) return;
+  animating=true;
+  const t0=performance.now(), DUR=900;
+  let swapped=false;
+  (function step(now){
+    prog=Math.min((now-t0)/DUR,1);
+    if(prog>=0.5&&!swapped){
+      swapped=true;
+      pages[cur].classList.remove('on');
+      pages[i].classList.add('on');
+      btns[cur].setAttribute('aria-current','false');
+      btns[i].setAttribute('aria-current','true');
+      paint(i); cur=i;
+    }
+    if(prog<1) requestAnimationFrame(step);
+    else { prog=0; animating=false; }
+  })(t0);
+}
+btns.forEach((b,i)=>b.addEventListener('click',()=>go(i)));
+(function loop(now){
+  gl.uniform1f(U('t'),now*0.001);
+  gl.uniform1f(U('prog'),prog);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+  requestAnimationFrame(loop);
+})(0);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

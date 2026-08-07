@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>速達物流 — 全台配送與冷鏈宅配</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0f14;--fg:#eaf1f7;--mut:#84939f;--acc:#3ad6b0;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(10,15,20,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:10px;background:var(--acc);color:#0a0f14;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：捲動 SVG 路線 --- */
+.hero{padding-top:118px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.hint{margin-top:22px;font-size:13px;color:#6c7b87}
+.routewrap{height:400vh;position:relative}
+.rsticky{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:1fr 380px;align-items:center;
+  gap:24px;padding:70px 22px 30px;max-width:1180px;margin:0 auto;overflow:hidden}
+.map{position:relative;height:min(74svh,620px)}
+.map svg{width:100%;height:100%;overflow:visible}
+.road{fill:none;stroke:rgba(255,255,255,.12);stroke-width:3;stroke-linecap:round}
+.live{fill:none;stroke:var(--acc);stroke-width:3.4;stroke-linecap:round;filter:drop-shadow(0 0 8px rgba(58,214,176,.6))}
+.stop{fill:#0a0f14;stroke:rgba(255,255,255,.3);stroke-width:2}
+.stop.on{stroke:var(--acc);fill:var(--acc)}
+.lbl{fill:#84939f;font-size:13px;font-family:inherit}
+.lbl.on{fill:#eaf1f7}
+.truck{fill:var(--acc)}
+.panel{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:26px}
+.panel .n{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.2em;color:var(--acc)}
+.panel h3{font-size:22px;margin:10px 0 8px;font-weight:800}
+.panel p{color:var(--mut);font-size:14.5px}
+.panel .eta{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:22px;flex-wrap:wrap}
+.panel .eta b{display:block;font-size:20px;color:var(--acc);font-weight:800;line-height:1}
+.panel .eta span{font-size:12px;color:var(--mut)}
+@media(max-width:880px){.rsticky{grid-template-columns:1fr;align-content:center}.map{height:44svh}.panel{padding:20px}}
+.tbl{margin-top:30px;border-top:1px solid var(--line)}
+.tbl div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.tbl div b{color:var(--fg);font-weight:700}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 32：<b>捲動 SVG 路線</b></i><i class="ind">產業：物流貨運</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">速達物流 ／ 全台常溫、低溫與冷凍配送</div>
+  <h1>你的貨現在到哪，<br><em>不用打電話問</em></h1>
+  <p class="lead">每一件都有 GPS 軌跡與溫層紀錄，客戶端可自行查詢。低溫車全程 -18°C 監控，斷鏈自動告警。</p>
+  <p class="hint">（往下捲：配送路線會隨捲動一段段畫出來，車子沿路前進、經過的站點亮起）</p>
+</div></section>
+
+<div class="routewrap" id="rw">
+  <div class="rsticky">
+    <div class="map">
+      <svg viewBox="0 0 400 620" id="svg">
+        <path id="road" class="road" d="M70,40 C70,120 250,130 250,210 C250,290 90,300 90,380 C90,455 300,455 300,530 C300,575 250,590 200,590"/>
+        <path id="live" class="live" d="M70,40 C70,120 250,130 250,210 C250,290 90,300 90,380 C90,455 300,455 300,530 C300,575 250,590 200,590"/>
+        <g id="stops">
+          <circle class="stop" cx="70" cy="40" r="8"/><text class="lbl" x="88" y="45">台北・出貨倉</text>
+          <circle class="stop" cx="250" cy="210" r="8"/><text class="lbl" x="268" y="215">桃園・轉運中心</text>
+          <circle class="stop" cx="90" cy="380" r="8"/><text class="lbl" x="108" y="385">台中・低溫倉</text>
+          <circle class="stop" cx="300" cy="530" r="8"/><text class="lbl" x="196" y="516" text-anchor="end">台南・區配站</text>
+          <circle class="stop" cx="200" cy="590" r="8"/><text class="lbl" x="182" y="595" text-anchor="end">高雄・送達</text>
+        </g>
+        <g id="truck"><rect class="truck" x="-9" y="-6" width="18" height="12" rx="3"/></g>
+      </svg>
+    </div>
+    <div class="panel">
+      <div class="n">STATUS ／ <span id="pct">0</span>% 已完成</div>
+      <h3 id="ttl">台北・出貨倉</h3>
+      <p id="dsc">下午三點截單，當日 18:00 前完成裝車。每件掃描上車，漏掃系統擋出車。</p>
+      <div class="eta">
+        <div><b id="km">0 km</b><span>已行駛</span></div>
+        <div><b id="tp">4°C</b><span>車廂溫度</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <h2>服務內容</h2>
+  <div class="tbl">
+    <div><b>常溫宅配</b><span>全台次日達，外島 2～3 日</span></div>
+    <div><b>低溫與冷凍</b><span>0～7°C 及 -18°C 兩種溫層，全程紀錄可調閱</span></div>
+    <div><b>大型貨件</b><span>單件 150 公斤以內，含電梯與樓層費報價</span></div>
+    <div><b>電商倉配一條龍</b><span>代收代寄、退貨處理、庫存即時 API</span></div>
+    <div><b>逆物流</b><span>到府收退貨，48 小時內回到你的倉</span></div>
+  </div>
+  <a class="btn" href="#c">索取企業報價</a>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>合作方式</h2>
+  <p class="lead">月出貨量 300 件以上可簽約走月結，並開通後台與 API。低於 300 件也可以合作，走一般寄件價。串接支援 Shopline、Cyberbiz、WACA 與自架站。</p>
+  <a class="btn" href="#c">聯絡業務</a>
+</div></section>
+
+<footer><b>效果原理：</b>路線是一條 SVG path，用 <code>getTotalLength()</code> 拿到總長後，把捲動進度乘上總長寫進 <code>stroke-dasharray</code>，線就會依比例畫出來。同一條 path 再用 <code>getPointAtLength()</code> 取出當前座標，把貨車圖形移到那個點，並取前後兩點算出切線角度讓車頭朝向行進方向。站點則比較「目前長度是否已超過該站所在的長度」來決定亮不亮。</footer>
+
+<script>
+const rw=document.getElementById('rw');
+const live=document.getElementById('live');
+const truck=document.getElementById('truck');
+const stops=[...document.querySelectorAll('.stop')];
+const lbls=[...document.querySelectorAll('.lbl')];
+const TOTAL=live.getTotalLength();
+live.style.strokeDasharray=TOTAL;
+const INFO=[
+  ['台北・出貨倉','下午三點截單，當日 18:00 前完成裝車。每件掃描上車，漏掃系統擋出車。','0 km','4°C'],
+  ['桃園・轉運中心','夜間到轉運中心分流，依配送區重新併車，低溫貨櫃不落地。','48 km','2°C'],
+  ['台中・低溫倉','中部訂單在此分裝，冷凍品換 -18°C 車廂，交接時雙方各留溫度紀錄。','168 km','-18°C'],
+  ['台南・區配站','清晨五點到站，六點司機領路單出發，一趟平均 62 個點。','298 km','-18°C'],
+  ['高雄・送達','到府送達拍照回傳，未遇則留通知單並自動排隔日再送。','372 km','-18°C']
+];
+// 各站在路徑上的長度位置（用座標反查近似值）
+const stopLens=stops.map(c=>{
+  const cx=+c.getAttribute('cx'), cy=+c.getAttribute('cy');
+  let best=0,bd=1e9;
+  for(let l=0;l<=TOTAL;l+=2){
+    const p=live.getPointAtLength(l);
+    const d=Math.hypot(p.x-cx,p.y-cy);
+    if(d<bd){bd=d;best=l;}
+  }
+  return best;
+});
+const pct=document.getElementById('pct'), ttl=document.getElementById('ttl'),
+      dsc=document.getElementById('dsc'), km=document.getElementById('km'), tp=document.getElementById('tp');
+let ticking=false;
+function upd(){
+  const total=rw.offsetHeight-innerHeight;
+  const p=Math.min(Math.max(-rw.getBoundingClientRect().top/total,0),1);
+  const len=p*TOTAL;
+  live.style.strokeDashoffset=TOTAL-len;
+  const pt=live.getPointAtLength(len);
+  const pt2=live.getPointAtLength(Math.min(len+4,TOTAL));
+  const ang=Math.atan2(pt2.y-pt.y,pt2.x-pt.x)*180/Math.PI;
+  truck.setAttribute('transform',`translate(${pt.x},${pt.y}) rotate(${ang})`);
+  let cur=0;
+  stops.forEach((c,i)=>{
+    const on=len>=stopLens[i]-6;
+    c.classList.toggle('on',on);
+    lbls[i].classList.toggle('on',on);
+    if(on) cur=i;
+  });
+  pct.textContent=Math.round(p*100);
+  ttl.textContent=INFO[cur][0]; dsc.textContent=INFO[cur][1];
+  km.textContent=INFO[cur][2]; tp.textContent=INFO[cur][3];
+  ticking=false;
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd);}},{passive:true});
+addEventListener('resize',upd); upd();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

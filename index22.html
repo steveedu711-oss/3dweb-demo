@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>遠見房屋 — 大台北中古屋買賣</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c0f14;--fg:#eff2f6;--mut:#8a94a4;--acc:#ffc978;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(12,15,20,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:8px;background:var(--acc);color:#0c0f14;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：WebGL 圖片扭曲 hover --- */
+.hero{padding-top:110px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.tiles{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:48px}
+.tile{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;cursor:pointer}
+.tile canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tile .info{position:absolute;left:0;right:0;bottom:0;padding:18px;z-index:2;
+  background:linear-gradient(transparent,rgba(6,8,11,.88))}
+.tile .info b{display:block;font-size:18px}
+.tile .info span{color:#b9c2d0;font-size:13px}
+.tile .tag{position:absolute;top:14px;left:14px;z-index:2;font-size:11px;letter-spacing:.14em;padding:5px 12px;border-radius:999px;
+  background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px)}
+.tile .price{position:absolute;top:14px;right:14px;z-index:2;font-size:15px;font-weight:800;color:var(--acc);
+  background:rgba(0,0,0,.55);padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.18)}
+.hint{margin-top:26px;font-size:13px;color:#6f7887}
+.svc{margin-top:38px;border-top:1px solid var(--line)}
+.svc div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.svc div b{color:var(--fg);font-weight:700}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 22：<b>WebGL 圖片扭曲</b></i><i class="ind">產業：房屋仲介</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">遠見房屋 ／ 大台北中古屋・不動產經紀業 (94) 北市字第 XXXX 號</div>
+  <h1>屋況報告先給你，<br><em>看完再決定要不要看屋</em></h1>
+  <p class="lead">每一件委託我們都會做結構、漏水與管線的現況記錄，含缺點。帶看前先傳給你，不浪費你的週末。</p>
+
+  <div class="tiles" id="tiles">
+    <div class="tile" data-c1="#3f5a78" data-c2="#12202e">
+      <canvas></canvas><span class="tag">大安區・電梯大樓</span><span class="price">2,880 萬</span>
+      <div class="info"><b>復興南路二段・3 房 2 廳</b><span>權狀 38.2 坪／屋齡 18 年／含平面車位</span></div>
+    </div>
+    <div class="tile" data-c1="#6b5a3f" data-c2="#2a2114">
+      <canvas></canvas><span class="tag">中山區・老公寓</span><span class="price">1,450 萬</span>
+      <div class="info"><b>民生東路一段・2 房 1 廳</b><span>權狀 24.6 坪／屋齡 41 年／四樓無電梯</span></div>
+    </div>
+    <div class="tile" data-c1="#3f6b58" data-c2="#122420">
+      <canvas></canvas><span class="tag">新店區・重劃區</span><span class="price">2,150 萬</span>
+      <div class="info"><b>央北重劃區・3 房 2 廳</b><span>權狀 41.5 坪／屋齡 6 年／高樓層面公園</span></div>
+    </div>
+    <div class="tile" data-c1="#5c4a6b" data-c2="#221a2a">
+      <canvas></canvas><span class="tag">板橋區・透天</span><span class="price">3,680 萬</span>
+      <div class="info"><b>江翠北側・4 層透天</b><span>建坪 68 坪／屋齡 25 年／可停兩車</span></div>
+    </div>
+  </div>
+  <p class="hint">（滑鼠移到物件上：畫面會被游標位置牽引產生液態波紋扭曲，是即時 shader 運算）</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>我們跟別家不一樣的地方</h2>
+  <div class="grid">
+    <div class="card"><h3>缺點寫在最前面</h3><p>漏水、鄰損、嫌惡設施、管委會欠費——先講，不等你簽約才發現。</p></div>
+    <div class="card"><h3>不做假成交行情</h3><p>報價一律附實價登錄同社區近一年的成交紀錄截圖。</p></div>
+    <div class="card"><h3>賣方不綁專任</h3><p>可先簽一般約試三個月。有信心的仲介不需要靠合約綁住你。</p></div>
+    <div class="card"><h3>買方履約保證</h3><p>全案採用第三方履保專戶，價金不經過仲介帳戶。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>服務費怎麼算</h2>
+  <div class="svc">
+    <div><b>買方</b><span>成交價 1%（法定上限 2%）</span></div>
+    <div><b>賣方</b><span>成交價 3%（法定上限 4%），含專業拍攝與屋況報告</span></div>
+    <div><b>屋況檢測</b><span>委託即含，含紅外線熱像儀查漏水，不另收費</span></div>
+    <div><b>沒成交</b><span>不收任何費用，包含已支出的拍攝與廣告成本</span></div>
+  </div>
+  <a class="btn" href="#c">預約免費估價</a>
+</div></section>
+
+<footer><b>效果原理：</b>每個物件是一支獨立的 WebGL 程式（不用 Three.js，直接寫原生 WebGL）。fragment shader 依「目前像素到游標的距離」對取樣座標做位移，距離越近位移越大並隨時間產生波紋，等於把畫面當成一層可以被推開的液體。滑鼠移開時強度以指數衰減回 0，所以扭曲會慢慢平復而不是瞬間消失。</footer>
+
+<script>
+const VS=`attribute vec2 p;varying vec2 uv;void main(){uv=p*0.5+0.5;gl_Position=vec4(p,0.,1.);}`;
+const FS=`precision highp float;
+varying vec2 uv;
+uniform vec2 mouse; uniform float amt; uniform float t; uniform vec3 c1; uniform vec3 c2; uniform float ratio;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
+ return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
+void main(){
+  vec2 q=uv;
+  vec2 d=(q-mouse)*vec2(ratio,1.0);
+  float dist=length(d);
+  float ripple=sin(dist*26.0-t*4.0)*exp(-dist*4.5);
+  q += normalize(d+1e-5)*ripple*0.055*amt;
+  // 程式化生成的「房屋照片」：漸層＋窗格＋雲紋
+  float g=smoothstep(0.0,1.0,q.y);
+  vec3 col=mix(c1,c2,g);
+  float win=step(0.55,fract(q.x*7.0))*step(0.5,fract(q.y*5.0));
+  col+=vec3(1.0,0.92,0.76)*win*0.18*(1.0-g);
+  col+=noise(q*9.0+t*0.05)*0.06;
+  col*=1.0-0.42*length(q-0.5);
+  col+=vec3(1.0,0.85,0.55)*abs(ripple)*0.55*amt;
+  gl_FragColor=vec4(col,1.0);
+}`;
+function initTile(tile){
+  const cv=tile.querySelector('canvas');
+  const gl=cv.getContext('webgl');
+  if(!gl){ cv.style.background='linear-gradient(160deg,'+tile.dataset.c1+','+tile.dataset.c2+')'; return; }
+  function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+  const pr=gl.createProgram();
+  gl.attachShader(pr,sh(gl.VERTEX_SHADER,VS));
+  gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));
+  gl.linkProgram(pr); gl.useProgram(pr);
+  const buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(pr,'p');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const U=n=>gl.getUniformLocation(pr,n);
+  const hex=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255);
+  gl.uniform3fv(U('c1'),hex(tile.dataset.c1));
+  gl.uniform3fv(U('c2'),hex(tile.dataset.c2));
+  let mx=.5,my=.5,amt=0,target=0;
+  tile.addEventListener('pointermove',e=>{
+    const r=tile.getBoundingClientRect();
+    mx=(e.clientX-r.left)/r.width; my=1-(e.clientY-r.top)/r.height; target=1;
+  });
+  tile.addEventListener('pointerleave',()=>target=0);
+  function size(){
+    const w=cv.clientWidth, h=cv.clientHeight;
+    const dpr=Math.min(devicePixelRatio,1.6);
+    cv.width=w*dpr; cv.height=h*dpr;
+    gl.viewport(0,0,cv.width,cv.height);
+    gl.uniform1f(U('ratio'), w/h);
+  }
+  addEventListener('resize',size); size();
+  (function loop(now){
+    amt+=(target-amt)*0.08;
+    gl.uniform2f(U('mouse'),mx,my);
+    gl.uniform1f(U('amt'),amt);
+    gl.uniform1f(U('t'),now*0.001);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    requestAnimationFrame(loop);
+  })(0);
+}
+document.querySelectorAll('.tile').forEach(initTile);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

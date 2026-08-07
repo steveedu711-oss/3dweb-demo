@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>隱山旅宿 — 溫泉私湯設計旅店</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0e0d0b;--fg:#f1ece2;--mut:#9a9184;--acc:#c8b189;--line:rgba(255,255,255,.14);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.85;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(14,13,11,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(30px,5vw,56px);line-height:1.24;letter-spacing:.01em;font-weight:400}
+h2{font-size:clamp(22px,3.2vw,34px);margin-bottom:14px;font-weight:400;letter-spacing:.02em}
+.lead{color:var(--mut);max-width:52ch;margin-top:20px;font-size:clamp(15px,1.6vw,17px)}
+.btn{display:inline-block;margin-top:32px;padding:14px 32px;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-size:14px;letter-spacing:.14em}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：遮罩選單轉場 --- */
+.menubtn{position:fixed;right:18px;top:52px;z-index:120;width:54px;height:54px;border-radius:50%;
+  border:1px solid var(--line);background:rgba(14,13,11,.72);backdrop-filter:blur(10px);cursor:pointer;
+  display:grid;place-items:center;gap:5px;padding:16px}
+.menubtn i{display:block;width:22px;height:1.4px;background:var(--fg);transition:transform .4s cubic-bezier(.7,0,.2,1),opacity .3s}
+.menubtn i:nth-child(1){transform:translateY(-5px)}
+.menubtn i:nth-child(3){transform:translateY(5px)}
+body.open .menubtn i:nth-child(1){transform:rotate(45deg)}
+body.open .menubtn i:nth-child(2){opacity:0}
+body.open .menubtn i:nth-child(3){transform:rotate(-45deg)}
+.overlay{position:fixed;inset:0;z-index:110;pointer-events:none}
+.overlay .sheet{position:absolute;inset:0;background:var(--s);
+  transform:translateY(101%);transition:transform .82s cubic-bezier(.76,0,.24,1)}
+.overlay .sheet:nth-child(1){--s:#c8b189;transition-delay:0s}
+.overlay .sheet:nth-child(2){--s:#6d5f49;transition-delay:.08s}
+.overlay .sheet:nth-child(3){--s:#16150f;transition-delay:.16s}
+body.open .overlay .sheet{transform:translateY(0)}
+body.open .overlay .sheet:nth-child(1){transition-delay:.16s}
+body.open .overlay .sheet:nth-child(2){transition-delay:.08s}
+body.open .overlay .sheet:nth-child(3){transition-delay:0s}
+.menu{position:fixed;inset:0;z-index:115;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(22px,8vw,120px);pointer-events:none}
+.menu a{display:block;overflow:hidden;text-decoration:none}
+.menu a span{display:block;font-size:clamp(30px,7vw,74px);line-height:1.2;color:#f1ece2;font-weight:300;
+  transform:translateY(110%);transition:transform .7s cubic-bezier(.16,1,.3,1),color .3s}
+body.open .menu{pointer-events:auto}
+body.open .menu a span{transform:translateY(0)}
+body.open .menu a:nth-child(1) span{transition-delay:.42s}
+body.open .menu a:nth-child(2) span{transition-delay:.50s}
+body.open .menu a:nth-child(3) span{transition-delay:.58s}
+body.open .menu a:nth-child(4) span{transition-delay:.66s}
+body.open .menu a:nth-child(5) span{transition-delay:.74s}
+.menu a:hover span{color:var(--acc)}
+.menu .sm{margin-top:34px;color:#9a9184;font-size:14px;letter-spacing:.1em;opacity:0;transition:opacity .5s .8s}
+body.open .menu .sm{opacity:1}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:70px;
+  background:radial-gradient(66vw 52vw at 72% 22%,rgba(200,177,137,.13),transparent 62%)}
+.kick{font-size:11px;letter-spacing:.34em;color:var(--acc);margin-bottom:24px}
+.hint{margin-top:26px;font-size:13px;color:#7b7367}
+.tbl{margin-top:30px;border-top:1px solid var(--line)}
+.tbl div{display:flex;justify-content:space-between;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.tbl div b{color:var(--fg);font-weight:500}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 38：<b>遮罩選單轉場</b></i><i class="ind">產業：溫泉旅宿</i></div>
+</div>
+
+<button class="menubtn" id="mb" aria-label="開啟選單"><i></i><i></i><i></i></button>
+<div class="overlay"><div class="sheet"></div><div class="sheet"></div><div class="sheet"></div></div>
+<nav class="menu" id="menu">
+  <a href="#"><span>房型與私湯</span></a>
+  <a href="#"><span>餐飲・晚膳</span></a>
+  <a href="#"><span>泉質與湯屋</span></a>
+  <a href="#"><span>交通與接駁</span></a>
+  <a href="#"><span>線上訂房</span></a>
+  <div class="sm">宜蘭礁溪・全館 11 間房・不接受未滿 12 歲入住</div>
+</nav>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">隱山旅宿 ／ 宜蘭礁溪・碳酸氫鈉泉</div>
+  <h1>十一間房，<br>所以我們記得住每一位客人的名字。</h1>
+  <p class="lead">每間房都有獨立露天私湯，源頭直送不循環，每日放乾清洗。晚膳一天只出十一份，主廚會親自到桌邊說明。</p>
+  <a class="btn" href="#c">查詢空房</a>
+  <p class="hint">（點右上角的圓鈕：三層色塊會依序推上來蓋住畫面，選單文字接著由下升起）</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>房型</h2>
+  <div class="tbl">
+    <div><b>山景私湯雙人房（6 間）</b><span>12 坪・平日 9,800／假日 12,800・含晚膳與早餐</span></div>
+    <div><b>庭園獨棟湯屋（3 間）</b><span>18 坪・平日 15,800／假日 19,800・獨立入口</span></div>
+    <div><b>頂樓觀星套房（2 間）</b><span>24 坪・平日 22,000／假日 27,000・戶外湯池</span></div>
+    <div><b>純泡湯（不住宿）</b><span>雙人湯屋 90 分鐘 1,600 元，需預約</span></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>訂房須知</h2>
+  <div class="tbl">
+    <div><b>入住／退房</b><span>15:00 ／ 11:00</span></div>
+    <div><b>年齡限制</b><span>為維持安靜，不接受未滿 12 歲入住，敬請見諒</span></div>
+    <div><b>取消政策</b><span>入住前 14 日免費取消；7 日內收 50%；3 日內恕不退款</span></div>
+    <div><b>接駁</b><span>礁溪車站免費接送，需於訂房時告知班次</span></div>
+    <div><b>泉質</b><span>碳酸氫鈉泉，pH 7.5，源頭水溫 58°C，每季送檢報告公開於官網</span></div>
+  </div>
+  <a class="btn" href="#c">線上訂房</a>
+</div></section>
+
+<footer><b>效果原理：</b>三層純色面板以不同的 <code>transition-delay</code> 從畫面下方依序推上來，形成「一層蓋一層」的層次；關閉時把 delay 順序反過來，最上層先退，看起來像布幕收回。選單文字各自包在 <code>overflow:hidden</code> 裡由下升起，delay 排在面板動畫之後，所以文字一定在遮罩完成後才出現，不會穿幫。全部靠 body 上的一個 class 切換，沒有逐一操作元素。</footer>
+
+<script>
+const mb=document.getElementById('mb');
+mb.addEventListener('click',()=>{
+  document.body.classList.toggle('open');
+  mb.setAttribute('aria-label', document.body.classList.contains('open')?'關閉選單':'開啟選單');
+});
+document.querySelectorAll('#menu a').forEach(a=>{
+  a.addEventListener('click',e=>{ e.preventDefault(); document.body.classList.remove('open'); });
+});
+addEventListener('keydown',e=>{ if(e.key==='Escape') document.body.classList.remove('open'); });
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

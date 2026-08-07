@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>藍徑潛水 — 墾丁 PADI 五星潛水中心</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#02121e;--fg:#e6f4fb;--mut:#7fa3b8;--acc:#4fd3ff;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.05)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(2,18,30,.74);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+h1{font-size:clamp(32px,5.8vw,64px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;backdrop-filter:blur(8px)}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#02121e;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:3;background:#01090f}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：捲動鏡頭下潛 --- */
+#gl{position:fixed;inset:0;z-index:0}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 40%,rgba(1,9,15,.75))}
+.stage{position:relative;z-index:2}
+.panel{min-height:100svh;display:flex;align-items:center;padding:100px 0 60px}
+.depth{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:4;text-align:right;font-family:ui-monospace,Menlo,monospace;pointer-events:none}
+.depth b{display:block;font-size:clamp(30px,5vw,54px);color:var(--acc);line-height:1;font-weight:700}
+.depth span{font-size:11px;letter-spacing:.2em;color:var(--mut)}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+.hint{margin-top:24px;font-size:13px;color:#5d7d90}
+.plate{background:rgba(2,18,30,.55);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:22px;padding:clamp(24px,4vw,44px);max-width:640px}
+@media(max-width:760px){.depth{top:auto;bottom:14px;transform:none;right:14px}.depth b{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 11：<b>捲動鏡頭推進</b></i><i class="ind">產業：潛水教學中心</i></div>
+</div>
+<canvas id="gl"></canvas>
+<div class="veil"></div>
+<div class="depth"><b id="dep">0</b><span>DEPTH ／ 公尺</span></div>
+
+<div class="stage">
+  <section class="panel"><div class="wrap"><div class="plate">
+    <div class="kick">藍徑潛水 ／ 墾丁後壁湖・PADI 五星中心</div>
+    <h1>從不會游泳，<br>到看見第一片珊瑚</h1>
+    <p class="lead">教練與學員比 1:2，全程中文教學。四天三夜的 OW 開放水域課程，結訓當天就能拿到國際證照。</p>
+    <p class="hint">（往下捲：鏡頭會帶著你一路下潛，右側是即時深度）</p>
+  </div></div></section>
+
+  <section class="panel"><div class="wrap"><div class="plate">
+    <h2>水深 5 公尺 ─ 平靜水域</h2>
+    <p class="lead">第一天在泳池與淺灘。學怎麼呼吸、怎麼排面鏡水、怎麼在水中找回掉落的調節器。這些動作要練到不用想。</p>
+    <div class="grid">
+      <div class="card"><h3>裝備熟悉</h3><p>全套裝備由中心提供，含 3mm 防寒衣與電腦錶。</p></div>
+      <div class="card"><h3>基本技巧</h3><p>中性浮力、耳壓平衡、水下溝通手勢。</p></div>
+    </div>
+  </div></div></section>
+
+  <section class="panel"><div class="wrap"><div class="plate">
+    <h2>水深 18 公尺 ─ 開放水域</h2>
+    <p class="lead">第二、三天下海。後壁湖出水口一帶的珊瑚礁地形平緩，能見度通常 15 公尺以上，是全台最適合初學的訓練點之一。</p>
+    <div class="grid">
+      <div class="card"><h3>四次海洋實習</h3><p>依 PADI 標準完成四支氣瓶的開放水域訓練潛水。</p></div>
+      <div class="card"><h3>水下攝影</h3><p>教練隨行拍照錄影，結訓相片免費給，不另外收錢。</p></div>
+    </div>
+  </div></div></section>
+
+  <section class="panel"><div class="wrap"><div class="plate">
+    <h2>水深 30 公尺 ─ 進階之後</h2>
+    <p class="lead">拿到 OW 之後可以續接 AOW 深潛與夜潛。我們也帶綠島、蘭嶼與國外的潛旅，同一批教練帶隊，不轉包。</p>
+    <div class="grid">
+      <div class="card"><h3>AOW 進階課程</h3><p>兩天完成，含深潛、導航、夜潛與水下攝影專長。</p></div>
+      <div class="card"><h3>潛旅出團</h3><p>每年固定菲律賓薄荷島與帛琉團，六人成行。</p></div>
+    </div>
+  </div></div></section>
+
+  <section class="panel" id="c"><div class="wrap"><div class="plate">
+    <h2>報名與費用</h2>
+    <p class="lead">OW 開放水域課程 16,800 元，含教材、裝備、四支氣瓶、證照費與保險。不會游泳可以報名，但要能在水中放鬆。旺季請提前三週預約。</p>
+    <a class="btn" href="#c">報名 OW 課程</a>
+  </div></div></section>
+</div>
+
+<footer><b>效果原理：</b>Three.js 建一個由數千個粒子構成的水中懸浮物體積，捲動進度換算成相機的 Z 軸位置與微幅擺動，並同步驅動霧氣濃度（fog.density）與背景色由淺藍轉深藍——所以越往下捲越暗、能見度越低。捲動值只讀一次並在 rAF 內插值，避免抖動。</footer>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+const cv=document.getElementById('gl');
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+const scene=new THREE.Scene();
+const shallow=new THREE.Color('#1d7fa8'), deep=new THREE.Color('#01121d');
+scene.fog=new THREE.FogExp2(shallow.getHex(),0.028);
+scene.background=shallow.clone();
+const cam=new THREE.PerspectiveCamera(60,1,.1,300);
+
+// 懸浮微粒
+const N=2600, pos=new Float32Array(N*3), spd=new Float32Array(N);
+for(let i=0;i<N;i++){
+  pos[i*3]  =(Math.random()-.5)*70;
+  pos[i*3+1]=(Math.random()-.5)*70;
+  pos[i*3+2]=-Math.random()*260;
+  spd[i]=.4+Math.random()*1.4;
+}
+const g=new THREE.BufferGeometry();
+g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+const particles=new THREE.Points(g,new THREE.PointsMaterial({color:0xbfe9ff,size:.26,transparent:true,opacity:.65,depthWrite:false}));
+scene.add(particles);
+
+// 海床岩體
+const rockMat=new THREE.MeshBasicMaterial({color:0x0a3446,wireframe:true,transparent:true,opacity:.42});
+for(let i=0;i<26;i++){
+  const r=new THREE.Mesh(new THREE.IcosahedronGeometry(2+Math.random()*5,0),rockMat);
+  r.position.set((Math.random()-.5)*46,-9-Math.random()*10,-14-i*9);
+  r.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
+  scene.add(r);
+}
+function size(){
+  renderer.setSize(innerWidth,innerHeight,false);
+  cam.aspect=innerWidth/innerHeight; cam.updateProjectionMatrix();
+}
+addEventListener('resize',size); size();
+
+const dep=document.getElementById('dep');
+let target=0, cur=0;
+addEventListener('scroll',()=>{
+  const max=document.body.scrollHeight-innerHeight;
+  target=max>0 ? scrollY/max : 0;
+},{passive:true});
+
+(function loop(){
+  cur += (target-cur)*0.075;
+  cam.position.z = 12 - cur*210;
+  cam.position.y = -cur*7;
+  cam.rotation.x = -cur*0.10 + Math.sin(performance.now()*0.0004)*0.012;
+  cam.rotation.z = Math.sin(performance.now()*0.00028)*0.02;
+  scene.fog.density = 0.024 + cur*0.038;
+  scene.background.copy(shallow).lerp(deep,Math.min(cur*1.25,1));
+  const p=g.attributes.position.array;
+  for(let i=0;i<N;i++) p[i*3+1]+=spd[i]*0.012;
+  g.attributes.position.needsUpdate=true;
+  dep.textContent=Math.round(cur*32);
+  renderer.render(scene,cam);
+  requestAnimationFrame(loop);
+})();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

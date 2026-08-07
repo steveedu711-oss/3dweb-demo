@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>珍芝道 — 手搖飲茶飲專門</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#12100b;--fg:#f6f0e4;--mut:#a2957f;--acc:#e8c05a;--line:rgba(255,255,255,.13);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(18,16,11,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(56px,8vw,100px) 22px}
+.wrap{max-width:1040px;margin:0 auto;width:100%;min-width:0}
+h1{font-size:clamp(32px,5.4vw,60px);line-height:1.14;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:800}
+.lead{color:var(--mut);max-width:52ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#12100b;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：圓環轉動文字 --- */
+.hero{min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:36px;
+  max-width:1180px;margin:0 auto;padding:112px 22px 60px}
+.kick{font-size:12px;letter-spacing:.26em;color:var(--acc);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--acc)}
+.ringbox{position:relative;display:grid;place-items:center;aspect-ratio:1;max-width:440px;margin:0 auto;width:100%;overflow:hidden}
+.ring{position:absolute;inset:0;animation:spin 26s linear infinite}
+.ring.r2{inset:14%;animation-duration:19s;animation-direction:reverse}
+.ring.r3{inset:28%;animation-duration:31s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring span{position:absolute;left:50%;top:0;transform-origin:0 var(--r);
+  font-size:var(--fs,13px);letter-spacing:.22em;color:var(--c,var(--mut));white-space:nowrap}
+.cup{position:relative;z-index:2;width:42%;aspect-ratio:.72;border-radius:8px 8px 26px 26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.24);overflow:hidden;backdrop-filter:blur(4px)}
+.cup .tea{position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(180deg,#c98f4a,#6b3f1c)}
+.cup .foam{position:absolute;left:0;right:0;bottom:62%;height:13%;background:linear-gradient(180deg,#fff8ec,#e8d6ba)}
+.cup .pearl{position:absolute;width:11%;aspect-ratio:1;border-radius:50%;background:#22150c;
+  animation:bub 4.6s ease-in-out infinite}
+@keyframes bub{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.hint{margin-top:24px;font-size:13px;color:#7e735f}
+.menu{margin-top:34px;border-top:1px solid var(--line)}
+.menu div{display:flex;justify-content:space-between;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.menu div b{color:var(--fg);font-weight:700}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+@media(max-width:880px){.hero{grid-template-columns:1fr;padding-top:96px}.ringbox{max-width:340px}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 30：<b>圓環轉動文字</b></i><i class="ind">產業：手搖飲品牌</i></div>
+</div>
+
+<div class="hero">
+  <div>
+    <div class="kick">珍芝道 ／ 全台 62 家門市・每日現煮</div>
+    <h1>茶湯過四小時<br><em>就整桶倒掉</em></h1>
+    <p class="lead">不是行銷話術，是我們的店務規定。每桶茶都貼上煮好時間，稽核抽查不合格的門市直接停權重訓。</p>
+    <a class="btn" href="#c">找最近的門市</a>
+    <p class="hint">（右邊三圈文字以不同速度與方向繞著杯子轉，是純 CSS 的圓環排字）</p>
+  </div>
+  <div class="ringbox">
+    <div class="ring" id="r1"></div>
+    <div class="ring r2" id="r2"></div>
+    <div class="ring r3" id="r3"></div>
+    <div class="cup">
+      <div class="tea"></div><div class="foam"></div>
+      <div class="pearl" style="left:18%;bottom:6%;animation-delay:0s"></div>
+      <div class="pearl" style="left:38%;bottom:11%;animation-delay:.6s"></div>
+      <div class="pearl" style="left:58%;bottom:5%;animation-delay:1.2s"></div>
+      <div class="pearl" style="left:74%;bottom:13%;animation-delay:1.9s"></div>
+      <div class="pearl" style="left:28%;bottom:22%;animation-delay:2.6s"></div>
+      <div class="pearl" style="left:52%;bottom:26%;animation-delay:3.2s"></div>
+    </div>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <h2>品項</h2>
+  <div class="menu">
+    <div><b>珍芝奶茶（招牌）</b><span>中 55 ／ 大 65・阿薩姆紅茶＋鮮奶＋自煮粉圓</span></div>
+    <div><b>四季春青茶</b><span>中 35 ／ 大 45・南投名間茶區</span></div>
+    <div><b>檸檬冬瓜露</b><span>中 50 ／ 大 60・現榨檸檬，不加濃縮汁</span></div>
+    <div><b>炭焙烏龍鮮奶</b><span>中 60 ／ 大 70・可換燕麥奶 +10</span></div>
+    <div><b>紅豆粉粿鮮奶茶</b><span>中 65 ／ 大 75・料多，建議少冰</span></div>
+    <div><b>甜度冰塊</b><span>全糖／少糖／半糖／微糖／無糖・正常冰至熱飲</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>加盟</h2>
+  <div class="grid">
+    <div class="card"><h3>單店加盟金</h3><p>38 萬（含教育訓練、開店輔導、首批物料）。設備另計約 65 萬。</p></div>
+    <div class="card"><h3>不強制裝潢廠商</h3><p>提供設計圖與規範，發包給誰你自己決定，我們只驗收。</p></div>
+    <div class="card"><h3>物料成本透明</h3><p>總部物料表公開，毛利結構直接給你算，不做黑箱進貨。</p></div>
+    <div class="card"><h3>商圈保障</h3><p>直線距離 800 公尺內不再開第二家，寫進合約。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>門市與外送</h2>
+  <p class="lead">全台 62 家門市，可於官方 LINE 查詢最近門市與即時候餐時間。外送平台已上架 Uber Eats 與 foodpanda，官方 App 自取享全品項折 5 元。</p>
+  <a class="btn" href="#c">加入官方 LINE</a>
+</div></section>
+
+<footer><b>效果原理：</b>圓環排字的做法是：每個字絕對定位在圓心正上方，用 <code>transform-origin:0 var(--r)</code> 把旋轉中心設在圓心，再各自 <code>rotate</code> 到自己的角度——於是所有字自然排成一圈且字身朝外。整圈再套一支等速 <code>rotate 360deg</code> 的動畫，三圈用不同秒數與方向就有層次。字是 JS 依字串長度平均分配角度產生的，換文案不用手動算角度。</footer>
+
+<script>
+function ring(el, text, r, fs, color){
+  const chars=[...text];
+  const step=360/chars.length;
+  chars.forEach((ch,i)=>{
+    const s=document.createElement('span');
+    s.textContent=ch;
+    s.style.setProperty('--r', r+'px');
+    s.style.setProperty('--fs', fs+'px');
+    s.style.setProperty('--c', color);
+    s.style.transform=`rotate(${i*step}deg) translateX(-50%)`;
+    el.appendChild(s);
+  });
+}
+function build(){
+  const box=document.querySelector('.ringbox');
+  const R=box.clientWidth/2;
+  ['r1','r2','r3'].forEach(id=>document.getElementById(id).innerHTML='');
+  ring(document.getElementById('r1'),'珍芝道・每日現煮茶湯・四小時不賣即倒・TEA SINCE 2009・',R,14,'#e8c05a');
+  ring(document.getElementById('r2'),'南投名間四季春・阿里山金萱・自煮粉圓・鮮奶不用奶精・',R*0.86,12.5,'#a2957f');
+  ring(document.getElementById('r3'),'全台六十二家門市・現點現搖・',R*0.72,12,'#7e735f');
+}
+build();
+addEventListener('resize',build);
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

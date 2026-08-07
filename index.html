@@ -2,360 +2,196 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nova — Design Beyond The Screen</title>
-<meta name="description" content="Three.js Shader 背景 + GSAP ScrollTrigger 鏡頭敘事技巧示範">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>40 種網頁特效 × 40 個產業 — 網站特效展示館</title>
+<meta name="description" content="40 個可互動的網頁特效示範，每一個都套用在一個真實產業的網站情境上，可依特效類型或產業別篩選。">
 <style>
-  :root{
-    --text:#f2f3f8;
-    --muted:#b7bcd4;
-    --accent:#a78bfa;
-    --accent2:#5eead4;
-    --line:rgba(255,255,255,.12);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
-    background:#050308;
-  }
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-
-  canvas#webgl{
-    position:fixed;inset:0;z-index:0;display:block;width:100vw;height:100vh;
-  }
-
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:18px 28px;
-    backdrop-filter:blur(10px);
-    background:linear-gradient(rgba(5,3,8,.55), transparent);
-  }
-  .logo{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.02em}
-  .logo-mark{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 20px rgba(167,139,250,.6)}
-  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
-  .nav-links a:hover{color:var(--text)}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;
-    font-size:14px;font-weight:600;
-    background:linear-gradient(135deg,var(--accent),#6d4fd6);
-    box-shadow:0 10px 28px rgba(167,139,250,.35);
-    border:1px solid rgba(255,255,255,.15);cursor:pointer;
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .btn:hover{transform:translateY(-2px)}
-  .btn.ghost{background:rgba(255,255,255,.04);box-shadow:none;border:1px solid var(--line)}
-
-  section, header.hero{position:relative;z-index:1}
-
-  .hero{
-    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:0 24px;
-  }
-  .pill{
-    display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
-    font-size:12px;color:var(--muted);border:1px solid var(--line);
-    background:rgba(255,255,255,.03);margin-bottom:26px;
-  }
-  .pill b{color:var(--accent2)}
-  h1.hero-title{
-    font-size:clamp(40px,7.5vw,84px);line-height:1.05;font-weight:700;letter-spacing:-.02em;
-    max-width:900px;margin:0 auto 20px;
-    text-shadow:0 4px 40px rgba(0,0,0,.6);
-  }
-  h1.hero-title em{
-    font-style:italic;font-weight:600;
-    background:linear-gradient(135deg,var(--accent2),var(--accent));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero p.sub{color:var(--muted);font-size:18px;max-width:560px;margin:0 auto 34px;line-height:1.6}
-  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;opacity:.7}
-
-  /* narrative pinned-feel panels */
-  .story{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:60px 24px;text-align:center}
-  .story .tag{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:18px;font-weight:600}
-  .story h2{
-    font-size:clamp(30px,5.5vw,58px);line-height:1.2;font-weight:600;max-width:760px;
-    text-shadow:0 4px 30px rgba(0,0,0,.7);
-  }
-  .story h2 i{font-style:italic;color:var(--accent)}
-  .story p{color:var(--muted);max-width:480px;margin:18px auto 0;line-height:1.7}
-
-  .feat-section{padding:120px 24px}
-  .eyebrow{color:var(--accent2);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
-  .section-title{font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-.01em;max-width:640px}
-  .section-sub{color:var(--muted);max-width:560px;margin-top:14px;line-height:1.7}
-
-  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:48px}
-  .feat{
-    padding:26px;border-radius:18px;
-    background:rgba(255,255,255,.035);
-    border:1px solid var(--line);backdrop-filter:blur(6px);
-    transition:transform .35s ease, border-color .35s ease;
-  }
-  .feat:hover{transform:translateY(-6px);border-color:rgba(167,139,250,.5)}
-  .feat .ic{
-    width:42px;height:42px;border-radius:12px;margin-bottom:16px;
-    display:flex;align-items:center;justify-content:center;font-size:19px;
-    background:linear-gradient(135deg,rgba(167,139,250,.35),rgba(94,234,212,.2));
-    border:1px solid var(--line);
-  }
-  .feat h3{font-size:17px;margin-bottom:8px}
-  .feat p{color:var(--muted);font-size:14px;line-height:1.6}
-
-  .cta-panel{
-    text-align:center;padding:70px 32px;border-radius:28px;margin:0 24px 100px;
-    background:rgba(167,139,250,.08);
-    border:1px solid var(--line);backdrop-filter:blur(10px);
-  }
-
-  footer{position:relative;z-index:1;padding:32px 24px;border-top:1px solid var(--line);
-    display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;flex-wrap:wrap;gap:12px}
-
-  .gsap-fade{opacity:0;transform:translateY(24px)}
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08090c;--fg:#f1f3f7;--mut:#89909f;--acc:#7cc4ff;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.035)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.75;overflow-x:hidden}
+a{color:inherit}
+.top{position:fixed;top:0;left:0;right:0;z-index:99;background:rgba(8,9,12,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+.top .in{max-width:1240px;margin:0 auto;padding:12px 22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:-.01em}
+.brand span{color:var(--acc)}
+.count{color:var(--mut);font-size:13px}
+.hero{padding:132px 22px 46px;max-width:1240px;margin:0 auto;position:relative;overflow:hidden}
+.mesh{position:absolute;inset:-30% -10% auto -10%;height:520px;z-index:-1;filter:blur(90px);opacity:.55}
+.mesh i{position:absolute;border-radius:50%}
+.mesh i:nth-child(1){width:40vw;height:40vw;background:#2b5cff;left:2%;top:8%;animation:f1 24s ease-in-out infinite}
+.mesh i:nth-child(2){width:34vw;height:34vw;background:#a855f7;right:6%;top:0;animation:f2 29s ease-in-out infinite}
+.mesh i:nth-child(3){width:30vw;height:30vw;background:#14b8a6;left:38%;top:22%;animation:f1 33s ease-in-out infinite reverse}
+@keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(9vw,5vh)}}
+@keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(-8vw,6vh)}}
+h1{font-size:clamp(34px,6vw,68px);line-height:1.08;letter-spacing:-.03em;font-weight:900;max-width:20ch}
+h1 em{font-style:normal;background:linear-gradient(100deg,#7cc4ff,#a855f7 55%,#34d399);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--mut);max-width:60ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:32px}
+.stats div b{display:block;font-size:30px;font-weight:900;line-height:1;color:var(--acc)}
+.stats div span{color:var(--mut);font-size:13px}
+.tools{max-width:1240px;margin:0 auto;padding:8px 22px 0;position:sticky;top:57px;z-index:50}
+.toolbox{background:rgba(8,9,12,.9);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.search{width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);
+  color:var(--fg);font-family:inherit;font-size:15px;outline:none}
+.search:focus{border-color:var(--acc)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chips button{padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);
+  font-family:inherit;font-size:13px;cursor:pointer;transition:.18s}
+.chips button:hover{color:var(--fg);border-color:rgba(255,255,255,.3)}
+.chips button[aria-pressed="true"]{border-color:var(--acc);color:var(--acc);background:rgba(124,196,255,.10)}
+.grid{max-width:1240px;margin:0 auto;padding:22px 22px 90px;
+  display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(258px,1fr))}
+.item{display:block;text-decoration:none;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:var(--card);transition:transform .3s cubic-bezier(.2,.9,.25,1),border-color .3s,box-shadow .3s}
+.item:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.28);box-shadow:0 20px 44px rgba(0,0,0,.42)}
+.thumb{aspect-ratio:16/10;position:relative;overflow:hidden;background:linear-gradient(150deg,var(--c1),var(--c2))}
+.thumb .no{position:absolute;left:14px;top:12px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+  letter-spacing:.14em;color:rgba(255,255,255,.72)}
+.thumb .fx{position:absolute;inset:0}
+.body{padding:16px 18px 18px}
+.body h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+.body .ind{display:inline-block;margin-top:8px;font-size:12px;padding:3px 10px;border-radius:999px;
+  border:1px solid var(--line);color:var(--mut)}
+.body p{color:var(--mut);font-size:13px;margin-top:10px;line-height:1.6}
+.cat{position:absolute;right:12px;top:12px;font-size:11px;padding:3px 9px;border-radius:999px;
+  background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(4px)}
+.empty{grid-column:1/-1;text-align:center;color:var(--mut);padding:60px 0}
+footer{border-top:1px solid var(--line);padding:30px 22px 50px;color:var(--mut);font-size:13px}
+footer .in{max-width:1240px;margin:0 auto}
+footer b{color:var(--fg)}
+footer p{margin-top:10px;max-width:80ch}
+@media(max-width:640px){.tools{top:64px}.hero{padding-top:120px}}
 </style>
 </head>
 <body>
+<div class="top"><div class="in">
+  <div class="brand">網站特效展示館 <span>／ 40 種</span></div>
+  <div class="count" id="count">顯示 40 / 40</div>
+</div></div>
 
-<canvas id="webgl"></canvas>
-
-<nav>
-  <div class="logo"><span class="logo-mark"></span>Nova</div>
-  <div class="nav-links">
-    <a href="#capabilities">Capabilities</a>
-    <a href="./blob/">下一個範例（有機變形）→</a>
+<div class="hero">
+  <div class="mesh"><i></i><i></i><i></i></div>
+  <h1>40 種網頁特效，<br><em>各配一個真實產業</em></h1>
+  <p class="sub">每一支都是可以直接開來玩的完整單頁：滑鼠移上去有反應、往下捲有事情發生，而且文案是那個產業真的會寫的話，不是 Lorem ipsum。點任一張卡片進去看，頁尾都有那個特效的實作原理說明。</p>
+  <div class="stats">
+    <div><b>40</b><span>種特效</span></div>
+    <div><b>40</b><span>個產業情境</span></div>
+    <div><b>0</b><span>外部框架相依</span></div>
+    <div><b>100%</b><span>單檔可獨立開啟</span></div>
   </div>
-  <a class="btn ghost" href="#cta">Get Started →</a>
-</nav>
+</div>
 
-<header class="hero">
-  <div class="pill">✦ <b>Live WebGL</b>&nbsp; Shader 背景即時渲染中，不是圖片</div>
-  <h1 class="hero-title">Design Beyond <em>The Screen</em></h1>
-  <p class="sub">背景是即時運算的自訂 GLSL Shader，中央物件是可互動的 Three.js 3D 模型，往下捲動鏡頭會跟著故事推進。</p>
-  <div class="hero-cta">
-    <a class="btn" href="#cta">開始建立 →</a>
-    <a class="btn ghost" href="#capabilities">查看原理</a>
-  </div>
-  <div class="scroll-hint">↓ Scroll to move the camera</div>
-</header>
+<div class="tools"><div class="toolbox">
+  <input class="search" id="q" type="search" placeholder="搜尋特效或產業⋯⋯例如「捲動」「診所」「WebGL」">
+  <div class="chips" id="chips"></div>
+</div></div>
 
-<section class="story" data-story="1">
-  <div>
-    <div class="tag">Chapter 01</div>
-    <h2>Every Idea Deserves <i>a Universe</i> of Its Own</h2>
-    <p>捲動時鏡頭會靠近，中央的多面體物件同步旋轉、放大 — 用 GSAP ScrollTrigger 把滾動進度直接綁定到 3D 場景參數。</p>
-  </div>
-</section>
+<div class="grid" id="grid"></div>
 
-<section class="story" data-story="2">
-  <div>
-    <div class="tag">Chapter 02</div>
-    <h2>Precision Meets <i>Imagination</i> in Motion</h2>
-    <p>物件材質是金屬感 Standard Material，外層包一層線框，隨場景色相緩慢偏移，營造玻璃與金屬並存的高級感。</p>
-  </div>
-</section>
+<footer><div class="in">
+  <b>關於這組展示</b>
+  <p>全部 40 支頁面皆為自我包含的單一 HTML 檔，只在需要時載入 three.js 或 GSAP 的 CDN，其餘完全是原生 CSS 與 JavaScript。所有品牌名稱、地址、電話、價格與數據皆為展示用途的虛構內容，與任何真實企業無關。</p>
+  <p>特效分類：A 背景與氛圍｜B 游標互動｜C 文字動態｜D 捲動敘事｜E 3D 與 WebGL｜F 版面與轉場｜G 資料視覺化</p>
+</div></footer>
 
-<section class="story" data-story="3">
-  <div>
-    <div class="tag">Chapter 03</div>
-    <h2>Ship Experiences <i>People Remember</i></h2>
-    <p>這一段鏡頭拉遠、物件回到原始角度，剛好對應下方功能區塊登場 — 完整的一鏡到底捲動敘事。</p>
-  </div>
-</section>
-
-<section class="feat-section" id="capabilities">
-  <div class="wrap">
-    <div class="gsap-fade">
-      <div class="eyebrow">How it's built</div>
-      <h2 class="section-title">這次不是用 CSS 假裝 3D</h2>
-      <p class="section-sub">對應影片裡 Design Rocket / 21st.dev Magic MCP 展示的技術層級，這裡用的是真正的引擎與函式庫，而不是漸層 + transform 的錯覺。</p>
-    </div>
-    <div class="grid3">
-      <div class="feat gsap-fade"><div class="ic">🌌</div><h3>自訂 GLSL Shader</h3><p>背景是一顆包住鏡頭的球體，內壁貼自訂 Fragment Shader，用多層噪聲即時算出流動的星雲色彩，每一幀都在 GPU 上重新運算。</p></div>
-      <div class="feat gsap-fade"><div class="ic">🧊</div><h3>Three.js 互動 3D 物件</h3><p>中央的線框多面體 + 金屬球是真正的 WebGL 3D 網格，會隨滑鼠位置產生視差旋轉，不是 2D 圖片模擬。</p></div>
-      <div class="feat gsap-fade"><div class="ic">🎬</div><h3>GSAP ScrollTrigger 鏡頭敘事</h3><p>三段章節文字對應三段鏡頭關鍵影格，捲動位置直接驅動 camera 的 z 軸與物件旋轉/縮放，做出「一鏡到底」的太空探索感。</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="cta">
-  <div class="wrap">
-    <div class="cta-panel gsap-fade">
-      <h2 class="section-title" style="margin:0 auto 14px;">準備好打造你的下一個場景了嗎？</h2>
-      <p class="section-sub" style="margin:0 auto 28px;">程式碼可直接參考修改，全部封裝在單一 index.html 內，無需建置工具。</p>
-      <a class="btn" href="https://github.com/steveedu711-oss/3dweb-demo" target="_blank" rel="noopener">查看原始碼 →</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <span>© 2026 Nova Demo — Three.js + GSAP ScrollTrigger 技巧示範</span>
-  <span>Built with WebGL · Deployed on Cloudflare Pages</span>
-</footer>
-
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script>
-gsap.registerPlugin(ScrollTrigger);
+const DATA=[
+ [1,'Shader 能量流','精密雷射切割設備','E','Three.js 全螢幕 shader，多層 FBM 噪聲流動並隨游標偏移亮度中心','#123a4d','#061420'],
+ [2,'粒子連線場','企業系統整合','A','Canvas 2D 節點自動連線，游標當引力點把附近節點拉過去','#0d3a35','#061412'],
+ [3,'Mesh 漸層','保養品牌','A','四顆模糊色球以互質週期飄移混色，純 CSS 零 JavaScript','#f3c9a8','#d9c7ef'],
+ [4,'磁性按鈕','健身房私人教練','B','元件被游標吸附位移，離開時以 overshoot 曲線彈回','#3a3608','#0f0f0a'],
+ [5,'游標聚光燈','企業資安檢測','B','光暈與遮罩共用同一組 CSS 變數，掃過才顯形','#06301f','#050a08'],
+ [6,'3D 傾斜卡','精品咖啡烘焙','E','游標位置換算 rotateX/Y，內容層 translateZ 造景深','#3d2a17','#140f0a'],
+ [7,'有機變形球','手工冰淇淋','E','vertex shader 用 simplex noise 推擠頂點，振幅隨滑鼠速度變化','#4a2340','#150a14'],
+ [8,'逐行顯現','心理諮商所','C','每行包在 overflow:hidden 內由下滑入，用 delay 做節奏','#12403a','#08181a'],
+ [9,'打字機','品牌文案工作室','C','逐字輸入帶隨機抖動，標點後多停一拍，更像真人','#3d3208','#0d0c0a'],
+ [10,'捲動視差','高山民宿','D','三層山稜、雲霧與太陽各自不同位移係數形成景深','#173b45','#0a1210'],
+ [11,'捲動鏡頭推進','潛水教學中心','E','捲動驅動相機 Z 軸與霧氣濃度，越深越暗','#0b3f56','#01121d'],
+ [12,'捲動釘選 Pin','空拍與航測','D','sticky 釘住畫面，捲動進度切換內容段落與高度數字','#3d2410','#0c0e12'],
+ [13,'橫向捲動藝廊','當代藝廊策展','D','垂直捲動百分比換算成軌道 translateX','#2a2a2a','#101010'],
+ [14,'3D 產品檢視','手工銀飾訂製','E','自寫拖曳慣性旋轉，PMREM 環境貼圖做金屬反射','#2e3238','#0b0c0e'],
+ [15,'前後對比拖曳','老屋翻修裝修','F','clip-path 裁切上層，拖曳只改一個百分比變數','#5a4127','#12100e'],
+ [16,'液態玻璃','金流收款服務','A','backdrop-filter 加 inset 高光，游標帶動表面光澤','#25378f','#080b16'],
+ [17,'SVG 線條描繪','建築師事務所','C','getTotalLength 配 stroke-dashoffset，線像被筆畫出來','#2a3336','#0e0f10'],
+ [18,'影格捲動','電動機車','D','120 影格即時運算 3D 投影，捲動位置對映影格索引','#2f3d0d','#08090c'],
+ [19,'數字滾動','社會企業募資','G','每位數是獨立 0–9 轉輪，遞增 delay 造里程表感','#1e5c3c','#e8f2ea'],
+ [20,'Logo 跑馬牆','雲端記帳 SaaS','F','內容複製一份接續，動畫只跑 -50% 達成無縫循環','#1a2f5c','#0b0d12'],
+ [21,'游標拖尾','醫美診所','B','60 筆座標佇列漸縮繪製，lighter 混色做發光','#3a1f34','#0d0a10'],
+ [22,'WebGL 圖片扭曲','房屋仲介','E','原生 WebGL，依游標距離位移取樣座標產生波紋','#3f5a78','#0c0f14'],
+ [23,'WebGL 頁面轉場','廣告代理商','F','shader 把畫面切碎塊各自推開再重組，含色差偏移','#5c1226','#0a0a0c'],
+ [24,'動態文字排版','車禍求償律師','C','逐字依游標距離改字重與位移，模擬可變字型','#3d3520','#0b0c0d'],
+ [25,'底片顆粒','底片沖掃工作室','A','每幀重繪 ImageData 雜訊，壓在 12fps 更像放映','#4a3520','#141210'],
+ [26,'卡片翻牌堆疊','企業管理顧問','F','索引決定層級，翻牌時 rotateX 飛出後面遞補','#134b45','#0c1014'],
+ [27,'CSS 捲動時間軸','升學補習班','D','animation-timeline:view()／scroll()，整頁零 JavaScript','#1b4bb5','#eef3fb'],
+ [28,'Bento 捲動格','會計師事務所','F','每格各有出場方向，捲動進度決定就位數量','#123a7a','#eef1f6'],
+ [29,'黏性堆疊卡','保險經紀','D','每張 sticky 的 top 值遞增，後張蓋住前張只露上緣','#16324a','#0d1219'],
+ [30,'圓環轉動文字','手搖飲品牌','C','transform-origin 設在圓心讓字排成圈，三圈不同速度','#4a3a12','#12100b'],
+ [31,'游標圖片殘影','婚禮攝影','B','游標每移動超過門檻距離就丟出下一張並淡出','#4a2f2f','#100e0e'],
+ [32,'捲動 SVG 路線','物流貨運','D','getPointAtLength 取座標移動車輛並算切線角度','#0d4a3d','#0a0f14'],
+ [33,'拖曳無限畫布','實木訂製家具','F','座標取餘數繞回，四個方向都走不到盡頭','#5c3d1e','#100d0a'],
+ [34,'文字解碼','科技業獵才','C','每字有解鎖幀數，未解鎖前顯示隨機亂碼','#0d4a3d','#06080b'],
+ [35,'Gooey 融合球','兒童牙科診所','A','feGaussianBlur 加 feColorMatrix 硬切 alpha 做黏合','#7fd6cb','#eef9f7'],
+ [36,'物理掉落互動','社區團購電商','B','自寫剛體物理：重力、彈性碰撞與可拖曳投擲','#7a2f14','#0f1013'],
+ [37,'音波視覺化','音樂教室','G','基頻加四個泛音即時合成波形，換樂器即換泛音組','#3a2470','#0b0a10'],
+ [38,'遮罩選單轉場','溫泉旅宿','F','三層色板依序推上，delay 反轉做出布幕收回','#4a4028','#0e0d0b'],
+ [39,'捲動歷程軸','金屬扣件製造','D','軸線可見比例直接換算高度，節點同步亮起','#123a5c','#0c0e10'],
+ [40,'互動門市地圖','連鎖餐飲','G','SVG 使用者座標定位門市，篩選與面板共用同一份資料','#8e2a1e','#fdfaf5']
+];
+const CATS={A:'背景與氛圍',B:'游標互動',C:'文字動態',D:'捲動敘事',E:'3D 與 WebGL',F:'版面與轉場',G:'資料視覺化'};
+const grid=document.getElementById('grid'), chips=document.getElementById('chips'),
+      q=document.getElementById('q'), count=document.getElementById('count');
 
-// ---------- Three.js 場景 ----------
-const canvas = document.getElementById('webgl');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setSize(window.innerWidth, window.innerHeight);
+// 縮圖上的迷你動態預覽（每類一種，純 CSS）
+const FX={
+  A:'radial-gradient(circle at 30% 30%,rgba(255,255,255,.28),transparent 55%),radial-gradient(circle at 72% 68%,rgba(255,255,255,.2),transparent 52%)',
+  B:'radial-gradient(circle 60px at 62% 44%,rgba(255,255,255,.34),transparent 70%)',
+  C:'repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 3px,transparent 3px 15px)',
+  D:'linear-gradient(180deg,rgba(255,255,255,.22),transparent 46%,rgba(0,0,0,.3))',
+  E:'radial-gradient(circle at 50% 46%,rgba(255,255,255,.3),transparent 46%),conic-gradient(from 40deg,rgba(255,255,255,.14),transparent 40%,rgba(255,255,255,.12))',
+  F:'repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 12px,transparent 12px 34px)',
+  G:'repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 6px,transparent 6px 16px)'
+};
+let cat='all', kw='';
+chips.innerHTML=`<button aria-pressed="true" data-c="all">全部</button>`+
+  Object.entries(CATS).map(([k,v])=>`<button aria-pressed="false" data-c="${k}">${k}・${v}</button>`).join('');
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 200);
-camera.position.set(0, 0, 6);
-
-// 自訂 Shader 星雲背景（包住鏡頭的內壁球體）
-const skyGeo = new THREE.SphereGeometry(80, 48, 48);
-const skyMat = new THREE.ShaderMaterial({
-  side: THREE.BackSide,
-  uniforms: { uTime: { value: 0 } },
-  vertexShader: `
-    varying vec2 vUv;
-    void main(){
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    uniform float uTime;
-    varying vec2 vUv;
-    float hash(vec2 p){ return fract(sin(dot(p, vec2(41.3, 289.1))) * 43758.5453); }
-    float noise(vec2 p){
-      vec2 i = floor(p); vec2 f = fract(p);
-      float a = hash(i), b = hash(i + vec2(1.0,0.0)), c = hash(i + vec2(0.0,1.0)), d = hash(i + vec2(1.0,1.0));
-      vec2 u = f*f*(3.0-2.0*f);
-      return mix(a,b,u.x) + (c-a)*u.y*(1.0-u.x) + (d-b)*u.x*u.y;
-    }
-    void main(){
-      vec2 uv = vUv * 3.0;
-      float n = 0.0; float amp = 0.55;
-      for(int i=0;i<4;i++){
-        n += noise(uv + uTime * 0.04 * float(i+1)) * amp;
-        uv *= 1.9; amp *= 0.5;
-      }
-      vec3 colA = vec3(0.07, 0.03, 0.22);
-      vec3 colB = vec3(0.02, 0.22, 0.26);
-      vec3 col = mix(colA, colB, n);
-      col += 0.025 * hash(vUv * 800.0 + uTime);
-      gl_FragColor = vec4(col, 1.0);
-    }
-  `
-});
-scene.add(new THREE.Mesh(skyGeo, skyMat));
-
-// 光源
-scene.add(new THREE.AmbientLight(0x8877ff, 0.6));
-const key = new THREE.PointLight(0xa78bfa, 3.2, 30);
-key.position.set(4, 3, 5);
-scene.add(key);
-const rim = new THREE.PointLight(0x5eead4, 2.4, 30);
-rim.position.set(-4, -2, -3);
-scene.add(rim);
-
-// 中央互動物件群組：線框多面體 + 金屬內核 + 粒子環
-const group = new THREE.Group();
-scene.add(group);
-
-const wire = new THREE.Mesh(
-  new THREE.IcosahedronGeometry(1.5, 1),
-  new THREE.MeshBasicMaterial({ color: 0x5eead4, wireframe: true, transparent: true, opacity: 0.55 })
-);
-group.add(wire);
-
-const core = new THREE.Mesh(
-  new THREE.IcosahedronGeometry(0.85, 2),
-  new THREE.MeshStandardMaterial({ color: 0xa78bfa, metalness: 0.85, roughness: 0.25, emissive: 0x2a1a55, emissiveIntensity: 0.6 })
-);
-group.add(core);
-
-const ringCount = 260;
-const ringPos = new Float32Array(ringCount * 3);
-for (let i = 0; i < ringCount; i++) {
-  const a = Math.random() * Math.PI * 2;
-  const r = 2.6 + Math.random() * 0.6;
-  ringPos[i*3]   = Math.cos(a) * r;
-  ringPos[i*3+1] = (Math.random() - 0.5) * 0.4;
-  ringPos[i*3+2] = Math.sin(a) * r;
-}
-const ringGeo = new THREE.BufferGeometry();
-ringGeo.setAttribute('position', new THREE.BufferAttribute(ringPos, 3));
-const ring = new THREE.Points(ringGeo, new THREE.PointsMaterial({ color: 0x5eead4, size: 0.035, transparent: true, opacity: 0.8 }));
-ring.rotation.x = Math.PI / 2.4;
-group.add(ring);
-
-// 滑鼠視差
-const mouse = { x: 0, y: 0 };
-window.addEventListener('mousemove', (e) => {
-  mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
-  mouse.y = (e.clientY / window.innerHeight - 0.5) * 2;
-});
-
-// 捲動驅動的鏡頭/物件目標值（GSAP ScrollTrigger 更新，render loop 內平滑逼近）
-const target = { camZ: 6, rotY: 0, scale: 1 };
-
-function storyTrigger(el, camZ, rotY, scaleV) {
-  gsap.to(target, {
-    camZ, rotY, scale: scaleV,
-    ease: 'none',
-    scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1 }
+function render(){
+  const list=DATA.filter(d=>{
+    if(cat!=='all' && d[3]!==cat) return false;
+    if(!kw) return true;
+    const s=(d[0]+' '+d[1]+' '+d[2]+' '+d[4]+' '+CATS[d[3]]).toLowerCase();
+    return s.includes(kw);
   });
+  count.textContent=`顯示 ${list.length} / ${DATA.length}`;
+  grid.innerHTML = list.length ? list.map(d=>`
+    <a class="item" href="./index${d[0]}.html">
+      <div class="thumb" style="--c1:${d[5]};--c2:${d[6]}">
+        <div class="fx" style="background:${FX[d[3]]}"></div>
+        <span class="no">${String(d[0]).padStart(2,'0')}</span>
+        <span class="cat">${d[3]}・${CATS[d[3]]}</span>
+      </div>
+      <div class="body">
+        <h3>${d[1]}</h3>
+        <span class="ind">${d[2]}</span>
+        <p>${d[4]}</p>
+      </div>
+    </a>`).join('')
+    : `<div class="empty">找不到符合「${kw}」的特效或產業，換個關鍵字試試。</div>`;
 }
-document.querySelectorAll('.story').forEach((el) => {
-  const step = el.dataset.story;
-  if (step === '1') storyTrigger(el, 3.6, Math.PI * 0.6, 1.35);
-  if (step === '2') storyTrigger(el, 2.1, Math.PI * 1.25, 1.75);
-  if (step === '3') storyTrigger(el, 5.4, Math.PI * 1.8, 1.0);
+chips.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...chips.children].forEach(n=>n.setAttribute('aria-pressed',n===b));
+  cat=b.dataset.c; render();
 });
-
-// 一般區塊淡入
-gsap.utils.toArray('.gsap-fade').forEach((el) => {
-  gsap.to(el, {
-    opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-    scrollTrigger: { trigger: el, start: 'top 85%' }
-  });
-});
-
-const clock = new THREE.Clock();
-function animate() {
-  requestAnimationFrame(animate);
-  const t = clock.getElapsedTime();
-  skyMat.uniforms.uTime.value = t;
-
-  camera.position.z += (target.camZ - camera.position.z) * 0.06;
-  camera.position.x += (mouse.x * 0.6 - camera.position.x) * 0.04;
-  camera.position.y += (-mouse.y * 0.4 - camera.position.y) * 0.04;
-  camera.lookAt(0, 0, 0);
-
-  group.rotation.y += ((target.rotY + mouse.x * 0.3) - group.rotation.y) * 0.06;
-  group.rotation.x += (mouse.y * 0.2 - group.rotation.x) * 0.06;
-  const s = target.scale;
-  group.scale.set(
-    group.scale.x + (s - group.scale.x) * 0.06,
-    group.scale.y + (s - group.scale.y) * 0.06,
-    group.scale.z + (s - group.scale.z) * 0.06
-  );
-  wire.rotation.y -= 0.0015;
-  ring.rotation.z += 0.0009;
-
-  renderer.render(scene, camera);
-}
-animate();
-
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+q.addEventListener('input',()=>{ kw=q.value.trim().toLowerCase(); render(); });
+render();
 </script>
-
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
 </body>
 </html>

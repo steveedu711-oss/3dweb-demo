@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>白晝藝廊 — 當代藝術策展空間</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#101010;--fg:#efece6;--mut:#8e8a83;--acc:#e3ddd0;--line:rgba(255,255,255,.14);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(16,16,16,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(32px,5.6vw,62px);line-height:1.16;letter-spacing:-.01em;font-weight:600}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:600}
+.lead{color:var(--mut);max-width:54ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border:1px solid var(--acc);border-radius:0;background:transparent;color:var(--acc);font-weight:600;text-decoration:none;letter-spacing:.08em}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：橫向捲動藝廊 --- */
+.hero{min-height:78svh;display:flex;align-items:flex-end;padding-top:110px;padding-bottom:40px}
+.kick{font-size:12px;letter-spacing:.3em;color:var(--mut);margin-bottom:20px}
+.hwrap{height:340vh;position:relative}
+.hsticky{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center}
+.rail{display:flex;gap:clamp(20px,3.2vw,44px);padding:0 12vw;will-change:transform}
+.art{flex:0 0 auto;width:clamp(230px,26vw,360px)}
+.art .frame{aspect-ratio:3/4;border:1px solid var(--line);position:relative;overflow:hidden;
+  background:linear-gradient(150deg,var(--c1),var(--c2))}
+.art .frame::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(var(--ang,42deg),rgba(255,255,255,.09) 0 2px,transparent 2px 13px);mix-blend-mode:overlay}
+.art h3{margin-top:14px;font-size:16px;font-weight:600}
+.art p{color:var(--mut);font-size:13px}
+.art .yr{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--mut);letter-spacing:.16em;margin-top:4px}
+.htitle{position:absolute;left:12vw;top:14vh;z-index:2;pointer-events:none}
+.htitle b{display:block;font-size:clamp(22px,3vw,34px);font-weight:600}
+.htitle span{color:var(--mut);font-size:13px;letter-spacing:.2em}
+.prog{position:absolute;left:12vw;right:12vw;bottom:9vh;height:1px;background:rgba(255,255,255,.16)}
+.prog i{position:absolute;left:0;top:-1px;height:3px;background:var(--acc);width:0}
+.hint{margin-top:22px;font-size:13px;color:#6e6a63}
+.info{margin-top:38px;border-top:1px solid var(--line)}
+.info div{display:flex;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px;flex-wrap:wrap}
+.info div b{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 13：<b>橫向捲動藝廊</b></i><i class="ind">產業：當代藝廊策展</i></div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">白晝藝廊 DAYBREAK ／ 台北大稻埕</div>
+  <h1>《無聲的白天》<br>2026 春季聯展</h1>
+  <p class="lead">八位台灣中生代藝術家，以「白天的沉默」為題。展期 3 月 8 日至 5 月 24 日，週一休館，免門票。</p>
+  <p class="hint">（往下捲：畫作會橫向移動，捲軸變成展場的動線）</p>
+</div></section>
+
+<div class="hwrap" id="hw">
+  <div class="hsticky">
+    <div class="htitle"><b>展出作品</b><span>SCROLL ／ 08 件</span></div>
+    <div class="rail" id="rail">
+      <div class="art"><div class="frame" style="--c1:#3a4a52;--c2:#0f1416;--ang:38deg"></div><h3>午後的窗</h3><p>壓克力・畫布 130×97cm</p><div class="yr">2025 ／ 林緒</div></div>
+      <div class="art"><div class="frame" style="--c1:#5a4638;--c2:#171210;--ang:112deg"></div><h3>父親的工具箱</h3><p>複合媒材 100×80cm</p><div class="yr">2024 ／ 陳允中</div></div>
+      <div class="art"><div class="frame" style="--c1:#4b5240;--c2:#12140f;--ang:76deg"></div><h3>河堤散步・七</h3><p>油彩・畫布 162×130cm</p><div class="yr">2025 ／ 黃惟</div></div>
+      <div class="art"><div class="frame" style="--c1:#6b5566;--c2:#161016;--ang:24deg"></div><h3>沒有講完的話</h3><p>膠彩・紙本 90×72cm</p><div class="yr">2026 ／ 蘇怡安</div></div>
+      <div class="art"><div class="frame" style="--c1:#39505c;--c2:#0d1418;--ang:134deg"></div><h3>白日夢遊者</h3><p>數位輸出 120×120cm</p><div class="yr">2025 ／ 賴子謙</div></div>
+      <div class="art"><div class="frame" style="--c1:#6a5c3f;--c2:#161310;--ang:58deg"></div><h3>家屋殘影</h3><p>炭筆・紙本 76×56cm</p><div class="yr">2024 ／ 吳映</div></div>
+      <div class="art"><div class="frame" style="--c1:#42555a;--c2:#101416;--ang:96deg"></div><h3>倉庫的光</h3><p>攝影・銀鹽 60×90cm</p><div class="yr">2026 ／ 鄭立</div></div>
+      <div class="art"><div class="frame" style="--c1:#5d4550;--c2:#150f13;--ang:16deg"></div><h3>整理中</h3><p>裝置・尺寸依場地</p><div class="yr">2026 ／ 何嘉恩</div></div>
+    </div>
+    <div class="prog"><i id="pi"></i></div>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <h2>參觀資訊</h2>
+  <div class="info">
+    <div><b>地址</b><span>台北市大同區迪化街一段 XX 號 2 樓（近永樂市場）</span></div>
+    <div><b>開放時間</b><span>週二至週日 12:00–19:00，週一休館</span></div>
+    <div><b>導覽</b><span>每週六 14:00 策展人導覽，免預約；十人以上團體請提前一週來信</span></div>
+    <div><b>拍照</b><span>可拍照不可使用閃光燈與腳架；商業攝影請先申請</span></div>
+    <div><b>作品洽詢</b><span>展場現場或來信索取完整作品集與價目表</span></div>
+  </div>
+  <a class="btn" href="#c">索取作品集</a>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>徵件與合作</h2>
+  <p class="lead">我們每年春秋兩檔開放徵件，接受個展提案與策展提案。請寄作品集 PDF（20MB 內）、創作自述與三年內展歷。收件後六週內回覆，不論是否入選都會回信。</p>
+  <a class="btn" href="#c">投遞提案</a>
+</div></section>
+
+<footer><b>效果原理：</b>外層容器高度拉到 340vh，內層 sticky 釘住視窗；把「垂直捲動的百分比」乘上軌道實際超出的寬度，寫進 <code>transform:translateX</code>——於是縱向滾輪就變成橫向平移。用 transform 而非 <code>scrollLeft</code>，可以吃到 GPU 合成，也不會與瀏覽器原生的水平捲動打架。</footer>
+
+<script>
+const hw=document.getElementById('hw'), rail=document.getElementById('rail'), pi=document.getElementById('pi');
+let ticking=false;
+function upd(){
+  const total=hw.offsetHeight-innerHeight;
+  const p=Math.min(Math.max(-hw.getBoundingClientRect().top/total,0),1);
+  const dist=Math.max(rail.scrollWidth-innerWidth,0);
+  rail.style.transform='translate3d('+(-p*dist)+'px,0,0)';
+  pi.style.width=(p*100)+'%';
+  ticking=false;
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd);}},{passive:true});
+addEventListener('resize',upd); upd();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>琢銀 — 手工銀飾與對戒訂製</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0b0c0e;--fg:#f1f3f6;--mut:#8f959e;--acc:#d6dbe2;--line:rgba(255,255,255,.14);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.8;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(11,12,14,.76);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,110px) 22px;position:relative;z-index:2}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(30px,5.2vw,58px);line-height:1.16;letter-spacing:-.01em;font-weight:600}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:14px;font-weight:600}
+.lead{color:var(--mut);max-width:52ch;margin-top:20px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px;font-weight:600}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:15px 34px;border-radius:999px;background:var(--acc);color:#0b0c0e;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px;position:relative;z-index:2;background:var(--bg)}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：3D 產品檢視 --- */
+.hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px;padding:110px 22px 60px;max-width:1180px;margin:0 auto}
+#gl{width:100%;aspect-ratio:1;max-height:66svh;cursor:grab;touch-action:none}
+#gl:active{cursor:grabbing}
+.kick{font-size:12px;letter-spacing:.28em;color:var(--mut);margin-bottom:18px}
+.hint{margin-top:22px;font-size:13px;color:#6d737c}
+.swatch{display:flex;gap:10px;margin-top:28px}
+.swatch button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);cursor:pointer;background:var(--c);transition:transform .2s,border-color .2s}
+.swatch button[aria-pressed="true"]{border-color:#fff;transform:scale(1.12)}
+.specs{margin-top:34px;border-top:1px solid var(--line)}
+.specs div{display:flex;justify-content:space-between;gap:18px;padding:15px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:14px}
+.specs div b{color:var(--fg);font-weight:600}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:90px}#gl{max-height:44svh;order:-1}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 14：<b>3D 產品檢視</b></i><i class="ind">產業：手工銀飾訂製</i></div>
+</div>
+
+<div class="hero">
+  <div>
+    <div class="kick">琢銀 ／ 台中審計新村・金工工作室</div>
+    <h1>對戒不用刻名字，<br>刻你們的手寫字就好</h1>
+    <p class="lead">925 純銀與 18K 金手工打造。刻字可以用你們自己寫的筆跡掃描製版，不是選字型。從討論到交件約四週。</p>
+    <div class="swatch" id="sw">
+      <button data-c="#cfd4da" style="--c:#cfd4da" aria-pressed="true" title="925 純銀・霧面"></button>
+      <button data-c="#e8c98d" style="--c:#e8c98d" aria-pressed="false" title="18K 黃金"></button>
+      <button data-c="#e2b9ae" style="--c:#e2b9ae" aria-pressed="false" title="18K 玫瑰金"></button>
+      <button data-c="#8a9099" style="--c:#8a9099" aria-pressed="false" title="氧化仿古銀"></button>
+    </div>
+    <a class="btn" href="#c">預約諮詢</a>
+    <p class="hint">（用滑鼠拖曳戒指可自由旋轉，放開會慣性續轉；點色塊換材質）</p>
+  </div>
+  <canvas id="gl"></canvas>
+</div>
+
+<section><div class="wrap">
+  <h2>訂製流程</h2>
+  <div class="grid">
+    <div class="card"><h3>01 面談與量圍</h3><p>工作室現場量指圍、討論寬度與表面處理。外縣市可寄戒圍量測環。</p></div>
+    <div class="card"><h3>02 手繪與報價</h3><p>三天內給兩版草圖與明確報價，確認後收訂金 50%。</p></div>
+    <div class="card"><h3>03 手工製作</h3><p>脫蠟鑄造或鍛敲成型，約三週。過程會拍照給你看進度。</p></div>
+    <div class="card"><h3>04 交件與售後</h3><p>終身免費清洗拋光，一年內免費調整戒圍一次。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>價格與規格</h2>
+  <div class="specs">
+    <div><b>925 純銀對戒</b><span>6,800 元起／對（含刻字）</span></div>
+    <div><b>18K 金對戒</b><span>28,000 元起／對，依重量計價</span></div>
+    <div><b>鑽石鑲嵌</b><span>另計，附 GIA 或 IGI 證書</span></div>
+    <div><b>手寫字製版</b><span>1,200 元／組，含兩次修改</span></div>
+    <div><b>金工體驗課（雙人）</b><span>4,800 元／組，四小時做出一對簡約戒</span></div>
+  </div>
+  <a class="btn" href="#c">預約工作室</a>
+</div></section>
+
+<footer><b>效果原理：</b>Three.js 的 TorusGeometry 加上 <code>MeshStandardMaterial</code> 高金屬度、低粗糙度，靠一組環境光加三盞方向光造出金屬反光。旋轉不是用 OrbitControls，而是自己接 pointerdown／move／up：拖曳量換算成角速度，放開後角速度以 0.94 的係數逐幀衰減，做出慣性續轉。換色只是改 <code>material.color</code>，不重建場景。</footer>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+const cv=document.getElementById('gl');
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.25;
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(38,1,.1,50); cam.position.set(0,0,5.4);
+
+// 用 canvas 畫一張攝影棚環境圖，經 PMREM 轉成 environment——金屬才有東西可以反射
+(function env(){
+  const c=document.createElement('canvas'); c.width=512; c.height=256;
+  const g=c.getContext('2d');
+  const grd=g.createLinearGradient(0,0,0,256);
+  grd.addColorStop(0,'#ffffff'); grd.addColorStop(.45,'#c3ccd6');
+  grd.addColorStop(.58,'#7d858f'); grd.addColorStop(1,'#3c4148');
+  g.fillStyle=grd; g.fillRect(0,0,512,256);
+  g.fillStyle='rgba(255,255,255,1)'; g.fillRect(40,14,180,54);     // 主燈箱
+  g.fillStyle='rgba(225,238,255,.95)'; g.fillRect(290,26,130,34);  // 副燈
+  g.fillStyle='rgba(255,232,196,.8)'; g.fillRect(420,110,90,26);   // 暖色反光
+  g.fillStyle='rgba(255,255,255,.7)'; g.fillRect(150,150,110,20);  // 底部補光
+  const tex=new THREE.CanvasTexture(c);
+  tex.mapping=THREE.EquirectangularReflectionMapping;
+  const pmrem=new THREE.PMREMGenerator(renderer);
+  scene.environment=pmrem.fromEquirectangular(tex).texture;
+  tex.dispose(); pmrem.dispose();
+})();
+const mat=new THREE.MeshStandardMaterial({color:0xcfd4da,metalness:1,roughness:.18,envMapIntensity:1.35});
+const ring=new THREE.Group();
+const band=new THREE.Mesh(new THREE.TorusGeometry(1.35,.20,40,180),mat);
+ring.add(band);
+// 內圈刻字帶（略窄一圈，做出雙層感）
+const inner=new THREE.Mesh(new THREE.TorusGeometry(1.35,.205,32,180),
+  new THREE.MeshStandardMaterial({color:0x3a3f46,metalness:.9,roughness:.55}));
+inner.scale.set(1,1,.55); ring.add(inner);
+// 主石
+const stone=new THREE.Mesh(new THREE.OctahedronGeometry(.30,0),
+  new THREE.MeshStandardMaterial({color:0xffffff,metalness:.1,roughness:0,transparent:true,opacity:.85}));
+stone.position.y=1.52; ring.add(stone);
+ring.rotation.x=.5;
+scene.add(ring);
+
+scene.add(new THREE.AmbientLight(0xffffff,.55));
+const k=new THREE.DirectionalLight(0xffffff,2.4); k.position.set(3,4,5); scene.add(k);
+const f=new THREE.DirectionalLight(0x9fc4ff,1.5); f.position.set(-4,-1,3); scene.add(f);
+const r=new THREE.DirectionalLight(0xffd9a8,1.2); r.position.set(0,3,-5); scene.add(r);
+
+function size(){
+  const w=cv.clientWidth||400, h=cv.clientHeight||400;
+  renderer.setSize(w,h,false);
+  cam.aspect=w/h; cam.updateProjectionMatrix();
+}
+addEventListener('resize',size); setTimeout(size,0); size();
+
+let vx=0.006, vy=0.004, drag=false, lx=0, ly=0;
+cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',e=>{
+  if(!drag) return;
+  vy=(e.clientX-lx)*0.006; vx=(e.clientY-ly)*0.006;
+  ring.rotation.y+=vy; ring.rotation.x+=vx;
+  lx=e.clientX; ly=e.clientY;
+});
+addEventListener('pointerup',()=>drag=false);
+document.getElementById('sw').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#sw button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  mat.color.set(b.dataset.c);
+});
+(function loop(){
+  if(!drag){
+    ring.rotation.y+=vy; ring.rotation.x+=vx;
+    vy*=0.94; vx*=0.94;
+    if(Math.abs(vy)<0.0009) vy=0.0018;   // 靜止時維持緩慢自轉
+    if(Math.abs(vx)<0.0004) vx=0;
+  }
+  ring.rotation.x=Math.max(Math.min(ring.rotation.x,1.2),-1.2);
+  renderer.render(scene,cam);
+  requestAnimationFrame(loop);
+})();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

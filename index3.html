@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>初露 CHULU — 溫和保養品</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fbf7f3;--fg:#2b2620;--mut:#7d7268;--acc:#c07d5a;--line:rgba(0,0,0,.11);--card:rgba(255,255,255,.66)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.75;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(251,247,243,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,120px) 22px;position:relative}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:clamp(34px,6vw,68px);line-height:1.14;letter-spacing:-.02em;font-weight:700}
+h2{font-size:clamp(24px,3.4vw,38px);letter-spacing:-.01em;margin-bottom:14px;font-weight:700}
+.lead{color:var(--mut);max-width:56ch;margin-top:18px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:38px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;backdrop-filter:blur(6px)}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:14px 32px;border-radius:999px;background:var(--acc);color:#fff;font-weight:600;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效：Mesh 漸層 --- */
+.mesh{position:fixed;inset:-20%;z-index:-1;filter:blur(70px) saturate(1.15)}
+.blob{position:absolute;border-radius:50%;mix-blend-mode:multiply;opacity:.55}
+.b1{width:52vw;height:52vw;background:#f3c9a8;top:2%;left:4%;animation:m1 19s ease-in-out infinite}
+.b2{width:46vw;height:46vw;background:#d9c7ef;top:26%;right:2%;animation:m2 23s ease-in-out infinite}
+.b3{width:44vw;height:44vw;background:#c7e3d4;bottom:2%;left:24%;animation:m3 27s ease-in-out infinite}
+.b4{width:34vw;height:34vw;background:#f6d9dd;top:44%;left:38%;animation:m2 21s ease-in-out infinite reverse}
+@keyframes m1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(8vw,6vh) scale(1.12)}66%{transform:translate(-5vw,9vh) scale(.94)}}
+@keyframes m2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-9vw,-7vh) scale(1.16)}}
+@keyframes m3{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(7vw,-8vh) scale(.9)}75%{transform:translate(-6vw,3vh) scale(1.1)}}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:70px}
+.kick{font-size:12px;letter-spacing:.28em;color:var(--acc);margin-bottom:20px}
+h1 em{font-style:normal;background:linear-gradient(100deg,#c07d5a,#a58bc7 60%,#6fa88a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ing{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.ing span{padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid var(--line);font-size:13px;color:var(--mut)}
+.stats{display:flex;flex-wrap:wrap;gap:44px;border-top:1px solid var(--line);padding-top:34px;margin-top:54px}
+.stats div b{display:block;font-size:clamp(28px,4vw,42px);color:var(--acc);font-weight:700;line-height:1}
+.stats div span{color:var(--mut);font-size:14px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 03：<b>Mesh 漸層</b></i><i class="ind">產業：保養品牌</i></div>
+</div>
+<div class="mesh"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">初露 CHULU ／ 敏感肌保養</div>
+  <h1>成分表只有 9 行，<br><em>因為多的都不必要</em></h1>
+  <p class="lead">不加香精、不加酒精、不加著色劑。為台灣濕熱氣候與換季就泛紅的肌膚設計，全系列通過人體貼膚測試。</p>
+  <div class="ing"><span>神經醯胺 NP</span><span>5% 泛醇</span><span>積雪草萃取</span><span>無香精</span><span>無酒精</span><span>孕期可用</span></div>
+  <a class="btn" href="#c">領取 7 日體驗組</a>
+  <div class="stats">
+    <div><b>9</b><span>種成分，全部標示</span></div>
+    <div><b>0</b><span>香精與酒精</span></div>
+    <div><b>4.8</b><span>回購評分（1,240 則）</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>三支就夠的日常保養</h2>
+  <p class="lead">我們不做 12 道流程。洗、擦、防曬，把這三件事做到位，皮膚自己會好。</p>
+  <div class="grid">
+    <div class="card"><h3>胺基酸潔面乳</h3><p>pH 5.5 弱酸性，洗完不緊繃。單瓶 150ml，早晚各一次可用兩個月。</p></div>
+    <div class="card"><h3>修護保濕乳</h3><p>神經醯胺三重比例配方，補角質層縫隙。上妝前擦不搓泥。</p></div>
+    <div class="card"><h3>物理防曬乳</h3><p>純氧化鋅 SPF50 PA++++，不泛白、不刺眼，小孩也能一起用。</p></div>
+    <div class="card"><h3>換季急救面膜</h3><p>泛紅、脫屑、刺痛時的救急用。一盒 5 片，敷完就停，不用天天敷。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>先試七天再決定</h2>
+  <p class="lead">體驗組含潔面、乳液、防曬各七日份，只收 149 元運費。不合適就不用買正貨，我們也不會一直打給你。</p>
+  <a class="btn" href="#c">我要體驗組</a>
+</div></section>
+
+<footer><b>效果原理：</b>四個大尺寸純色圓形 div 疊在一起，套 <code>filter:blur(70px)</code> 與 <code>mix-blend-mode:multiply</code>，讓顏色在模糊邊緣自然混色成 Mesh 漸層。各自跑不同週期與位移的 CSS keyframes，因為週期互質所以永遠不會回到同一個畫面。純 CSS，零 JavaScript，效能極低耗。</footer>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>

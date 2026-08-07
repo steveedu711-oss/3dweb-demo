@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>鏈宇資訊 — 企業系統整合</title>
+<style>
+.demo-note{position:fixed;left:0;right:0;bottom:0;z-index:98;padding:7px 18px;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-top:1px solid var(--line);color:var(--mut);font-size:12px;line-height:1.5;text-align:center}
+.demo-note b{color:var(--fg);font-weight:600}
+.demo-note a{color:var(--acc);text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#060a10;--fg:#eaf2f4;--mut:#8496a0;--acc:#5eead4;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.04)}
+body{background:var(--bg);color:var(--fg);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;line-height:1.7;overflow-x:hidden}
+.bar{position:fixed;top:0;left:0;right:0;z-index:99;display:flex;gap:14px;align-items:center;justify-content:space-between;padding:10px 18px;background:rgba(6,10,16,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.bar a{color:var(--mut);text-decoration:none}.bar a:hover{color:var(--acc)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta i{font-style:normal;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mut)}
+.meta i b{color:var(--acc);font-weight:600}
+.meta .ind{border-color:var(--acc);color:var(--acc)}
+section{padding:clamp(60px,9vw,120px) 22px;position:relative}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:clamp(34px,6vw,68px);line-height:1.12;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(24px,3.4vw,38px);letter-spacing:-.01em;margin-bottom:14px}
+.lead{color:var(--mut);max-width:56ch;margin-top:18px;font-size:clamp(15px,1.6vw,18px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:38px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font-size:17px;margin-bottom:8px}.card p{color:var(--mut);font-size:14px}
+.btn{display:inline-block;margin-top:30px;padding:14px 30px;border-radius:999px;background:var(--acc);color:#060a10;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 22px;color:var(--mut);font-size:13px}
+footer b{color:var(--fg)}
+@media(max-width:640px){.bar{font-size:11px;padding:8px 12px}}
+/* --- 本頁特效 --- */
+#net{position:fixed;inset:0;z-index:-1}
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:70px}
+.kick{font-size:12px;letter-spacing:.24em;color:var(--acc);margin-bottom:20px}
+h1 em{font-style:normal;color:var(--acc)}
+.stats{display:flex;flex-wrap:wrap;gap:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0;margin-top:60px}
+.stats div b{display:block;font-size:clamp(28px,4vw,44px);color:var(--acc);font-weight:800;line-height:1}
+.stats div span{color:var(--mut);font-size:14px}
+.hint{margin-top:22px;font-size:13px;color:var(--mut)}
+.flow{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:38px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.flow div{padding:22px;border-right:1px solid var(--line)}
+.flow div:last-child{border-right:0}
+.flow b{color:var(--acc);font-size:13px;letter-spacing:.1em}
+.flow p{color:var(--mut);font-size:14px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a href="./index.html">← 全部 40 種特效</a>
+  <div class="meta"><i>特效 02：<b>粒子連線場</b></i><i class="ind">產業：企業系統整合</i></div>
+</div>
+<canvas id="net"></canvas>
+
+<section class="hero"><div class="wrap">
+  <div class="kick">鏈宇資訊 CHAINVERSE ／ 系統整合 SI</div>
+  <h1>ERP、POS、倉儲、電商，<br><em>讓它們終於講同一種話</em></h1>
+  <p class="lead">你的公司不缺系統，缺的是把系統接起來的人。我們做 API 串接、資料同步與流程重整，讓總部看到的數字跟現場一致。</p>
+  <a class="btn" href="#c">預約系統健檢</a>
+  <p class="hint">（滑鼠移動看看：節點會被游標吸引，靠近的節點自動連線）</p>
+  <div class="stats">
+    <div><b>260+</b><span>完成串接專案</span></div>
+    <div><b>18</b><span>已支援 ERP 系統</span></div>
+    <div><b>99.95%</b><span>介接服務可用率</span></div>
+    <div><b>7×24</b><span>值班監控</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>常見的串接需求</h2>
+  <div class="grid">
+    <div class="card"><h3>電商訂單自動落單</h3><p>蝦皮／momo／官網訂單自動寫進 ERP，不用再請人每天手動貼上。</p></div>
+    <div class="card"><h3>多門市庫存同步</h3><p>門市 POS 與總倉庫存即時對帳，避免超賣與帳料不符。</p></div>
+    <div class="card"><h3>財會系統介接</h3><p>發票、進銷項與會計傳票自動生成，月結從五天縮到一天。</p></div>
+    <div class="card"><h3>舊系統資料搬遷</h3><p>十年前的 AS/400 或自寫系統，資料清洗後完整搬到新平台。</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>怎麼進行</h2>
+  <div class="flow">
+    <div><b>01 系統盤點</b><p>兩週訪談，畫出你現在的資料實際怎麼流。</p></div>
+    <div><b>02 介接設計</b><p>定義 API 契約與失敗重送機制，先講清楚才動工。</p></div>
+    <div><b>03 分批上線</b><p>單一流程先跑，確認穩定再擴大，不做一次性大爆炸切換。</p></div>
+    <div><b>04 監控維運</b><p>介接失敗自動告警，異常單留檔可回補。</p></div>
+  </div>
+</div></section>
+
+<section id="c"><div class="wrap">
+  <h2>先做一次免費系統健檢</h2>
+  <p class="lead">兩小時線上訪談，我們回你一份「現況資料流圖」與三個最該優先串接的環節，不綁後續合作。</p>
+  <a class="btn" href="#c">預約健檢時段</a>
+</div></section>
+
+<footer><b>效果原理：</b>Canvas 2D 維護一組帶速度的節點陣列，每幀更新位置並對兩兩節點算距離，小於門檻就畫線且用距離換算透明度，造成「網路自動成形」的錯覺。游標視為一個額外的引力點，附近節點會被拉過去。複雜度 O(n²)，所以節點數壓在 90 上下，手機再自動減半。</footer>
+
+<script>
+const c = document.getElementById('net'), x = c.getContext('2d');
+let W,H,pts,DPR=Math.min(devicePixelRatio,2);
+const mouse={x:-9999,y:-9999};
+function init(){
+  W=c.width=innerWidth*DPR; H=c.height=innerHeight*DPR;
+  c.style.width=innerWidth+'px'; c.style.height=innerHeight+'px';
+  const n = innerWidth<700 ? 45 : 90;
+  pts = Array.from({length:n},()=>({
+    x:Math.random()*W, y:Math.random()*H,
+    vx:(Math.random()-.5)*.35*DPR, vy:(Math.random()-.5)*.35*DPR
+  }));
+}
+addEventListener('resize',init); init();
+addEventListener('pointermove',e=>{mouse.x=e.clientX*DPR;mouse.y=e.clientY*DPR});
+addEventListener('pointerleave',()=>{mouse.x=mouse.y=-9999});
+const LINK=150*DPR, PULL=210*DPR;
+(function draw(){
+  x.clearRect(0,0,W,H);
+  for(const p of pts){
+    const dx=mouse.x-p.x, dy=mouse.y-p.y, d=Math.hypot(dx,dy);
+    if(d<PULL){ p.vx+=dx/d*0.035; p.vy+=dy/d*0.035; }
+    p.vx*=0.99; p.vy*=0.99;
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>W) p.vx*=-1;
+    if(p.y<0||p.y>H) p.vy*=-1;
+  }
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const d=Math.hypot(pts[i].x-pts[j].x, pts[i].y-pts[j].y);
+      if(d<LINK){
+        x.strokeStyle='rgba(94,234,212,'+(1-d/LINK)*0.34+')';
+        x.lineWidth=DPR*0.7;
+        x.beginPath(); x.moveTo(pts[i].x,pts[i].y); x.lineTo(pts[j].x,pts[j].y); x.stroke();
+      }
+    }
+  }
+  for(const p of pts){
+    x.fillStyle='rgba(94,234,212,.75)';
+    x.beginPath(); x.arc(p.x,p.y,1.7*DPR,0,7); x.fill();
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+<div class="demo-note"><b>設計範例</b>　本頁的品牌名稱、文案與價格皆為虛構，僅用於展示網頁特效與版面設計，非實際商家。<a href="https://www.hunglun.com/services/brand-website">鴻綸科技官網建置服務 →</a></div>
+</body>
+</html>
