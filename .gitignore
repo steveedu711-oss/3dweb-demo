@@ -1,0 +1,3 @@
+# 內部工作紀錄，不進公開 repo（會被 Cloudflare Pages 當靜態檔案公開下載）。
+# ClaudeOnly 的備份流程用 git add -f 蓋過這個檔，所以仍會備份到 safezone0619。
+進度.md
